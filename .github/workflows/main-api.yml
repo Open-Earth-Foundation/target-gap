@@ -1,0 +1,63 @@
+name: Push tags to ECR stable
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - v*
+
+jobs:
+  pushToECR:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - name: Logging in to ECR
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/openearthfoundation
+
+    - name: Pushing OC-API to ECR
+      env:
+        SHA: ${{ github.sha }}
+        IMAGE: public.ecr.aws/openearthfoundation/target-gap
+
+      run: |
+        export VERSION=`node -pe "require('./package.json').version"`
+        export MAJOR=${VERSION%.*.*}
+        export MINOR=${VERSION%.*}
+        echo Version: ${VERSION} Major: ${MAJOR} Minor: ${MINOR}
+        docker build -t $IMAGE:$SHA api
+        docker tag $IMAGE:$SHA $IMAGE:$VERSION
+        docker tag $IMAGE:$SHA $IMAGE:$MAJOR
+        docker tag $IMAGE:$SHA $IMAGE:$MINOR
+        docker tag $IMAGE:$SHA $IMAGE:stable
+        docker push $IMAGE:$SHA
+        docker push $IMAGE:$VERSION
+        docker push $IMAGE:$MAJOR
+        docker push $IMAGE:$MINOR
+        docker push $IMAGE:stable
+
+  deployToEKS:
+    needs: pushToECR
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID_EKS_PROD_USER }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY_EKS_PROD_USER }}
+    steps:
+
+    - uses: actions/checkout@v3
+
+    - name: Creating kubeconfig file
+      run: aws eks update-kubeconfig --name ${{ secrets.EKS_PROD_NAME }} --region us-east-1
+
+    - name: Testing connection to EKS
+      run: kubectl get pods -n default
+
+    - name: Deploying service
+      run: |
+        kubectl apply -f k8s/prod/target-gap-deployment.yml -n default
+        kubectl rollout restart deployment target-gap-deployment -n default
+        kubectl apply -f k8s/prod/target-gap-service.yml -n default

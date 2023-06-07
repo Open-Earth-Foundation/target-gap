@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: target-gap-deployment
+  labels:
+    app: target-gap
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: target-gap
+  template:
+    metadata:
+      labels:
+        app: target-gap
+    spec:
+      containers:
+      - name: target-gap
+        image: public.ecr.aws/openearthfoundation/target-gap:latest
+        # Set to Never for local
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3100
+        env:
+        - name: NODE_ENV
+          value: "production"
+        resources:
+          limits:
+            memory: "1024Mi"
+            cpu: "1000m"

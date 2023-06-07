@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: target-gap-service
+spec:
+  selector:
+    app: target-gap
+  ports:
+    - name: target-gap-service-port
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
