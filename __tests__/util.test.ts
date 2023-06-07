@@ -1,4 +1,4 @@
-import { actorNextTarget, actorEmissions, actorReductions } from '../src/lib/util';
+import { actorNextTarget, actorEmissions, actorReductions, paris15Emissions, paris20Emissions } from '../src/lib/util';
 import fs from 'fs';
 import path from 'path';
 
@@ -35,6 +35,16 @@ describe('Util', () => {
         test('returns reductions for a future year for actor with no target', () => {
             const reductions = actorReductions(CA_AB, 2005, 2030);
             expect(Math.round(reductions/1000000)).toBeCloseTo(18);
+        });
+    });
+    describe('Paris goals', () => {
+        test('returns the actor\'s recommended emissions level for 1.5C', () => {
+            const emissions = paris15Emissions(CA);
+            expect(Math.round(emissions/1000000)).toBeCloseTo(421);
+        });
+        test('returns the actor\'s recommended emissions level for 2.0C', () => {
+            const emissions = paris20Emissions(CA);
+            expect(Math.round(emissions/1000000)).toBeCloseTo(539);
         });
     });
 });

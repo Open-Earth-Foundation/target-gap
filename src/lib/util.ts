@@ -91,28 +91,24 @@ export function actorReductions(actorDetails: any, from: number, to: number): nu
 
 // returns the actor's emissions levels to comply with the
 // paris agreement to meet the 1.5 degree target
+// per @lgloege 's comment here:
+// https://github.com/Open-Earth-Foundation/ambition-gaps/blob/main/notebooks/utils.py
+// emissions required to be in line with AR6
+// 1.5C : 43% reduction from 2019 levels by 2030
 
 export function paris15Emissions(actorDetails: any): number {
-    return (actorDetails.type == 'country') ? 80000000: 800000;
+    const emissions = actorEmissions(actorDetails, 2019);
+    return (emissions) ? Math.round(emissions * 0.57) : 0.0;
 }
 
 // returns the actor's emissions levels to comply with the
 // paris agreement to meet the 1.5 degree target
+// per @lgloege 's comment here:
+// https://github.com/Open-Earth-Foundation/ambition-gaps/blob/main/notebooks/utils.py
+// emissions required to be in line with AR6
+// 1.5C : 27% reduction from 2019 levels by 2030
 
 export function paris20Emissions(actorDetails: any): number {
-    return (actorDetails.type == 'country') ? 90000000: 900000;
-}
-
-// returns the actor's emissions reductions to comply with the
-// paris agreement to meet the 1.5 degree target
-
-export function paris15Reductions(actorDetails: any): number {
-    return (actorDetails.type == 'country') ? 50000000: 500000;
-}
-
-// returns the actor's emissions reductions to comply with the
-// paris agreement to meet the 1.5 degree target
-
-export function paris20Reductions(actorDetails: any): number {
-    return (actorDetails.type == 'country') ? 40000000: 400000;
+    const emissions = actorEmissions(actorDetails, 2019);
+    return (emissions) ? Math.round(emissions * 0.73) : 0.0;
 }
