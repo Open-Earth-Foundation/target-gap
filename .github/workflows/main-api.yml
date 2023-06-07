@@ -58,6 +58,6 @@ jobs:
 
     - name: Deploying service
       run: |
-        kubectl apply -f k8s/prod/target-gap-deployment.yml -n default
+        kubectl apply -f k8s/target-gap-deployment.yml -n default
         kubectl rollout restart deployment target-gap-deployment -n default
-        kubectl apply -f k8s/prod/target-gap-service.yml -n default
+        kubectl apply -f k8s/target-gap-service.yml -n default
