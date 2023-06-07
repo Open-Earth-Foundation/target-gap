@@ -4,6 +4,8 @@ import path from 'path';
 
 describe('Util', () => {
     const CA = JSON.parse(fs.readFileSync(path.join(__dirname, 'CA.json'), 'utf8')).data;
+    const CA_AB = JSON.parse(fs.readFileSync(path.join(__dirname, 'CA-AB.json'), 'utf8')).data;
+
     describe('actorNextTarget', () => {
         test('returns the next target for the given actor', () => {
             const target = actorNextTarget(CA);
@@ -19,6 +21,10 @@ describe('Util', () => {
         test('returns the actor\'s emissions for a future year', () => {
             const emissions2030 = actorEmissions(CA, 2030);
             expect(Math.round(emissions2030/1000000)).toBeCloseTo(445);
+        });
+        test('returns emissions for a future year for actor with no target', () => {
+            const emissions2030 = actorEmissions(CA_AB, 2030);
+            expect(Math.round(emissions2030/1000000)).toBeCloseTo(219);
         });
     });
 });
