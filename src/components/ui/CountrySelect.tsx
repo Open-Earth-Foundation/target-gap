@@ -10,7 +10,7 @@ type CountrySelectProps = {
 }
 
 const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSelected}) => {
-  const [selectedCountry, setSelectedCountry] = useState('Earth');
+  const [selectedCountry, setSelectedCountry] = useState('');
   const handleCountryChanged = (event: SelectChangeEvent<null>) => {
     const newCountry = event.target.value;
     if (newCountry) {
@@ -20,7 +20,7 @@ const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSele
   }
 
   return (
-    <FormControl>
+    <FormControl className="min-w-[50%]">
       <InputLabel id="country-select-label">Country</InputLabel>
       <Select
         labelId="country-select-label"
@@ -31,7 +31,7 @@ const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSele
       >
         <MenuItem value="">Please select a country...</MenuItem>
         {countries.map((country: ActorPart) => (
-          <MenuItem value={country.actor_id}>{country.name}</MenuItem>
+          <MenuItem value={country.actor_id} key={country.actor_id}>{country.name}</MenuItem>
         ))}
       </Select>
     </FormControl>
