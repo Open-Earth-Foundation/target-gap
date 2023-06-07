@@ -33,13 +33,27 @@ export function actorReductions(actorDetails: any, from: number, to: number): nu
 // returns the actor's emissions levels to comply with the
 // paris agreement to meet the 1.5 degree target
 
-export function paris15Level(actorDetails: any): number {
+export function paris15Emissions(actorDetails: any): number {
     return (actorDetails.type == 'country') ? 80000000: 800000;
 }
 
 // returns the actor's emissions levels to comply with the
 // paris agreement to meet the 1.5 degree target
 
-export function paris20Level(actorDetails: any): number {
+export function paris20Emissions(actorDetails: any): number {
     return (actorDetails.type == 'country') ? 90000000: 900000;
+}
+
+// returns the actor's emissions reductions to comply with the
+// paris agreement to meet the 1.5 degree target
+
+export function paris15Reductions(actorDetails: any): number {
+    return (actorDetails.type == 'country') ? 50000000: 500000;
+}
+
+// returns the actor's emissions reductions to comply with the
+// paris agreement to meet the 1.5 degree target
+
+export function paris20Reductions(actorDetails: any): number {
+    return (actorDetails.type == 'country') ? 40000000: 400000;
 }
