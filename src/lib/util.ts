@@ -1,6 +1,6 @@
 import { Target } from "./models"
 
-const dsq = {
+const dsq: Record<string, number> = {
     "ECCC:GHG_inventory:2022-04-13": 0.9,
     "EPA:state_GHG_inventory:2022-08-31": 0.8,
     "PRIMAP:10.5281/zenodo.7179775:v2.4": 0.8,
