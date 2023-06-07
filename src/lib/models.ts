@@ -1,4 +1,4 @@
-enum ActorType {
+export enum ActorType {
   Planet = 'planet',
   Country = 'country',
   Adm1 = 'adm1',
