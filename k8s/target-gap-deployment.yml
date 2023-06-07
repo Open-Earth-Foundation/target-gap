@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: target-gap
-        image: public.ecr.aws/openearthfoundation/target-gap:latest
+        image: public.ecr.aws/openearthfoundation/target-gap:0
         # Set to Never for local
         imagePullPolicy: Always
         ports:
