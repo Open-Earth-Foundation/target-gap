@@ -8,7 +8,7 @@ interface HeroProps {
     description: string
 }
 
-const TextArea:FC<HeroProps> = ({description, title}) => {
+const TextBox:FC<HeroProps> = ({description, title}) => {
     return(
         <div className="
             h-72
@@ -28,4 +28,4 @@ const TextArea:FC<HeroProps> = ({description, title}) => {
     )
 }
 
-export default TextArea
+export default TextBox;
