@@ -79,7 +79,14 @@ function actorEmissionsFuture(actorDetails: any, year: number): number {
 // years.
 
 export function actorReductions(actorDetails: any, from: number, to: number): number {
-    return (actorDetails.type == 'country') ? 30000000: 300000;
+    const target = actorTargetAfter(actorDetails, to);
+    if (target) {
+        const from_emissions = actorEmissions(actorDetails, from);
+        const to_emissions = actorEmissions(actorDetails, to);
+        return Math.max(from_emissions - to_emissions, 0.0);
+    } else {
+        return 0.0;
+    }
 }
 
 // returns the actor's emissions levels to comply with the
