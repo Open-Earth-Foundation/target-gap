@@ -15,7 +15,7 @@ export function actorNextTarget(actorDetails: any): Target | null {
     return actorTargetAfter(actorDetails, (new Date()).getFullYear());
 }
 
-function actorTargetAfter(actorDetails: any, year: number): Target | null {
+export function actorTargetAfter(actorDetails: any, year: number): Target | null {
     const filtered = actorDetails.targets
         .filter((target: any) => target.target_type == "Absolute emission reduction" && target.target_year >= year);
     const sorted = filtered
@@ -72,6 +72,7 @@ function actorEmissionsFuture(actorDetails: any, year: number): number {
                 return emissions;
             }
         }
+        return Infinity;
     }
 }
 

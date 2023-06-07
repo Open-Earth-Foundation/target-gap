@@ -1,4 +1,4 @@
-import { actorNextTarget, actorEmissions, actorReductions, paris15Emissions, paris20Emissions } from '../src/lib/util';
+import { actorNextTarget, actorTargetAfter, actorEmissions, actorReductions, paris15Emissions, paris20Emissions } from '../src/lib/util';
 import fs from 'fs';
 import path from 'path';
 
@@ -11,6 +11,13 @@ describe('Util', () => {
             const target = actorNextTarget(CA);
             expect(target?.target_year).toBe(2030);
             expect(target?.target_value).toBe("40");
+        });
+    });
+    describe('actorTargetAfter', () => {
+        test('returns the next target for the given actor on or after a given year', () => {
+            const target = actorTargetAfter(CA_AB, 2030);
+            expect(target?.target_year).toBe(2050);
+            expect(target?.target_value).toBe("14");
         });
     });
     describe('actorEmissions', () => {
