@@ -72,11 +72,6 @@ export interface GdpData {
 export interface Target {
   target_id: string;
   target_type: string;
-}
-
-export interface Target {
-  target_id: string;
-  target_type: string;
   baseline_year: number;
   baseline_value: number | null;
   target_year: number;
