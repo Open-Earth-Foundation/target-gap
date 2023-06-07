@@ -4,14 +4,16 @@ import { Target } from "./models"
 // returns null if there is no next target
 
 export function actorNextTarget(actorDetails: any): any {
-    return {
-        target_id: `FAKE:madeup:${actorDetails['actor_id']}}`,
-        target_type: "Absolute emission reduction",
-        baseline_year: 2005,
-        baseline_value: null,
-        target_year: 2030,
-        target_value: "40",
-        target_unit: "percent",
+    const filtered = actorDetails.targets
+        .filter((target: any) => target.target_type == "Absolute emission reduction");
+    const sorted = filtered
+        .sort((a: any, b: any) => (a.target_year > b.target_year) ? 1 :
+            (a.target_year < b.target_year) ? -1 :
+            parseFloat(a.target_value) - parseFloat(b.target_value))
+    if (sorted.length > 0) {
+        return sorted[0]
+    } else {
+        return null
     }
 }
 
