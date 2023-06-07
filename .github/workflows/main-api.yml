@@ -19,7 +19,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/openearthfoundation
 
-    - name: Pushing OC-API to ECR
+    - name: Pushing target-gap to ECR
       env:
         SHA: ${{ github.sha }}
         IMAGE: public.ecr.aws/openearthfoundation/target-gap
@@ -29,7 +29,7 @@ jobs:
         export MAJOR=${VERSION%.*.*}
         export MINOR=${VERSION%.*}
         echo Version: ${VERSION} Major: ${MAJOR} Minor: ${MINOR}
-        docker build -t $IMAGE:$SHA api
+        docker build -t $IMAGE:$SHA .
         docker tag $IMAGE:$SHA $IMAGE:$VERSION
         docker tag $IMAGE:$SHA $IMAGE:$MAJOR
         docker tag $IMAGE:$SHA $IMAGE:$MINOR
