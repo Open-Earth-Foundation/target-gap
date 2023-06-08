@@ -3,7 +3,7 @@
 import { ActorEmissionsMap, ActorPart } from '@/lib/models';
 import { Card, CardContent, Chip } from '@mui/material';
 import { FunctionComponent } from 'react';
-import { Bar, BarChart, CartesianGrid, Label, Legend, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, Label, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 type EmissionsProps = {
   actor: ActorEmissionsMap;
@@ -30,6 +30,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({actor, parts}) => {
     <Card sx={{ minWidth: 275, minHeight: 300 }}>
       <CardContent className='items-center'>
         <p className='text-3xl'><span className="font-bold">Emissions</span> for the next national target year (2030)</p>
+        <ResponsiveContainer width="100%" height="100%" minHeight={300}>
           <BarChart
             width={500}
             height={300}
@@ -45,7 +46,6 @@ const Emissions: FunctionComponent<EmissionsProps> = ({actor, parts}) => {
             <XAxis dataKey="name" />
             <YAxis unit="Mt" />
             <Tooltip />
-            {/*<Legend />*/}
             <ReferenceLine y={actor20Emissions} ifOverflow="extendDomain" stroke="#35006A" strokeDasharray="6 4">
               <Label position="right" stroke="#35006A">2.0°C</Label>
             </ReferenceLine>
@@ -66,7 +66,8 @@ const Emissions: FunctionComponent<EmissionsProps> = ({actor, parts}) => {
               />
             ))}
           </BarChart>
-        <p>Legends</p>
+        </ResponsiveContainer>
+        <p className="py-8 text-sm">Legends</p>
         <div className="space-x-4">
           <Chip label="1.5°C Temparature Increase" avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#F23D33' }} />} />
           <Chip label="2.0°C Temparature Increase" avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#35006A' }} />} />
