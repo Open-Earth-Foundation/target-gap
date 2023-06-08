@@ -1,8 +1,8 @@
 'use client'
 
 import { ActorPart } from '@/lib/models';
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
-import { FunctionComponent, useState } from 'react';
+import { Autocomplete, FormControl, TextField } from '@mui/material';
+import { FunctionComponent } from 'react';
 
 type CountrySelectProps = {
   countries: ActorPart[];
@@ -10,30 +10,32 @@ type CountrySelectProps = {
 }
 
 const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSelected}) => {
-  const [selectedCountry, setSelectedCountry] = useState('');
-  const handleCountryChanged = (event: SelectChangeEvent<null>) => {
-    const newCountry = event.target.value;
-    if (newCountry) {
-      setSelectedCountry(newCountry);
-      onSelected(newCountry);
+  const handleCountryChanged = (_event: any, value: { label: string, id: string} | null, reason: string) => {
+    if (value && reason === 'selectOption') {
+      onSelected(value.id);
     }
   }
+  
+  const options = countries.map((country) => ({ label: country.name, id: country.actor_id }));
 
   return (
     <FormControl className="min-w-[50%]">
-      <InputLabel id="country-select-label">Country</InputLabel>
-      <Select
-        labelId="country-select-label"
-        id="country-select"
-        value={selectedCountry as any}
-        label="Country"
+      <p className="text-sm pb-4">Search for a country</p>
+      <Autocomplete
+        disablePortal
+        id="country-autocomplete"
+        options={options}
+        sx={{ width: 300 }}
+        autoSelect={true}
+        blurOnSelect={true}
         onChange={handleCountryChanged}
-      >
-        <MenuItem value="">Please select a country...</MenuItem>
-        {countries.map((country: ActorPart) => (
-          <MenuItem value={country.actor_id} key={country.actor_id}>{country.name}</MenuItem>
-        ))}
-      </Select>
+        renderOption={(props, option) => (
+          <li {...props} key={option.id}>
+            {option.label}
+          </li>
+        )}
+        renderInput={(params) => <TextField {...params} label="Country" defaultValue="You can type here" />}
+      />
     </FormControl>
   );
 };
