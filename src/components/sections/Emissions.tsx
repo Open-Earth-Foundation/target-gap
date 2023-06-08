@@ -70,8 +70,8 @@ const Emissions: FunctionComponent<EmissionsProps> = ({actor, parts}) => {
         </ResponsiveContainer>
         <p className="pb-4 text-sm">Legends</p>
         <div className="space-x-4">
-          <Chip label="1.5°C Temparature Increase" avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#F23D33' }} />} />
-          <Chip label="2.0°C Temparature Increase" avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#35006A' }} />} />
+          <Chip label="1.5°C Temparature Increase" style={{ backgroundColor: '#E8EAFB', color: '#001EA7' }} avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#F23D33' }} />} />
+          <Chip label="2.0°C Temparature Increase" style={{ backgroundColor: '#E8EAFB', color: '#001EA7' }} avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#35006A' }} />} />
         </div>
       </CardContent>
     </Card>
