@@ -27,7 +27,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({actor, parts}) => {
   const actor20Emissions = 550;
 
   return(
-    <Card sx={{ minWidth: 275, minHeight: 300 }}>
+    <Card sx={{ minWidth: 500, minHeight: 300 }}>
       <CardContent className='items-center'>
         <p className="text-2xl"><span className="font-bold">Emissions</span> for the next national target year (2030)</p>
         <p className="text-sm text-gray-500 pb-2">Last updated in 2019</p>
