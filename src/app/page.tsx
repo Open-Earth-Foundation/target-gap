@@ -44,19 +44,17 @@ export default function Home() {
   }
 
   return (
-    <>
+    <div className="p-16">
       <TextBox
         description="This target visualiser shows Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
       />
-      <Container maxWidth="xl" className="pb-16">
-        <CountrySelect countries={countries} onSelected={onCountrySelected} />
-        <p>Selected country: {selectedCountry}</p>
-      </Container>
-      <Emissions/>
+      <CountrySelect countries={countries} onSelected={onCountrySelected} />
+      <p className="mb-8">Selected country: {selectedCountry}</p>
+      <Emissions actor={countryEmissions} parts={subActorEmissions} />
       <Reductions/>
       <TextBox
         description="The 1.5C is calculated Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
       />
-    </>
+    </div>
   )
 }
