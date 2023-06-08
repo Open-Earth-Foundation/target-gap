@@ -29,17 +29,18 @@ const Emissions: FunctionComponent<EmissionsProps> = ({actor, parts}) => {
   return(
     <Card sx={{ minWidth: 275, minHeight: 300 }}>
       <CardContent className='items-center'>
-        <p className='text-3xl'><span className="font-bold">Emissions</span> for the next national target year (2030)</p>
+        <p className="text-2xl"><span className="font-bold">Emissions</span> for the next national target year (2030)</p>
+        <p className="text-sm text-gray-500 pb-2">Last updated in 2019</p>
         <ResponsiveContainer width="100%" height="100%" minHeight={300}>
           <BarChart
             width={500}
             height={300}
             data={data}
             margin={{
-              top: 20,
+              top: 10,
               right: 50,
-              left: 20,
-              bottom: 5,
+              left: 5,
+              bottom: 0,
             }}
           >
             <CartesianGrid vertical={false} />
@@ -67,7 +68,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({actor, parts}) => {
             ))}
           </BarChart>
         </ResponsiveContainer>
-        <p className="py-8 text-sm">Legends</p>
+        <p className="pb-4 text-sm">Legends</p>
         <div className="space-x-4">
           <Chip label="1.5°C Temparature Increase" avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#F23D33' }} />} />
           <Chip label="2.0°C Temparature Increase" avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#35006A' }} />} />
