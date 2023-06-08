@@ -52,7 +52,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({actor, parts}) => {
             <ReferenceLine y={actor15Emissions} ifOverflow="extendDomain" stroke="#F23D33" strokeDasharray="6 4">
               <Label position="right" stroke="#F23D33">1.5°C</Label>
             </ReferenceLine>
-            <Bar dataKey="emissions" name="National Emissions" unit="Mt" fill="#F23D33" radius={[16, 16, 0, 0]} />
+            <Bar dataKey="emissions" name="National Emissions" unit="Mt" stackId="a" fill="#F23D33" radius={[16, 16, 0, 0]} />
             {subEmissions.map((subEmission, i) => (
               <Bar
                 dataKey={`emissions${subEmission.id}`}
