@@ -6,7 +6,6 @@ import TextBox from "@/components/sections/TextBox";
 import CountrySelect from "@/components/ui/CountrySelect";
 import { getActorEmissions, getActorParts } from "@/lib/api";
 import { ActorEmissionsMap, ActorPart, ActorType } from "@/lib/models";
-import { Container } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function Home() {
