@@ -28,6 +28,8 @@ const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSele
         sx={{ width: 300 }}
         autoSelect={true}
         blurOnSelect={true}
+        autoComplete={true}
+        autoHighlight={true}
         onChange={handleCountryChanged}
         renderOption={(props, option) => (
           <li {...props} key={option.id}>
