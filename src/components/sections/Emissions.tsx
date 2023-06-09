@@ -107,8 +107,8 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
   return (
     <Card sx={{ minWidth: 500, minHeight: 300 }} className="overflow-visible">
       <CardContent className='items-center'>
-        <p className="text-2xl"><span className="font-bold">Emissions</span> for the next national target year (2030)</p>
-        <p className="text-sm text-gray-500 pb-2">Last updated in 2019</p>
+        <p className="text-lg"><span className="font-bold">Emissions</span> for the next national target year (2030)</p>
+        <p className="text-xs text-gray-500 pb-2">Last updated in 2019</p>
         <ResponsiveContainer width="100%" height="100%" minHeight={300}>
           <BarChart
             width={500}
