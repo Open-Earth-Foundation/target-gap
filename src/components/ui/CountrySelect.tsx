@@ -36,6 +36,8 @@ const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSele
             {option.label}
           </li>
         )}
+        getOptionLabel={option => `${option.label} (${option.id})`}
+        isOptionEqualToValue={(option, value) => option.id === value.id}
         renderInput={(params) => <TextField {...params} label="Country" defaultValue="You can type here" />}
       />
     </FormControl>
