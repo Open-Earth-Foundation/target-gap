@@ -51,7 +51,7 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
             </thead>
             <tbody>
               {sortedPayload.map(entry => (
-                <tr>
+                <tr key={entry.dataKey}>
                   <td><span className="w-4 h-4 inline-block" style={{ backgroundColor: entry.fill }} /></td>
                   <td>{entry.name}</td>
                   <td className="text-right">{entry.value.toFixed(1)}</td>
