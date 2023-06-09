@@ -4,11 +4,10 @@ import Emissions from "@/components/sections/Emissions";
 import Reductions from "@/components/sections/Reductions";
 import TextBox from "@/components/sections/TextBox";
 import CountrySelect from "@/components/ui/CountrySelect";
-import { getActorEmissions, getActorOverview, getActorParts } from "@/lib/api";
-import { ActorEmissionsMap, ActorOverview, ActorPart, ActorType } from "@/lib/models";
+import { getActorOverview, getActorParts } from "@/lib/api";
+import { ActorOverview, ActorPart, ActorType } from "@/lib/models";
 import { useEffect, useState } from "react";
 
-import HelpIcon from '@mui/icons-material/Help';
 import Container from '@mui/material/Container';
 
 import ReactCountryFlag from "react-country-flag"
@@ -16,7 +15,6 @@ import ReactCountryFlag from "react-country-flag"
 export default function Home() {
   const [countries, setCountries] = useState<ActorPart[]>([]);
   const [selectedCountry, setSelectedCountry] = useState('');
-  const [getCountryName, setCountryName] = useState('');
   const [countryDetails, setCountryDetails] = useState<ActorOverview | null>(null);
   const [subActorDetails, setSubActorDetails] = useState<ActorOverview[]>([]);
 
@@ -29,9 +27,8 @@ export default function Home() {
     fetchData().catch(console.error);
   });
 
-  const onCountrySelected = (actorId: string, actorName: string) => {
+  const onCountrySelected = (actorId: string) => {
     setSelectedCountry(actorId);
-    setCountryName(actorName)
     loadEmissionsData(actorId).catch(console.error);
   }
 
@@ -50,37 +47,37 @@ export default function Home() {
 
   return (
     <div className="p-16 bg-[#FAFAFA]">
-        <TextBox
-          coloredTitle="Target Gap"
-          otherTitle="Visualizer"
-          description="This target visualiser shows Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
-        />
-        <Container maxWidth="xl" className="pb-8">
-          <CountrySelect countries={countries} onSelected={onCountrySelected} />
-          <div className="text-xl font-bold pt-8">{countryDetails ? 
-            <div className="flex items-center space-x-4 mb-8 mt-2">
-                <ReactCountryFlag
-                    svg
-                    countryCode={countryDetails.actor_id}
-                    style={{
-                        fontSize: '2em',
-                        lineHeight: '6em',
-                        borderRadius: "100%"
-                    }}
-                    aria-label={countryDetails.name}
-                />
-                <p className="font-bold text-xl">{countryDetails.name}</p>
-            </div>  : 'No country selected'}</div>
-        </Container>
-        <Container maxWidth="xl" className="flex space-x-4 h-full pb-8">
-          <Emissions actor={countryDetails} parts={subActorDetails} />
-          <Reductions actor={countryDetails} parts={subActorDetails} />
-        </Container>
-        <TextBox
-          coloredTitle="Methodology"
-          otherTitle="used"
-          description="The 1.5C is calculated Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
-        />
+      <TextBox
+        coloredTitle="Target Gap"
+        otherTitle="Visualizer"
+        description="This target visualiser shows Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
+      />
+      <Container maxWidth="xl" className="pb-8">
+        <CountrySelect countries={countries} onSelected={onCountrySelected} />
+        <div className="text-xl font-bold pt-8">{countryDetails ?
+          <div className="flex items-center space-x-4 mb-8 mt-2">
+            <ReactCountryFlag
+              svg
+              countryCode={countryDetails.actor_id}
+              style={{
+                fontSize: '2em',
+                lineHeight: '6em',
+                borderRadius: "100%"
+              }}
+              aria-label={countryDetails.name}
+            />
+            <p className="font-bold text-xl">{countryDetails.name}</p>
+          </div> : 'No country selected'}</div>
+      </Container>
+      <Container maxWidth="xl" className="flex space-x-4 h-full pb-8">
+        <Emissions actor={countryDetails} parts={subActorDetails} />
+        <Reductions actor={countryDetails} parts={subActorDetails} />
+      </Container>
+      <TextBox
+        coloredTitle="Methodology"
+        otherTitle="used"
+        description="The 1.5C is calculated Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
+      />
     </div>
-  )
+  );
 }
