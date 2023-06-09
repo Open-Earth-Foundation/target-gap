@@ -1,13 +1,13 @@
 'use client'
 
 import { ActorOverview } from '@/lib/models';
-import { actorEmissions, actorNextTarget, paris15Emissions, paris20Emissions } from '@/lib/util';
-import { Card, CardContent, Chip } from '@mui/material';
+import { actorReductions, actorNextTarget } from '@/lib/util';
+import { Card, CardContent } from '@mui/material';
 import { FunctionComponent } from 'react';
-import { Bar, BarChart, CartesianGrid, Label, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
-type EmissionsProps = {
+type ReductionsProps = {
   actor: ActorOverview | null;
   parts: ActorOverview[] | null;
 };
@@ -15,29 +15,29 @@ type EmissionsProps = {
 type BarData = {
   id: string;
   name: string;
-  emissions: number;
+  reductions: number;
   hasTarget: boolean;
 };
 
-const targetYear = 2030; // for which year emissions should be displayed
-const emissionsScale = 10e6; // transform to megatons
+const targetYear = 2030; // for which year reductions should be displayed
+const reductionsScale = 10e6; // transform to megatons
 
 const ReductionsTooltip = ({ active = false, payload = [], label = '' }: { active?: boolean, payload?: Array<any>, label?: string }) => {
   if (!(active && payload && payload.length)) {
     return null;
   }
-  const totalEmissions = payload.reduce((acc, value) => acc + value.value, 0);
+  const totalReductions = payload.reduce((acc, value) => acc + value.value, 0);
   const sortedPayload = payload.sort((a, b) => b.value - a.value);
 
   return (
     <div className="bg-white rounded-md p-4 drop-shadow-lg">
       <div className="font-bold">
         <InfoOutlinedIcon color="info" />{' '}
-        <span className="h-full align-middle">{label === 'Provinces' ? 'Subnational' : label} Emissions</span>
+        <span className="h-full align-middle">{label === 'Provinces' ? 'Subnational' : label} Reductions</span>
       </div>
       <hr className="my-4" />
       <p className="font-bold">Total</p>
-      <p className="text-xl"><span className="font-bold">{totalEmissions.toFixed(3)}</span> MtCO2eq</p>
+      <p className="text-xl"><span className="font-bold">{totalReductions.toFixed(3)}</span> MtCO2eq</p>
       {payload.length > 1 && (
         <>
           <hr className="my-4" />
@@ -68,7 +68,7 @@ const ReductionsTooltip = ({ active = false, payload = [], label = '' }: { activ
           <p>
             <span className="w-4 h-4 inline-block mr-6" style={{ backgroundColor: '#C5CBF5' }} />
             No target; business-as-usual based on<br />
-            <span className="pl-10">most recent emissions</span>
+            <span className="pl-10">most recent reductions</span>
           </p>
         </>
       )}
@@ -76,39 +76,36 @@ const ReductionsTooltip = ({ active = false, payload = [], label = '' }: { activ
   )
 };
 
-const Reductions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
+const Reductions: FunctionComponent<ReductionsProps> = ({ actor, parts }) => {
   let data: Record<string, any>[] = [{ name: 'National' }, { name: 'Provinces' }];
-  let actor15Emissions = 450; // TODO use paris15Emissions from utils
-  let actor20Emissions = 550;
-  let subEmissions: BarData[] = [];
+  let subReductions: BarData[] = [];
+  const currentYear = (new Date()).getFullYear();
 
   if (actor != null && parts != null) {
     const provinceData: Record<string, any> = { name: 'Provinces' };
     for (const province of parts) {
-      let provinceEmissions = actorEmissions(province, targetYear) / emissionsScale;
-      provinceEmissions = provinceEmissions === Infinity ? 0 : provinceEmissions;
-      provinceData['emissions' + province.actor_id] = provinceEmissions;
-      subEmissions.push({
+      let provinceReductions = actorReductions(province, currentYear, targetYear) / reductionsScale;
+      provinceReductions = provinceReductions === Infinity ? 0 : provinceReductions;
+      provinceData['reductions' + province.actor_id] = provinceReductions;
+      subReductions.push({
         id: province.actor_id,
         name: province.name,
-        emissions: provinceEmissions,
+        reductions: provinceReductions,
         hasTarget: actorNextTarget(province) != null,
       });
     }
-    subEmissions = subEmissions.sort((a, b) => a.emissions - b.emissions);
+    subReductions = subReductions.sort((a, b) => a.reductions - b.reductions);
     data = [
-      { name: 'National', emissions: actorEmissions(actor, targetYear) / emissionsScale },
+      { name: 'National', reductions: actorReductions(actor, currentYear, targetYear) / reductionsScale },
       provinceData,
     ];
-    actor15Emissions = paris15Emissions(actor) / emissionsScale;
-    actor20Emissions = paris20Emissions(actor) / emissionsScale;
   }
 
   return (
     <Card sx={{ minWidth: 500, minHeight: 300 }} className="overflow-visible">
       <CardContent className='items-center'>
-        <p className="text-2xl"><span className="font-bold">Reductions</span> for the next national target year (2030)</p>
-        <p className="text-sm text-gray-500 pb-2">Last updated in 2019</p>
+        <p className="text-lg"><span className="font-bold">Reductions</span> for the next national target year (2030)</p>
+        <p className="text-xs text-gray-500 pb-2">Last updated in 2019</p>
         <ResponsiveContainer width="100%" height="100%" minHeight={300}>
           <BarChart
             width={500}
@@ -128,19 +125,19 @@ const Reductions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
               content={<ReductionsTooltip />}
               wrapperStyle={{ zIndex: 1000 }}
               allowEscapeViewBox={{ x: true, y: true }}
-              position={{ x: 500, y: -100 }}
+              position={{ x: -250, y: -100 }}
             />
-            <Bar dataKey="emissions" name="National Emissions" unit="Mt" stackId="a" fill="#F23D33" radius={[16, 16, 0, 0]} />
-            {subEmissions.map((subEmission, i) => (
+            <Bar dataKey="reductions" name="National Reductions" unit="Mt" stackId="a" fill="#001EA7" radius={[16, 16, 0, 0]} />
+            {subReductions.map((subEmission, i) => (
               <Bar
-                dataKey={`emissions${subEmission.id}`}
+                dataKey={`reductions${subEmission.id}`}
                 name={subEmission.name}
                 key={subEmission.id}
                 unit="Mt"
                 stackId="a"
-                fill={subEmission.hasTarget ? '#F9A200' : '#C5CBF5'}
+                fill={subEmission.hasTarget ? '#2351DC' : '#C5CBF5'}
                 style={{ stroke: '#fff', strokeWidth: 1 }}
-                radius={i === subEmissions.length - 1 ? [16, 16, 0, 0] : [0, 0, 0, 0]}
+                radius={i === subReductions.length - 1 ? [16, 16, 0, 0] : [0, 0, 0, 0]}
               />
             ))}
           </BarChart>
