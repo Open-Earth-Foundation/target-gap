@@ -14,13 +14,14 @@ type EmissionsProps = {
 type BarData = {
   id: string;
   name: string;
+  emissions: number;
   hasTarget: boolean;
 };
 
 const targetYear = 2030; // for which year emissions should be displayed
 
-const Emissions: FunctionComponent<EmissionsProps> = ({actor, parts}) => {
-  let data: Record<string, any>[] = [{name: 'National'}, {name: 'Provinces'}];
+const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
+  let data: Record<string, any>[] = [{ name: 'National' }, { name: 'Provinces' }];
   let actor15Emissions = 450; // TODO use paris15Emissions from utils
   let actor20Emissions = 550;
   let subEmissions: BarData[] = [];
@@ -28,18 +29,25 @@ const Emissions: FunctionComponent<EmissionsProps> = ({actor, parts}) => {
   if (actor != null && parts != null) {
     const provinceData: Record<string, any> = { name: 'Provinces' };
     for (const province of parts) {
-      provinceData['emissions' + province.actor_id] = actorEmissions(province, targetYear);
-      subEmissions.push({ id: province.actor_id, name: province.name, hasTarget: actorNextTarget(province) != null });
+      const provinceEmissions = actorEmissions(province, targetYear);
+      provinceData['emissions' + province.actor_id] = provinceEmissions;
+      subEmissions.push({
+        id: province.actor_id,
+        name: province.name,
+        emissions: provinceEmissions,
+        hasTarget: actorNextTarget(province) != null,
+      });
     }
+    subEmissions = subEmissions.sort((a, b) => b.emissions - a.emissions);
     data = [
-      {name: 'National', emissions: actorEmissions(actor, targetYear)},
+      { name: 'National', emissions: actorEmissions(actor, targetYear) },
       provinceData,
     ];
     actor15Emissions = paris15Emissions(actor);
     actor20Emissions = paris20Emissions(actor);
   }
 
-  return(
+  return (
     <Card sx={{ minWidth: 500, minHeight: 300 }}>
       <CardContent className='items-center'>
         <p className="text-2xl"><span className="font-bold">Emissions</span> for the next national target year (2030)</p>
