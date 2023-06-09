@@ -19,13 +19,13 @@ const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSele
   const options = countries.map((country) => ({ label: country.name, id: country.actor_id }));
 
   return (
-    <FormControl className="min-w-[50%]">
+    <FormControl>
       <p className="text-sm pb-4">Search for a country</p>
       <Autocomplete
         disablePortal
         id="country-autocomplete"
         options={options}
-        sx={{ width: 300 }}
+        sx={{ width: 500 }}
         autoSelect={true}
         blurOnSelect={true}
         autoComplete={true}
@@ -33,7 +33,7 @@ const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSele
         onChange={handleCountryChanged}
         renderOption={(props, option) => (
           <li {...props} key={option.id}>
-            {option.label}
+            {option.label} ({option.id})
           </li>
         )}
         getOptionLabel={option => `${option.label} (${option.id})`}
