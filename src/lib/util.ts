@@ -65,15 +65,19 @@ function actorEmissionsFuture(actorDetails: any, year: number): number {
         const reduction_for_year = ((year - target.baseline_year) / (target.target_year - target.baseline_year)) * total_reduction;
         return emissions - reduction_for_year;
     } else {
-        // Get the most recent emissions value
-        for (year = (new Date()).getFullYear() - 1; year > 1990; year--) {
-            const emissions = actorEmissionsPast(actorDetails, year);
-            if (emissions) {
-                return emissions;
-            }
-        }
-        return Infinity;
+        return actorLastEmissions(actorDetails);
     }
+}
+
+export function actorLastEmissions(actorDetails: any): number {
+    // Get the most recent emissions value
+    for (let year = (new Date()).getFullYear() - 1; year > 1990; year--) {
+        const emissions = actorEmissionsPast(actorDetails, year);
+        if (emissions) {
+            return emissions;
+        }
+    }
+    return NaN;
 }
 
 // returns the actor's emissions reductions between the given
