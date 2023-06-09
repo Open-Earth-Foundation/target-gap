@@ -5,6 +5,7 @@ import { actorEmissions, actorNextTarget, paris15Emissions, paris20Emissions } f
 import { Card, CardContent, Chip } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { Bar, BarChart, CartesianGrid, Label, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 
 type EmissionsProps = {
   actor: ActorOverview | null;
@@ -29,17 +30,20 @@ const EmissionsTooltip = ({ active = false, payload = [], label = ''}: {active?:
   const totalEmissions = payload.reduce((acc, value) => acc + value.value, 0);
 
   return (
-    <div className="bg-white rounded-md p-4">
-      <p>{label}</p>
-      <hr />
-      <p>Total</p>
-      <p><span className="font-bold">{totalEmissions.toFixed(3)}</span> MtCO2eq</p>
-      <hr />
+    <div className="bg-white rounded-md p-4 drop-shadow-lg">
+      <div className="font-bold">
+        <InfoOutlinedIcon color="info" />{' '}
+        <span className="h-full align-middle">{label}</span>
+      </div>
+      <hr className="my-4" />
+      <p className="font-bold">Total</p>
+      <p className="text-xl"><span className="font-bold">{totalEmissions.toFixed(3)}</span> MtCO2eq</p>
+      <hr className="my-4" />
       <table>
         <thead>
           <tr className="text-left">
-            <th>Ref.</th>
-            <th>Name</th>
+            <th className="pr-2">Ref.</th>
+            <th className="w-">Name</th>
             <th>MtCO2eq</th>
           </tr>
         </thead>
@@ -53,6 +57,18 @@ const EmissionsTooltip = ({ active = false, payload = [], label = ''}: {active?:
           ))}
         </tbody>
       </table>
+      <hr className="my-2" />
+      <p className="font-bold mb-2">Key</p>
+      <p className="mb-2">
+        <span className="w-4 h-4 inline-block mr-6" style={{ backgroundColor: '#F9A200' }} />
+        Expected value based on target
+      </p>
+      <p>
+        <span className="w-4 h-4 inline-block mr-6" style={{ backgroundColor: '#C5CBF5' }} />
+        No target; business-as-usual based on<br />
+        <span className="pl-10">most recent emissions</span>
+      </p>
+      
     </div>
   )
 };
@@ -104,7 +120,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
             <CartesianGrid vertical={false} />
             <XAxis dataKey="name" />
             <YAxis unit="Mt" />
-            <Tooltip content={<EmissionsTooltip />} />
+            <Tooltip content={<EmissionsTooltip />} wrapperStyle={{ zIndex: 1000 }} />
             <ReferenceLine y={actor20Emissions} ifOverflow="extendDomain" stroke="#35006A" strokeDasharray="6 4">
               <Label position="right" stroke="#35006A">2.0°C</Label>
             </ReferenceLine>
