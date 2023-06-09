@@ -1,29 +1,48 @@
 'use client'
 
 import React, {FC} from "react"
-import Container from '@mui/material/Container';
 
 interface HeroProps {
     title?: string,
-    description: string
+    description: string,
+    headerTextSize?: string
 }
 
-const TextBox:FC<HeroProps> = ({description, title}) => {
+const TextBox:FC<HeroProps> = ({description, title, headerTextSize}) => {
+    const [pageTitle, setPageTitle] = React.useState<string[] | undefined>([])
+    React.useEffect(()=> {
+    const modifiedTitle = title?.split(" ")
+    setPageTitle(modifiedTitle)
+   }, [title])
+
     return(
         <div className="
-            h-72
-            py-16
+            h-38
             w-full
             flex
             items-center
         ">
-            <Container maxWidth="xl" className='flex items-center h-full'>
-                <h1>{title}</h1>
-                <p className="w-1/2 text-xl font-light py-10">
+            <div className='flex flex-col justify-center h-full'>
+                <h1>
+                    {
+                        pageTitle?.map((val) => (
+                            <span
+                                key={val}
+                                className={`
+                                    font-bold
+                                    ${ headerTextSize == "large" ? "text-4xl" : " text-3xl"}
+                                    ${ pageTitle.lastIndexOf(val) == 2 ? "text-black": "text-[#008600]"}
+                                `}
+                            >
+                                {val}&nbsp;
+                            </span>
+                        )) 
+                    }
+                </h1>
+                <p className="w-full font-light py-10">
                     {description}
                 </p>
-            </Container>
-            
+            </div>
         </div>
     )
 }
