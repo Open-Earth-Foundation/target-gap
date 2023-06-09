@@ -27,6 +27,7 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
     return null;
   }
   const totalEmissions = payload.reduce((acc, value) => acc + value.value, 0);
+  const sortedPayload = payload.sort((a, b) => b.value - a.value);
 
   return (
     <div className="bg-white rounded-md p-4 drop-shadow-lg">
@@ -49,7 +50,7 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
               </tr>
             </thead>
             <tbody>
-              {payload.map(entry => (
+              {sortedPayload.map(entry => (
                 <tr>
                   <td><span className="w-4 h-4 inline-block" style={{ backgroundColor: entry.fill }} /></td>
                   <td>{entry.name}</td>
@@ -122,7 +123,12 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
             <CartesianGrid vertical={false} />
             <XAxis dataKey="name" />
             <YAxis unit="Mt" />
-            <Tooltip content={<EmissionsTooltip />} wrapperStyle={{ zIndex: 1000 }} allowEscapeViewBox={{ x: true, y: true }} />
+            <Tooltip
+              content={<EmissionsTooltip />}
+              wrapperStyle={{ zIndex: 1000 }}
+              allowEscapeViewBox={{ x: true, y: true }}
+              position={{ x: 500, y: -100 }}
+            />
             <ReferenceLine y={actor20Emissions} ifOverflow="extendDomain" stroke="#35006A" strokeDasharray="6 4">
               <Label position="right" stroke="#35006A">2.0°C</Label>
             </ReferenceLine>
