@@ -6,6 +6,7 @@ import TextBox from "@/components/sections/TextBox";
 import CountrySelect from "@/components/ui/CountrySelect";
 import { getActorEmissions, getActorOverview, getActorParts } from "@/lib/api";
 import { ActorEmissionsMap, ActorOverview, ActorPart, ActorType } from "@/lib/models";
+import { Container } from "@mui/material";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -46,12 +47,14 @@ export default function Home() {
       <TextBox
         description="This target visualiser shows Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
       />
-      <CountrySelect countries={countries} onSelected={onCountrySelected} />
-      <p className="mb-8">Selected country: {selectedCountry}</p>
-      <div className="flex space-x-4">
+      <Container maxWidth="xl">
+        <CountrySelect countries={countries} onSelected={onCountrySelected} />
+        <p className="mb-8">Selected country: {selectedCountry}</p>
+      </Container>
+      <Container maxWidth="xl" className='flex space-x-4 h-full'>
         <Emissions actor={countryDetails} parts={subActorDetails} />
         <Reductions actor={countryDetails} parts={subActorDetails} />
-      </div>
+      </Container>
       <TextBox
         description="The 1.5C is calculated Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
       />
