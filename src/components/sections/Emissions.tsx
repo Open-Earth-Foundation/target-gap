@@ -21,6 +21,42 @@ type BarData = {
 const targetYear = 2030; // for which year emissions should be displayed
 const emissionsScale = 10e6; // transform to megatons
 
+const EmissionsTooltip = ({ active = false, payload = [], label = ''}: {active?: boolean, payload?: Array<any>, label?: string}) => {
+  if (!(active && payload && payload.length)) {
+    return null;
+  }
+  console.dir(payload);
+  const totalEmissions = payload.reduce((acc, value) => acc + value.value, 0);
+
+  return (
+    <div className="bg-white rounded-md p-4">
+      <p>{label}</p>
+      <hr />
+      <p>Total</p>
+      <p><span className="font-bold">{totalEmissions.toFixed(3)}</span> MtCO2eq</p>
+      <hr />
+      <table>
+        <thead>
+          <tr className="text-left">
+            <th>Ref.</th>
+            <th>Name</th>
+            <th>MtCO2eq</th>
+          </tr>
+        </thead>
+        <tbody>
+          {payload.map(entry => (
+            <tr>
+              <td><span className="w-4 h-4 inline-block" style={{ backgroundColor: entry.fill }} /></td>
+              <td>{entry.name}</td>
+              <td className="text-right">{entry.value.toFixed(1)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+};
+
 const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
   let data: Record<string, any>[] = [{ name: 'National' }, { name: 'Provinces' }];
   let actor15Emissions = 450; // TODO use paris15Emissions from utils
@@ -39,7 +75,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
         hasTarget: actorNextTarget(province) != null,
       });
     }
-    subEmissions = subEmissions.sort((a, b) => b.emissions - a.emissions);
+    subEmissions = subEmissions.sort((a, b) => a.emissions - b.emissions);
     data = [
       { name: 'National', emissions: actorEmissions(actor, targetYear) / emissionsScale },
       provinceData,
@@ -68,7 +104,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
             <CartesianGrid vertical={false} />
             <XAxis dataKey="name" />
             <YAxis unit="Mt" />
-            <Tooltip />
+            <Tooltip content={<EmissionsTooltip />} />
             <ReferenceLine y={actor20Emissions} ifOverflow="extendDomain" stroke="#35006A" strokeDasharray="6 4">
               <Label position="right" stroke="#35006A">2.0°C</Label>
             </ReferenceLine>
