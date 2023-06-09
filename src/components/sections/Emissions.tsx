@@ -86,7 +86,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
     const provinceData: Record<string, any> = { name: 'Provinces' };
     for (const province of parts) {
       let provinceEmissions = actorEmissions(province, targetYear) / emissionsScale;
-      provinceEmissions = provinceEmissions === Infinity ? 0 : provinceEmissions;
+      provinceEmissions = isNaN(provinceEmissions) ? 0 : provinceEmissions;
       provinceData['emissions' + province.actor_id] = provinceEmissions;
       subEmissions.push({
         id: province.actor_id,

@@ -85,7 +85,7 @@ const Reductions: FunctionComponent<ReductionsProps> = ({ actor, parts }) => {
     const provinceData: Record<string, any> = { name: 'Provinces' };
     for (const province of parts) {
       let provinceReductions = actorReductions(province, currentYear, targetYear) / reductionsScale;
-      provinceReductions = provinceReductions === Infinity ? 0 : provinceReductions;
+      provinceReductions = isNaN(provinceReductions) ? 0 : provinceReductions;
       provinceData['reductions' + province.actor_id] = provinceReductions;
       subReductions.push({
         id: province.actor_id,
