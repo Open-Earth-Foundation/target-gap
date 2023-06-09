@@ -6,13 +6,13 @@ import { FunctionComponent } from 'react';
 
 type CountrySelectProps = {
   countries: ActorPart[];
-  onSelected: (actorId: string, actorName: string) => void;
+  onSelected: (actorId: string) => void;
 }
 
 const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSelected}) => {
   const handleCountryChanged = (_event: any, value: { label: string, id: string} | null, reason: string) => {
     if (value && reason === 'selectOption') {
-      onSelected(value.id, value.label);
+      onSelected(value.id);
     }
   }
   

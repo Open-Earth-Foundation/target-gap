@@ -1,7 +1,7 @@
 'use client'
 
 import { ActorOverview } from '@/lib/models';
-import { actorEmissions, actorNextTarget, paris15Emissions, paris20Emissions } from '@/lib/util';
+import { actorEmissions, actorNextTarget, actorTargetAfter, paris15Emissions, paris20Emissions } from '@/lib/util';
 import { Card, CardContent, Chip } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { Bar, BarChart, CartesianGrid, Label, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
@@ -19,8 +19,7 @@ type BarData = {
   hasTarget: boolean;
 };
 
-const targetYear = 2030; // for which year emissions should be displayed
-const emissionsScale = 10e6; // transform to megatons
+const emissionsScale = 1e6; // transform to megatons
 
 const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active?: boolean, payload?: Array<any>, label?: string }) => {
   if (!(active && payload && payload.length)) {
@@ -51,7 +50,7 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
             </thead>
             <tbody>
               {sortedPayload.map(entry => (
-                <tr>
+                <tr key={entry.dataKey}>
                   <td><span className="w-4 h-4 inline-block" style={{ backgroundColor: entry.fill }} /></td>
                   <td>{entry.name}</td>
                   <td className="text-right">{entry.value.toFixed(1)}</td>
@@ -78,83 +77,105 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
 
 const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
   let data: Record<string, any>[] = [{ name: 'National' }, { name: 'Provinces' }];
-  let actor15Emissions = 450; // TODO use paris15Emissions from utils
+  let actor15Emissions = 450;
   let actor20Emissions = 550;
   let subEmissions: BarData[] = [];
+  let targetYear = 2030;
+  let hasMissingData = false;
 
   if (actor != null && parts != null) {
-    const provinceData: Record<string, any> = { name: 'Provinces' };
-    for (const province of parts) {
-      const provinceEmissions = actorEmissions(province, targetYear) / emissionsScale;
-      provinceData['emissions' + province.actor_id] = provinceEmissions;
-      subEmissions.push({
-        id: province.actor_id,
-        name: province.name,
-        emissions: provinceEmissions,
-        hasTarget: actorNextTarget(province) != null,
-      });
+    const nextTarget = actorNextTarget(actor);
+    if (!nextTarget) {
+      hasMissingData = true;
+    } else {
+      if (nextTarget.target_year) {
+        targetYear = nextTarget.target_year;
+      }
+
+      const provinceData: Record<string, any> = { name: 'Provinces' };
+      for (const province of parts) {
+        let provinceEmissions = actorEmissions(province, targetYear) / emissionsScale;
+        const provinceNextTarget = actorNextTarget(province);
+        if (isNaN(provinceEmissions)) {
+          hasMissingData = true;
+          provinceEmissions = 0;
+          break;
+        }
+
+        provinceData['emissions' + province.actor_id] = provinceEmissions;
+        subEmissions.push({
+          id: province.actor_id,
+          name: province.name,
+          emissions: provinceEmissions,
+          hasTarget: provinceNextTarget != null,
+        });
+      }
+      subEmissions = subEmissions.sort((a, b) => a.emissions - b.emissions);
+      data = [
+        { name: 'National', emissions: actorEmissions(actor, targetYear) / emissionsScale },
+        provinceData,
+      ];
+      actor15Emissions = paris15Emissions(actor) / emissionsScale;
+      actor20Emissions = paris20Emissions(actor) / emissionsScale;
     }
-    subEmissions = subEmissions.sort((a, b) => a.emissions - b.emissions);
-    data = [
-      { name: 'National', emissions: actorEmissions(actor, targetYear) / emissionsScale },
-      provinceData,
-    ];
-    actor15Emissions = paris15Emissions(actor) / emissionsScale;
-    actor20Emissions = paris20Emissions(actor) / emissionsScale;
   }
 
   return (
-    <Card sx={{ minWidth: 500, minHeight: 300 }} className="overflow-visible">
-      <CardContent className='items-center'>
-        <p className="text-2xl"><span className="font-bold">Emissions</span> for the next national target year (2030)</p>
-        <p className="text-sm text-gray-500 pb-2">Last updated in 2019</p>
-        <ResponsiveContainer width="100%" height="100%" minHeight={300}>
-          <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 10,
-              right: 50,
-              left: 5,
-              bottom: 0,
-            }}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis dataKey="name" />
-            <YAxis unit="Mt" />
-            <Tooltip
-              content={<EmissionsTooltip />}
-              wrapperStyle={{ zIndex: 1000 }}
-              allowEscapeViewBox={{ x: true, y: true }}
-              position={{ x: 500, y: -100 }}
-            />
-            <ReferenceLine y={actor20Emissions} ifOverflow="extendDomain" stroke="#35006A" strokeDasharray="6 4">
-              <Label position="right" stroke="#35006A">2.0°C</Label>
-            </ReferenceLine>
-            <ReferenceLine y={actor15Emissions} ifOverflow="extendDomain" stroke="#F23D33" strokeDasharray="6 4">
-              <Label position="right" stroke="#F23D33">1.5°C</Label>
-            </ReferenceLine>
-            <Bar dataKey="emissions" name="National Emissions" unit="Mt" stackId="a" fill="#F23D33" radius={[16, 16, 0, 0]} />
-            {subEmissions.map((subEmission, i) => (
-              <Bar
-                dataKey={`emissions${subEmission.id}`}
-                name={subEmission.name}
-                key={subEmission.id}
-                unit="Mt"
-                stackId="a"
-                fill={subEmission.hasTarget ? '#F9A200' : '#C5CBF5'}
-                style={{ stroke: '#fff', strokeWidth: 1 }}
-                radius={i === subEmissions.length - 1 ? [16, 16, 0, 0] : [0, 0, 0, 0]}
+    <Card sx={{ minWidth: 400, minHeight: 300 }} className="overflow-visible">
+      <CardContent>
+        <p className="text-lg"><span className="font-bold">Emissions</span> for the next national target year ({targetYear})</p>
+        <p className="text-xs text-gray-500 pb-2">Last updated in 2019</p>
+        {hasMissingData ? (
+          <p className="text-center align-center w-full my-8">Insufficient data for this country</p>
+        ) : (
+          <ResponsiveContainer width="100%" height="100%" minHeight={300}>
+            <BarChart
+              width={500}
+              height={300}
+              data={data}
+              margin={{
+                top: 10,
+                right: 50,
+                left: 5,
+                bottom: 0,
+              }}
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis dataKey="name" />
+              <YAxis unit="Mt" />
+              <Tooltip
+                content={<EmissionsTooltip />}
+                wrapperStyle={{ zIndex: 1000 }}
+                allowEscapeViewBox={{ x: true, y: true }}
+                position={{ x: 500, y: -100 }}
               />
-            ))}
-          </BarChart>
-        </ResponsiveContainer>
-        <p className="pb-4 text-sm">Legends</p>
+              {/*<ReferenceLine y={actor20Emissions} ifOverflow="extendDomain" stroke="#35006A" strokeDasharray="6 4">
+                <Label position="right" stroke="#35006A">2.0°C</Label>
+              </ReferenceLine>
+              <ReferenceLine y={actor15Emissions} ifOverflow="extendDomain" stroke="#F23D33" strokeDasharray="6 4">
+                <Label position="right" stroke="#F23D33">1.5°C</Label>
+              </ReferenceLine>*/}
+              <Bar dataKey="emissions" name="National Emissions" unit="Mt" stackId="a" fill="#F23D33" radius={[16, 16, 0, 0]} />
+              {subEmissions.map((subEmission, i) => (
+                <Bar
+                  dataKey={`emissions${subEmission.id}`}
+                  name={subEmission.name}
+                  key={subEmission.id}
+                  unit="Mt"
+                  stackId="a"
+                  fill={subEmission.hasTarget ? '#F9A200' : '#C5CBF5'}
+                  style={{ stroke: '#fff', strokeWidth: 1 }}
+                  radius={i === subEmissions.length - 1 ? [16, 16, 0, 0] : [0, 0, 0, 0]}
+                />
+              ))}
+            </BarChart>
+          </ResponsiveContainer>
+        )}
+        {/*<p className="pb-4 text-sm">Legends</p>
         <div className="space-x-4">
           <Chip label="1.5°C Temparature Increase" style={{ backgroundColor: '#E8EAFB', color: '#001EA7' }} avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#F23D33' }} />} />
           <Chip label="2.0°C Temparature Increase" style={{ backgroundColor: '#E8EAFB', color: '#001EA7' }} avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#35006A' }} />} />
-        </div>
+        </div>*/}
       </CardContent>
     </Card>
   )

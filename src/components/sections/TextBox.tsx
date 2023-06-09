@@ -1,50 +1,23 @@
 'use client'
 
-import React, {FC} from "react"
+import React, { FC } from "react"
+import Container from '@mui/material/Container';
 
 interface HeroProps {
-    title?: string,
-    description: string,
-    headerTextSize?: string
+  coloredTitle?: string,
+  otherTitle?: string,
+  description: string
 }
 
-const TextBox:FC<HeroProps> = ({description, title, headerTextSize}) => {
-    const [pageTitle, setPageTitle] = React.useState<string[] | undefined>([])
-    React.useEffect(()=> {
-    const modifiedTitle = title?.split(" ")
-    setPageTitle(modifiedTitle)
-   }, [title])
-
-    return(
-        <div className="
-            h-38
-            w-full
-            flex
-            items-center
-        ">
-            <div className='flex flex-col justify-center h-full'>
-                <h1>
-                    {
-                        pageTitle?.map((val) => (
-                            <span
-                                key={val}
-                                className={`
-                                    font-bold
-                                    ${ headerTextSize == "large" ? "text-4xl" : " text-3xl"}
-                                    ${ pageTitle.lastIndexOf(val) == 2 ? "text-black": "text-[#008600]"}
-                                `}
-                            >
-                                {val}&nbsp;
-                            </span>
-                        )) 
-                    }
-                </h1>
-                <p className="w-full font-light py-10">
-                    {description}
-                </p>
-            </div>
-        </div>
-    )
+const TextBox: FC<HeroProps> = ({ description, coloredTitle, otherTitle }) => {
+  return (
+    <Container maxWidth="xl" className='items-center h-full'>
+      <h1 className="text-3xl font-bold pb-4"><span className="text-[#008600]">{coloredTitle}</span> <span className="text-[#00001F]">{otherTitle}</span></h1>
+      <p className="text-lg font-light pb-8">
+        {description}
+      </p>
+    </Container>
+  );
 }
 
 export default TextBox;

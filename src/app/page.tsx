@@ -50,46 +50,37 @@ export default function Home() {
 
   return (
     <div className="p-16 bg-[#FAFAFA]">
-      <Container maxWidth="xl">
         <TextBox
-          headerTextSize="large"
-          title="Target Gap Visualizer"
+          coloredTitle="Target Gap"
+          otherTitle="Visualizer"
           description="This target visualiser shows Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
         />
-        <CountrySelect countries={countries} onSelected={onCountrySelected} />
-        
-        <div className="py-5">
-          {
-            getCountryName ? <div className="flex items-center space-x-4 mb-8 mt-2">
+        <Container maxWidth="xl" className="pb-8">
+          <CountrySelect countries={countries} onSelected={onCountrySelected} />
+          <div className="text-xl font-bold pt-8">{countryDetails ? 
+            <div className="flex items-center space-x-4 mb-8 mt-2">
                 <ReactCountryFlag
                     svg
-                    countryCode={selectedCountry}
+                    countryCode={countryDetails.actor_id}
                     style={{
                         fontSize: '2em',
                         lineHeight: '6em',
                         borderRadius: "100%"
                     }}
-                    aria-label={getCountryName}
+                    aria-label={countryDetails.name}
                 />
-                <p className="font-bold text-xl">{getCountryName}</p>
-              </div> 
-            :            
-            <div className="flex items-center space-x-3">
-              <HelpIcon className="text-[#D9D9D9]"/>
-              <p>No country selected</p>
-            </div>
-          }
-        </div>
-
-        <div className="flex space-x-4 mb-10">
+                <p className="font-bold text-xl">{countryDetails.name}</p>
+            </div>  : 'No country selected'}</div>
+        </Container>
+        <Container maxWidth="xl" className="flex space-x-4 h-full pb-8">
           <Emissions actor={countryDetails} parts={subActorDetails} />
-          <Reductions/>
-        </div>
+          <Reductions actor={countryDetails} parts={subActorDetails} />
+        </Container>
         <TextBox
-          title="Methodologies  used"
+          coloredTitle="Methodology"
+          otherTitle="used"
           description="The 1.5C is calculated Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
         />
-      </Container>
     </div>
   )
 }
