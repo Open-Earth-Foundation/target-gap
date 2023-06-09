@@ -122,7 +122,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
             <CartesianGrid vertical={false} />
             <XAxis dataKey="name" />
             <YAxis unit="Mt" />
-            <Tooltip content={<EmissionsTooltip />} wrapperStyle={{ zIndex: 1000 }} />
+            <Tooltip content={<EmissionsTooltip />} wrapperStyle={{ zIndex: 1000 }} allowEscapeViewBox={{ x: true, y: true }} />
             <ReferenceLine y={actor20Emissions} ifOverflow="extendDomain" stroke="#35006A" strokeDasharray="6 4">
               <Label position="right" stroke="#35006A">2.0°C</Label>
             </ReferenceLine>
