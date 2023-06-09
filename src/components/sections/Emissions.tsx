@@ -19,6 +19,7 @@ type BarData = {
 };
 
 const targetYear = 2030; // for which year emissions should be displayed
+const emissionsScale = 10e6; // transform to megatons
 
 const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
   let data: Record<string, any>[] = [{ name: 'National' }, { name: 'Provinces' }];
@@ -29,7 +30,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
   if (actor != null && parts != null) {
     const provinceData: Record<string, any> = { name: 'Provinces' };
     for (const province of parts) {
-      const provinceEmissions = actorEmissions(province, targetYear);
+      const provinceEmissions = actorEmissions(province, targetYear) / emissionsScale;
       provinceData['emissions' + province.actor_id] = provinceEmissions;
       subEmissions.push({
         id: province.actor_id,
@@ -40,11 +41,11 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
     }
     subEmissions = subEmissions.sort((a, b) => b.emissions - a.emissions);
     data = [
-      { name: 'National', emissions: actorEmissions(actor, targetYear) },
+      { name: 'National', emissions: actorEmissions(actor, targetYear) / emissionsScale },
       provinceData,
     ];
-    actor15Emissions = paris15Emissions(actor);
-    actor20Emissions = paris20Emissions(actor);
+    actor15Emissions = paris15Emissions(actor) / emissionsScale;
+    actor20Emissions = paris20Emissions(actor) / emissionsScale;
   }
 
   return (
@@ -83,7 +84,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
                 unit="Mt"
                 stackId="a"
                 fill={subEmission.hasTarget ? '#F9A200' : '#C5CBF5'}
-                style={{ stroke: '#fff', strokeWidth: 2 }}
+                style={{ stroke: '#fff', strokeWidth: 1 }}
                 radius={i === subEmissions.length - 1 ? [16, 16, 0, 0] : [0, 0, 0, 0]}
               />
             ))}
