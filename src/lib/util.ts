@@ -42,7 +42,7 @@ export function actorEmissions(actorDetails: any, year: number): number {
 }
 
 function actorEmissionsPast(actorDetails: any, year: number): number {
-    let values = []
+    let values = [];
     for (let datasource_id in actorDetails.emissions) {
         const datasource = actorDetails.emissions[datasource_id];
         const emissions = datasource.data.find((emission: any) => emission.year == year);
@@ -52,7 +52,7 @@ function actorEmissionsPast(actorDetails: any, year: number): number {
         }
     }
     let sorted = values.sort((a: any, b: any) => b.quality - a.quality);
-    return (sorted) ? sorted[0].total_emissions : null;
+    return (sorted && sorted.length > 0) ? sorted[0].total_emissions : null;
 }
 
 function actorEmissionsFuture(actorDetails: any, year: number): number {
