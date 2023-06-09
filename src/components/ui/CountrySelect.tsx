@@ -15,7 +15,7 @@ const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSele
       onSelected(value.id);
     }
   }
-  
+
   const options = countries.map((country) => ({ label: country.name, id: country.actor_id }));
 
   return (
@@ -38,11 +38,10 @@ const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSele
         )}
         getOptionLabel={option => `${option.label} (${option.id})`}
         isOptionEqualToValue={(option, value) => option.id === value.id}
-        renderInput={(params) => <TextField {...params} label="Country" defaultValue="You can type here" />}
+        renderInput={(params) => <TextField {...params} label="Country" />}
       />
     </FormControl>
   );
 };
 
 export default CountrySelect;
-
