@@ -68,7 +68,7 @@ const ReductionsTooltip = ({ active = false, payload = [], label = '' }: { activ
           <p>
             <span className="w-4 h-4 inline-block mr-6" style={{ backgroundColor: '#C5CBF5' }} />
             No target; business-as-usual based on<br />
-            <span className="pl-10">most recent reductions</span>
+            <span className="pl-10">most recent emissions</span>
           </p>
         </>
       )}
