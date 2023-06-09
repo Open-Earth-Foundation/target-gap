@@ -4,15 +4,15 @@ import Emissions from "@/components/sections/Emissions";
 import Reductions from "@/components/sections/Reductions";
 import TextBox from "@/components/sections/TextBox";
 import CountrySelect from "@/components/ui/CountrySelect";
-import { getActorEmissions, getActorParts } from "@/lib/api";
-import { ActorEmissionsMap, ActorPart, ActorType } from "@/lib/models";
+import { getActorEmissions, getActorOverview, getActorParts } from "@/lib/api";
+import { ActorEmissionsMap, ActorOverview, ActorPart, ActorType } from "@/lib/models";
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [countries, setCountries] = useState<ActorPart[]>([]);
   const [selectedCountry, setSelectedCountry] = useState('');
-  const [countryEmissions, setCountryEmissions] = useState<ActorEmissionsMap>({});
-  const [subActorEmissions, setSubActorEmissions] = useState<Map<ActorPart, ActorEmissionsMap>>(new Map());
+  const [countryDetails, setCountryDetails] = useState<ActorOverview | null>(null);
+  const [subActorDetails, setSubActorDetails] = useState<ActorOverview[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,17 +29,16 @@ export default function Home() {
   }
 
   const loadEmissionsData = async (actorId: string) => {
-    const countryEmissionsData = await getActorEmissions(actorId);
+    const countryEmissionsData = await getActorOverview(actorId);
     const subActors = await getActorParts(actorId);
     const adm1Actors = subActors.filter((actor) => actor.type === ActorType.Adm1);
-    const subActorEmissionsData = await Promise.all(
-      adm1Actors.map(async (subActor): Promise<[ActorPart, ActorEmissionsMap]> => {
-        return [subActor, await getActorEmissions(subActor.actor_id)];
+    const subActorDetails = await Promise.all(
+      adm1Actors.map(async (subActor): Promise<ActorOverview> => {
+        return await getActorOverview(subActor.actor_id);
       })
     );
-    const subActorEmissionsMap = new Map<ActorPart, ActorEmissionsMap>(subActorEmissionsData); // transforms tuple array into Map
-    setCountryEmissions(countryEmissionsData);
-    setSubActorEmissions(subActorEmissionsMap);
+    setCountryDetails(countryEmissionsData);
+    setSubActorDetails(subActorDetails);
   }
 
   return (
@@ -50,7 +49,7 @@ export default function Home() {
       <CountrySelect countries={countries} onSelected={onCountrySelected} />
       <p className="mb-8">Selected country: {selectedCountry}</p>
       <div className="flex space-x-4">
-        <Emissions actor={countryEmissions} parts={subActorEmissions} />
+        <Emissions actor={countryDetails} parts={subActorDetails} />
         <Reductions/>
       </div>
       <TextBox
