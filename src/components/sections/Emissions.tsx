@@ -129,12 +129,12 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
               allowEscapeViewBox={{ x: true, y: true }}
               position={{ x: 500, y: -100 }}
             />
-            <ReferenceLine y={actor20Emissions} ifOverflow="extendDomain" stroke="#35006A" strokeDasharray="6 4">
+            {/*<ReferenceLine y={actor20Emissions} ifOverflow="extendDomain" stroke="#35006A" strokeDasharray="6 4">
               <Label position="right" stroke="#35006A">2.0°C</Label>
             </ReferenceLine>
             <ReferenceLine y={actor15Emissions} ifOverflow="extendDomain" stroke="#F23D33" strokeDasharray="6 4">
               <Label position="right" stroke="#F23D33">1.5°C</Label>
-            </ReferenceLine>
+            </ReferenceLine>*/}
             <Bar dataKey="emissions" name="National Emissions" unit="Mt" stackId="a" fill="#F23D33" radius={[16, 16, 0, 0]} />
             {subEmissions.map((subEmission, i) => (
               <Bar
@@ -150,11 +150,11 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
             ))}
           </BarChart>
         </ResponsiveContainer>
-        <p className="pb-4 text-sm">Legends</p>
+        {/*<p className="pb-4 text-sm">Legends</p>
         <div className="space-x-4">
           <Chip label="1.5°C Temparature Increase" style={{ backgroundColor: '#E8EAFB', color: '#001EA7' }} avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#F23D33' }} />} />
           <Chip label="2.0°C Temparature Increase" style={{ backgroundColor: '#E8EAFB', color: '#001EA7' }} avatar={<span className="w-4 max-h-1.5" style={{ backgroundColor: '#35006A' }} />} />
-        </div>
+        </div>*/}
       </CardContent>
     </Card>
   )
