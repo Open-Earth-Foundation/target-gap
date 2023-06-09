@@ -85,7 +85,8 @@ const Reductions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
   if (actor != null && parts != null) {
     const provinceData: Record<string, any> = { name: 'Provinces' };
     for (const province of parts) {
-      const provinceEmissions = actorEmissions(province, targetYear) / emissionsScale;
+      let provinceEmissions = actorEmissions(province, targetYear) / emissionsScale;
+      provinceEmissions = provinceEmissions === Infinity ? 0 : provinceEmissions;
       provinceData['emissions' + province.actor_id] = provinceEmissions;
       subEmissions.push({
         id: province.actor_id,
