@@ -19,7 +19,7 @@ type BarData = {
   hasTarget: boolean;
 };
 
-const emissionsScale = 10e6; // transform to megatons
+const emissionsScale = 1e6; // transform to megatons
 
 const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active?: boolean, payload?: Array<any>, label?: string }) => {
   if (!(active && payload && payload.length)) {
@@ -98,6 +98,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
         const provinceNextTarget = actorNextTarget(province);
         if (isNaN(provinceEmissions)) {
           hasMissingData = true;
+          provinceEmissions = 0;
           break;
         }
 
