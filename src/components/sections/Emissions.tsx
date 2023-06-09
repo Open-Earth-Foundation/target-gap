@@ -1,7 +1,7 @@
 'use client'
 
 import { ActorOverview } from '@/lib/models';
-import { actorEmissions, actorNextTarget, paris15Emissions, paris20Emissions } from '@/lib/util';
+import { actorEmissions, actorNextTarget, actorTargetAfter, paris15Emissions, paris20Emissions } from '@/lib/util';
 import { Card, CardContent, Chip } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { Bar, BarChart, CartesianGrid, Label, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
@@ -19,7 +19,6 @@ type BarData = {
   hasTarget: boolean;
 };
 
-const targetYear = 2030; // for which year emissions should be displayed
 const emissionsScale = 10e6; // transform to megatons
 
 const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active?: boolean, payload?: Array<any>, label?: string }) => {
@@ -78,21 +77,39 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
 
 const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
   let data: Record<string, any>[] = [{ name: 'National' }, { name: 'Provinces' }];
-  let actor15Emissions = 450; // TODO use paris15Emissions from utils
+  let actor15Emissions = 450;
   let actor20Emissions = 550;
   let subEmissions: BarData[] = [];
+  let targetYear = 2030;
+  let hasMissingData = false;
 
   if (actor != null && parts != null) {
+    const nextTarget = actorNextTarget(actor);
+    if (nextTarget && nextTarget.target_year) {
+      targetYear = nextTarget.target_year;
+    }
+
     const provinceData: Record<string, any> = { name: 'Provinces' };
     for (const province of parts) {
       let provinceEmissions = actorEmissions(province, targetYear) / emissionsScale;
-      provinceEmissions = provinceEmissions === Infinity ? 0 : provinceEmissions;
+      let provinceNextTarget = actorNextTarget(province); 
+      if (provinceNextTarget && provinceNextTarget.target_unit === 'percent') {
+        console.log(province.name, provinceNextTarget.target_year, provinceNextTarget.target_value, provinceNextTarget.target_unit, provinceNextTarget.baseline_value, provinceNextTarget.baseline_year)
+        let baseline = provinceNextTarget.baseline_value;
+        if (baseline == null) {
+          baseline = actorEmissions(province, provinceNextTarget.baseline_year);
+          console.log('Baseline', baseline);
+        }
+        const reduction = parseInt(provinceNextTarget.target_value) / 100;
+        provinceEmissions = baseline * reduction;
+      }
+
       provinceData['emissions' + province.actor_id] = provinceEmissions;
       subEmissions.push({
         id: province.actor_id,
         name: province.name,
         emissions: provinceEmissions,
-        hasTarget: actorNextTarget(province) != null,
+        hasTarget: provinceNextTarget != null,
       });
     }
     subEmissions = subEmissions.sort((a, b) => a.emissions - b.emissions);
@@ -107,7 +124,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
   return (
     <Card sx={{ minWidth: 500, minHeight: 300 }} className="overflow-visible">
       <CardContent className='items-center'>
-        <p className="text-lg"><span className="font-bold">Emissions</span> for the next national target year (2030)</p>
+        <p className="text-lg"><span className="font-bold">Emissions</span> for the next national target year ({targetYear})</p>
         <p className="text-xs text-gray-500 pb-2">Last updated in 2019</p>
         <ResponsiveContainer width="100%" height="100%" minHeight={300}>
           <BarChart
