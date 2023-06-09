@@ -49,11 +49,11 @@ export default function Home() {
         otherTitle="Visualizer"
         description="This target visualiser shows Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
       />
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" className="pb-8">
         <CountrySelect countries={countries} onSelected={onCountrySelected} />
-        <p className="mb-8">Selected country: {selectedCountry}</p>
+        <p className="text-xl font-bold pt-8">{countryDetails ? countryDetails.name : 'No country selected'}</p>
       </Container>
-      <Container maxWidth="xl" className='flex space-x-4 h-full pb-8'>
+      <Container maxWidth="xl" className="flex space-x-4 h-full pb-8">
         <Emissions actor={countryDetails} parts={subActorDetails} />
         <Reductions actor={countryDetails} parts={subActorDetails} />
       </Container>
