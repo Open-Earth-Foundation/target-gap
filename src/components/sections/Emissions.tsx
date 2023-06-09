@@ -20,7 +20,7 @@ type BarData = {
 };
 
 const targetYear = 2030; // for which year emissions should be displayed
-const emissionsScale = 10e6; // transform to megatons
+const emissionsScale = 1e6; // transform to megatons
 
 const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active?: boolean, payload?: Array<any>, label?: string }) => {
   if (!(active && payload && payload.length)) {

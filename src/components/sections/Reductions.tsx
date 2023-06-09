@@ -20,7 +20,7 @@ type BarData = {
 };
 
 const targetYear = 2030; // for which year reductions should be displayed
-const reductionsScale = 10e6; // transform to megatons
+const reductionsScale = 1e6; // transform to megatons
 
 const ReductionsTooltip = ({ active = false, payload = [], label = '' }: { active?: boolean, payload?: Array<any>, label?: string }) => {
   if (!(active && payload && payload.length)) {
@@ -148,4 +148,3 @@ const Reductions: FunctionComponent<ReductionsProps> = ({ actor, parts }) => {
 }
 
 export default Reductions;
-
