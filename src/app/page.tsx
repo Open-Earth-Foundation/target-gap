@@ -45,17 +45,21 @@ export default function Home() {
   return (
     <div className="p-16">
       <TextBox
+        coloredTitle="Target Gap"
+        otherTitle="Visualizer"
         description="This target visualiser shows Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
       />
       <Container maxWidth="xl">
         <CountrySelect countries={countries} onSelected={onCountrySelected} />
         <p className="mb-8">Selected country: {selectedCountry}</p>
       </Container>
-      <Container maxWidth="xl" className='flex space-x-4 h-full'>
+      <Container maxWidth="xl" className='flex space-x-4 h-full pb-8'>
         <Emissions actor={countryDetails} parts={subActorDetails} />
         <Reductions actor={countryDetails} parts={subActorDetails} />
       </Container>
       <TextBox
+        coloredTitle="Methodology"
+        otherTitle="used"
         description="The 1.5C is calculated Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
       />
     </div>
