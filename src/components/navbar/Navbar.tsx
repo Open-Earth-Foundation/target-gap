@@ -12,33 +12,34 @@ import Image from 'next/image';
 
 const Navbar = () => {
     return(
-        <AppBar className='bg-[#008600] h-20' position="static">
+        <AppBar position="static" sx={{background: "#008600"}}>
             <Container maxWidth="xl" className='flex items-center h-full'>
                 <Toolbar disableGutters>
                     <Image 
-                        src="/images/OEFLogo.svg"
-                        height={150}
-                        width={150}
+                        src="/images/OEFLogo.png"
+                        height={36}
+                        width={36}
                         alt='OEF_Logo'
 
                     />
                     <Typography
-                    variant="h6"
-                    noWrap
-                    component="a"
-                    href="/"
-                    sx={{
-                        ml:2,
-                        borderLeft: "2px solid #ffffff",
-                        pl:2,
-                        display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'inherit',
-                        fontWeight: 400,
-                        color: 'inherit',
-                        textDecoration: 'none',
-                    }}
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            ml:6,
+                            pl:2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'inherit',
+                            fontWeight: 600,
+                            fontSize: "16px",
+                            color: 'inherit',
+                            textDecoration: 'none',
+                            
+                        }}
                     >
-                    Target Gap Visualiser
+                    TargetGapVisualiser
                     </Typography>
         
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -68,7 +69,7 @@ const Navbar = () => {
                         textDecoration: 'none',
                     }}
                     >
-                        Target Gap Visualiser
+                        TargetGapVisualiser
                     </Typography>
                 </Toolbar>
         </Container>

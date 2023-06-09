@@ -20,12 +20,12 @@ const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSele
 
   return (
     <FormControl>
-      <p className="text-sm pb-4">Search for a country</p>
+      <p className="text-sm pb-2">Search for a country</p>
       <Autocomplete
         disablePortal
         id="country-autocomplete"
         options={options}
-        sx={{ width: 500 }}
+        sx={{ width: 365 }}
         autoSelect={true}
         blurOnSelect={true}
         autoComplete={true}

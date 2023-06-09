@@ -4,10 +4,13 @@ import Emissions from "@/components/sections/Emissions";
 import Reductions from "@/components/sections/Reductions";
 import TextBox from "@/components/sections/TextBox";
 import CountrySelect from "@/components/ui/CountrySelect";
-import { getActorEmissions, getActorOverview, getActorParts } from "@/lib/api";
-import { ActorEmissionsMap, ActorOverview, ActorPart, ActorType } from "@/lib/models";
-import { Container } from "@mui/material";
+import { getActorOverview, getActorParts } from "@/lib/api";
+import { ActorOverview, ActorPart, ActorType } from "@/lib/models";
 import { useEffect, useState } from "react";
+
+import Container from '@mui/material/Container';
+
+import ReactCountryFlag from "react-country-flag"
 
 export default function Home() {
   const [countries, setCountries] = useState<ActorPart[]>([]);
@@ -43,7 +46,7 @@ export default function Home() {
   }
 
   return (
-    <div className="p-16">
+    <div className="p-16 bg-[#FAFAFA]">
       <TextBox
         coloredTitle="Target Gap"
         otherTitle="Visualizer"
@@ -51,7 +54,20 @@ export default function Home() {
       />
       <Container maxWidth="xl" className="pb-8">
         <CountrySelect countries={countries} onSelected={onCountrySelected} />
-        <p className="text-xl font-bold pt-8">{countryDetails ? countryDetails.name : 'No country selected'}</p>
+        <div className="text-xl font-bold pt-8">{countryDetails ?
+          <div className="flex items-center space-x-4 mb-8 mt-2">
+            <ReactCountryFlag
+              svg
+              countryCode={countryDetails.actor_id}
+              style={{
+                fontSize: '2em',
+                lineHeight: '6em',
+                borderRadius: "100%"
+              }}
+              aria-label={countryDetails.name}
+            />
+            <p className="font-bold text-xl">{countryDetails.name}</p>
+          </div> : 'No country selected'}</div>
       </Container>
       <Container maxWidth="xl" className="flex space-x-4 h-full pb-8">
         <Emissions actor={countryDetails} parts={subActorDetails} />
@@ -63,5 +79,5 @@ export default function Home() {
         description="The 1.5C is calculated Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
       />
     </div>
-  )
+  );
 }
