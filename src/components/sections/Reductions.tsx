@@ -19,7 +19,6 @@ type BarData = {
   hasTarget: boolean;
 };
 
-const targetYear = 2030; // for which year reductions should be displayed
 const reductionsScale = 1e6; // transform to megatons
 
 const ReductionsTooltip = ({ active = false, payload = [], label = '' }: { active?: boolean, payload?: Array<any>, label?: string }) => {
@@ -80,31 +79,41 @@ const Reductions: FunctionComponent<ReductionsProps> = ({ actor, parts }) => {
   let data: Record<string, any>[] = [{ name: 'National' }, { name: 'Provinces' }];
   let subReductions: BarData[] = [];
   const currentYear = (new Date()).getFullYear();
+  let hasMissingData = false;
+  let targetYear = 2030;
 
   if (actor != null && parts != null) {
-    const provinceData: Record<string, any> = { name: 'Provinces' };
-    for (const province of parts) {
-      let provinceReductions = actorReductions(province, currentYear, targetYear) / reductionsScale;
-      provinceReductions = isNaN(provinceReductions) ? 0 : provinceReductions;
-      provinceData['reductions' + province.actor_id] = provinceReductions;
-      subReductions.push({
-        id: province.actor_id,
-        name: province.name,
-        reductions: provinceReductions,
-        hasTarget: actorNextTarget(province) != null,
-      });
+    const nextTarget = actorNextTarget(actor);
+    if (!nextTarget) {
+      hasMissingData = true;
+    } else {
+      if (nextTarget.target_year) {
+        targetYear = nextTarget.target_year;
+      }
+      const provinceData: Record<string, any> = { name: 'Provinces' };
+      for (const province of parts) {
+        let provinceReductions = actorReductions(province, currentYear, targetYear) / reductionsScale;
+        provinceReductions = isNaN(provinceReductions) ? 0 : provinceReductions;
+        provinceData['reductions' + province.actor_id] = provinceReductions;
+        subReductions.push({
+          id: province.actor_id,
+          name: province.name,
+          reductions: provinceReductions,
+          hasTarget: actorNextTarget(province) != null,
+        });
+      }
+      subReductions = subReductions.sort((a, b) => a.reductions - b.reductions);
+      data = [
+        { name: 'National', reductions: actorReductions(actor, currentYear, targetYear) / reductionsScale },
+        provinceData,
+      ];
     }
-    subReductions = subReductions.sort((a, b) => a.reductions - b.reductions);
-    data = [
-      { name: 'National', reductions: actorReductions(actor, currentYear, targetYear) / reductionsScale },
-      provinceData,
-    ];
   }
 
   return (
-    <Card sx={{ minWidth: 500, minHeight: 300 }} className="overflow-visible">
+    <Card sx={{ minWidth: 400, minHeight: 300 }} className="overflow-visible">
       <CardContent className='items-center'>
-        <p className="text-lg"><span className="font-bold">Reductions</span> for the next national target year (2030)</p>
+        <p className="text-lg"><span className="font-bold">Reductions</span> for the next national target year ({targetYear})</p>
         <p className="text-xs text-gray-500 pb-2">Last updated in 2019</p>
         <ResponsiveContainer width="100%" height="100%" minHeight={300}>
           <BarChart
