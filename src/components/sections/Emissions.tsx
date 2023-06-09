@@ -1,30 +1,43 @@
 'use client'
 
-import { ActorEmissionsMap, ActorPart } from '@/lib/models';
+import { ActorOverview } from '@/lib/models';
+import { actorEmissions, actorNextTarget, paris15Emissions, paris20Emissions } from '@/lib/util';
 import { Card, CardContent, Chip } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { Bar, BarChart, CartesianGrid, Label, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 type EmissionsProps = {
-  actor: ActorEmissionsMap;
-  parts: Map<ActorPart, ActorEmissionsMap>;
+  actor: ActorOverview | null;
+  parts: ActorOverview[] | null;
 };
 
+type BarData = {
+  id: string;
+  name: string;
+  hasTarget: boolean;
+};
+
+const targetYear = 2030; // for which year emissions should be displayed
+
 const Emissions: FunctionComponent<EmissionsProps> = ({actor, parts}) => {
-  const data = [
-    {name: "National", emissions: 450},
-    {name: "Provinces", emissionsBV: 140, emissionsHH: 280, emissionsABC: 123, emissionsDEF: 139, emissionsGHI: 193},
-  ];
-  const subEmissions = [
-    { id: "BV", name: "Bavaria", hasTarget: false },
-    { id: "BER", name: "Berlin", hasTarget: true },
-    { id: "HH", name: "Hamburg", hasTarget: true },
-    { id: "ABC", name: "Potsdam", hasTarget: true },
-    { id: "DEF", name: "Brandenburg", hasTarget: true },
-    { id: "GHI", name: "Hannover", hasTarget: true },
-  ];
-  const actor15Emissions = 450; // TODO use paris15Emissions from utils
-  const actor20Emissions = 550;
+  let data: Record<string, any>[] = [{name: 'National'}, {name: 'Provinces'}];
+  let actor15Emissions = 450; // TODO use paris15Emissions from utils
+  let actor20Emissions = 550;
+  let subEmissions: BarData[] = [];
+
+  if (actor != null && parts != null) {
+    const provinceData: Record<string, any> = { name: 'Provinces' };
+    for (const province of parts) {
+      provinceData['emissions' + province.actor_id] = actorEmissions(province, targetYear);
+      subEmissions.push({ id: province.actor_id, name: province.name, hasTarget: actorNextTarget(province) != null });
+    }
+    data = [
+      {name: 'National', emissions: actorEmissions(actor, targetYear)},
+      provinceData,
+    ];
+    actor15Emissions = paris15Emissions(actor);
+    actor20Emissions = paris20Emissions(actor);
+  }
 
   return(
     <Card sx={{ minWidth: 500, minHeight: 300 }}>
