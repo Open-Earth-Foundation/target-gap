@@ -50,7 +50,7 @@ export default function Home() {
       <p className="mb-8">Selected country: {selectedCountry}</p>
       <div className="flex space-x-4">
         <Emissions actor={countryDetails} parts={subActorDetails} />
-        <Reductions/>
+        <Reductions actor={countryDetails} parts={subActorDetails} />
       </div>
       <TextBox
         description="The 1.5C is calculated Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
