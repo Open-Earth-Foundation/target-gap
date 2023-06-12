@@ -114,7 +114,7 @@ const Reductions: FunctionComponent<ReductionsProps> = ({ actor, parts }) => {
   }
 
   return (
-    <Card sx={{ minWidth: 400, minHeight: 400 }} className="overflow-visible inline-block">
+    <Card sx={{ minWidth: 400, minHeight: 400 }} className="overflow-visible w-full lg:inline-block lg:w-1/2 mt-4 lg:mt-0">
       <CardContent className='items-center'>
         <p className="text-lg"><span className="font-bold">Reductions</span> for the next national target year ({targetYear})</p>
         <p className="text-xs text-gray-500 pb-2">Last updated in 2019</p>

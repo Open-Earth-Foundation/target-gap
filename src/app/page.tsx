@@ -91,7 +91,7 @@ export default function Home() {
           }
         </div>
       </Container>
-      <Container maxWidth="xl" className="space-x-4 pb-8 whitespace-nowrap inline-block">
+      <Container maxWidth="xl" className="lg:space-x-4 pb-8 whitespace-nowrap inline-block">
         <Emissions actor={countryDetails} parts={subActorDetails} />
         <Reductions actor={countryDetails} parts={subActorDetails} />
       </Container>
