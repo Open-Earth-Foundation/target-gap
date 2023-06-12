@@ -69,7 +69,7 @@ export default function Home() {
             <p className="font-bold text-xl">{countryDetails.name}</p>
           </div> : 'No country selected'}</div>
       </Container>
-      <Container maxWidth="xl" className="flex space-x-4 h-full pb-8">
+      <Container maxWidth="xl" className="space-x-4 pb-8 whitespace-nowrap inline-block">
         <Emissions actor={countryDetails} parts={subActorDetails} />
         <Reductions actor={countryDetails} parts={subActorDetails} />
       </Container>

@@ -121,7 +121,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
   }
 
   return (
-    <Card sx={{ minWidth: 400, minHeight: 300 }} className="overflow-visible">
+    <Card sx={{ minWidth: 400, minHeight: 300 }} className="overflow-visible inline-block">
       <CardContent>
         <p className="text-lg"><span className="font-bold">Emissions</span> for the next national target year ({targetYear})</p>
         <p className="text-xs text-gray-500 pb-2">Last updated in 2019</p>
