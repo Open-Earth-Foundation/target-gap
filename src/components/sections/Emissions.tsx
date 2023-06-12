@@ -1,10 +1,10 @@
 'use client'
 
 import { ActorOverview } from '@/lib/models';
-import { actorEmissions, actorNextTarget, actorTargetAfter, paris15Emissions, paris20Emissions } from '@/lib/util';
-import { Card, CardContent, Chip } from '@mui/material';
+import { actorEmissions, actorNextTarget, paris15Emissions, paris20Emissions } from '@/lib/util';
+import { Card, CardContent } from '@mui/material';
 import { FunctionComponent } from 'react';
-import { Bar, BarChart, CartesianGrid, Label, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import PopperPortal from '../util/PopperPortal';
 
@@ -124,7 +124,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
   }
 
   return (
-    <Card sx={{ minWidth: 400, minHeight: 300 }} className="overflow-visible inline-block">
+    <Card sx={{ minWidth: 400, minHeight: 400 }} className="overflow-visible inline-block">
       <CardContent>
         <p className="text-lg"><span className="font-bold">Emissions</span> for the next national target year ({targetYear})</p>
         <p className="text-xs text-gray-500 pb-2">Last updated in 2019</p>
