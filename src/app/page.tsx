@@ -87,7 +87,7 @@ export default function Home() {
               <CircleFlag countryCode={countryDetails.actor_id.toLowerCase()} aria-label={countryDetails.name} className="h-12" />
               <p className="font-bold text-xl">{countryDetails.name}</p>
             </div>
-          : <span><HelpOutlinedIcon style={{ color: '#C5CBF5', verticalAlign: -6, marginRight: 16 }} />No country selected</span>
+          : <p className="mb-8 mt-2"><HelpOutlinedIcon fontSize="large" style={{ color: '#C5CBF5', verticalAlign: -11, marginRight: 16 }} />No country selected</p>
           }
         </div>
       </Container>
