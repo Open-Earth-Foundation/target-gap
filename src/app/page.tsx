@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import Container from '@mui/material/Container';
 
 import ReactCountryFlag from "react-country-flag"
+import { CircleFlag } from "react-circle-flags";
 
 export default function Home() {
   const [countries, setCountries] = useState<ActorPart[]>([]);
@@ -76,16 +77,7 @@ export default function Home() {
         <CountrySelect countries={countries} onSelected={onCountrySelected} />
         <div className="text-xl font-bold pt-8">{countryDetails ?
           <div className="flex items-center space-x-4 mb-8 mt-2">
-            <ReactCountryFlag
-              svg
-              countryCode={countryDetails.actor_id}
-              style={{
-                fontSize: '2em',
-                lineHeight: '6em',
-                borderRadius: "100%"
-              }}
-              aria-label={countryDetails.name}
-            />
+            <CircleFlag countryCode={countryDetails.actor_id.toLowerCase()} aria-label={countryDetails.name} className="h-12"/>
             <p className="font-bold text-xl">{countryDetails.name}</p>
           </div> : 'No country selected'}</div>
       </Container>
