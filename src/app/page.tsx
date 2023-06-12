@@ -12,6 +12,7 @@ import Container from '@mui/material/Container';
 
 import { CircleFlag } from "react-circle-flags";
 import { CircularProgress } from "@mui/material";
+import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
 
 export default function Home() {
   const [countries, setCountries] = useState<ActorPart[]>([]);
@@ -77,14 +78,18 @@ export default function Home() {
         otherTitle="Visualizer"
         description={description}
       />
-      <Container maxWidth="xl" className="pb-8">
+      <Container maxWidth="xl" className="pb-2">
         <CountrySelect countries={countries} onSelected={onCountrySelected} />
-        {<CircularProgress className="align-bottom m-2 ml-4" />}
-        <div className="text-xl font-bold pt-8">{countryDetails ?
-          <div className="flex items-center space-x-4 mb-8 mt-2">
-            <CircleFlag countryCode={countryDetails.actor_id.toLowerCase()} aria-label={countryDetails.name} className="h-12" />
-            <p className="font-bold text-xl">{countryDetails.name}</p>
-          </div> : 'No country selected'}</div>
+        {isLoading && <CircularProgress className="align-bottom m-2 ml-4" />}
+        <div className="text-xl font-bold pt-8">
+          {countryDetails ?
+            <div className="flex items-center space-x-4 mb-8 mt-2">
+              <CircleFlag countryCode={countryDetails.actor_id.toLowerCase()} aria-label={countryDetails.name} className="h-12" />
+              <p className="font-bold text-xl">{countryDetails.name}</p>
+            </div>
+          : <span><HelpOutlinedIcon style={{ color: '#C5CBF5', verticalAlign: -6, marginRight: 16 }} />No country selected</span>
+          }
+        </div>
       </Container>
       <Container maxWidth="xl" className="space-x-4 pb-8 whitespace-nowrap inline-block">
         <Emissions actor={countryDetails} parts={subActorDetails} />
