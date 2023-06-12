@@ -63,7 +63,7 @@ const ReductionsTooltip = ({ active = false, payload = [], label = '' }: { activ
             <hr className="my-2" />
             <p className="font-bold mb-2">Key</p>
             <p className="mb-2">
-              <span className="w-4 h-4 inline-block mr-6" style={{ backgroundColor: '#F9A200' }} />
+              <span className="w-4 h-4 inline-block mr-6" style={{ backgroundColor: '#2351DC' }} />
               Expected value based on target
             </p>
             <p>
