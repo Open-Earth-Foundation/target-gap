@@ -45,12 +45,32 @@ export default function Home() {
     setSubActorDetails(subActorDetails);
   }
 
+  const description = `
+  This target gap visualizer uses the OpenClimate API to shows the
+  difference between the emissions reductions targets of national actors
+  and their subnational parts (states, provinces, or regions).
+  The emissions graph shows the projected emissions by the national actor
+  if they achieve their next reductions target, next to the sum of the
+  emissions by all of their subnational parts. If subnational actors
+  have not made emission reductions targets, it uses their last measured
+  emisisons values. The reductions graph shows the amount of reductions
+  the national actor needs to achieve their next target, next to the sum
+  of the reductions needed by all of their subnational parts. If a subnational
+  actor has not made a reduction target, we use 0.0 for its reductions value.
+  `;
+
+  const methodology = `
+  Emissions data is from the OpenClimate API. Emissions values are
+  derived from national or international datasets. Target values come
+  from nationally-determined contributions (NDCs) or other public sources.
+  `;
+
   return (
     <div className="p-16 bg-[#FAFAFA]">
       <TextBox
         coloredTitle="Target Gap"
         otherTitle="Visualizer"
-        description="This target visualiser shows Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
+        description={description}
       />
       <Container maxWidth="xl" className="pb-8">
         <CountrySelect countries={countries} onSelected={onCountrySelected} />
@@ -76,7 +96,7 @@ export default function Home() {
       <TextBox
         coloredTitle="Methodology"
         otherTitle="used"
-        description="The 1.5C is calculated Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin in luctus quam, vel lacinia est. Praesent vel sagittis urna, eget rutrum sapien. Integer eu arcu eros. Curabitur in consequat lacus, ac ullamcorper metus. Vivamus rutrum purus ac mollis ullamcorper"
+        description={methodology}
       />
     </div>
   );
