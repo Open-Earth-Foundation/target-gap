@@ -129,7 +129,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
         <p className="text-lg"><span className="font-bold">Emissions</span> for the next national target year ({targetYear})</p>
         <p className="text-xs text-gray-500 pb-2">Last updated in 2019</p>
         {hasMissingData ? (
-          <p className="text-center align-center w-full my-8">Insufficient data for this country</p>
+          <p className="text-center align-center w-full my-32">Insufficient data for this country</p>
         ) : (
           <ResponsiveContainer width="100%" height="100%" minHeight={300}>
             <BarChart

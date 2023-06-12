@@ -87,7 +87,8 @@ const Reductions: FunctionComponent<ReductionsProps> = ({ actor, parts }) => {
 
   if (actor != null && parts != null) {
     const nextTarget = actorNextTarget(actor);
-    if (!nextTarget) {
+    const countryReductions = actorReductions(actor, currentYear, targetYear) / reductionsScale;
+    if (!nextTarget || isNaN(countryReductions)) {
       hasMissingData = true;
     } else {
       if (nextTarget.target_year) {
@@ -107,7 +108,7 @@ const Reductions: FunctionComponent<ReductionsProps> = ({ actor, parts }) => {
       }
       subReductions = subReductions.sort((a, b) => a.reductions - b.reductions);
       data = [
-        { name: 'National', reductions: actorReductions(actor, currentYear, targetYear) / reductionsScale },
+        { name: 'National', reductions: countryReductions },
         provinceData,
       ];
     }
@@ -118,42 +119,46 @@ const Reductions: FunctionComponent<ReductionsProps> = ({ actor, parts }) => {
       <CardContent className='items-center'>
         <p className="text-lg"><span className="font-bold">Reductions</span> for the next national target year ({targetYear})</p>
         <p className="text-xs text-gray-500 pb-2">Last updated in 2019</p>
-        <ResponsiveContainer width="100%" height="100%" minHeight={300}>
-          <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 10,
-              right: 50,
-              left: 5,
-              bottom: 0,
-            }}
-          >
-            <CartesianGrid vertical={false} />
-            <XAxis dataKey="name" />
-            <YAxis unit="Mt" />
-            <Tooltip
-              content={<ReductionsTooltip />}
-              wrapperStyle={{ zIndex: 1000 }}
-              allowEscapeViewBox={{ x: true, y: true }}
-              position={{ x: -250, y: -100 }}
-            />
-            <Bar dataKey="reductions" name="National Reductions" unit="Mt" stackId="a" fill="#001EA7" radius={[16, 16, 0, 0]} />
-            {subReductions.map((subEmission, i) => (
-              <Bar
-                dataKey={`reductions${subEmission.id}`}
-                name={subEmission.name}
-                key={subEmission.id}
-                unit="Mt"
-                stackId="a"
-                fill={subEmission.hasTarget ? '#2351DC' : '#C5CBF5'}
-                style={{ stroke: '#fff', strokeWidth: 1 }}
-                radius={i === subReductions.length - 1 ? [16, 16, 0, 0] : [0, 0, 0, 0]}
+        {hasMissingData ? (
+          <p className="text-center align-center w-full my-32">Insufficient data for this country</p>
+        ) : (
+          <ResponsiveContainer width="100%" height="100%" minHeight={300}>
+            <BarChart
+              width={500}
+              height={300}
+              data={data}
+              margin={{
+                top: 10,
+                right: 50,
+                left: 5,
+                bottom: 0,
+              }}
+            >
+              <CartesianGrid vertical={false} />
+              <XAxis dataKey="name" />
+              <YAxis unit="Mt" />
+              <Tooltip
+                content={<ReductionsTooltip />}
+                wrapperStyle={{ zIndex: 1000 }}
+                allowEscapeViewBox={{ x: true, y: true }}
+                position={{ x: -250, y: -100 }}
               />
-            ))}
-          </BarChart>
-        </ResponsiveContainer>
+              <Bar dataKey="reductions" name="National Reductions" unit="Mt" stackId="a" fill="#001EA7" radius={[16, 16, 0, 0]} />
+              {subReductions.map((subEmission, i) => (
+                <Bar
+                  dataKey={`reductions${subEmission.id}`}
+                  name={subEmission.name}
+                  key={subEmission.id}
+                  unit="Mt"
+                  stackId="a"
+                  fill={subEmission.hasTarget ? '#2351DC' : '#C5CBF5'}
+                  style={{ stroke: '#fff', strokeWidth: 1 }}
+                  radius={i === subReductions.length - 1 ? [16, 16, 0, 0] : [0, 0, 0, 0]}
+                />
+              ))}
+            </BarChart>
+          </ResponsiveContainer>
+        )}
       </CardContent>
     </Card>
   )
