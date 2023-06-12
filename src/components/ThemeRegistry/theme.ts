@@ -1,6 +1,6 @@
 'use client';
 
-import { createTheme, ThemeOptions } from '@mui/material/styles';
+import { createTheme, ThemeOptions, Palette, PaletteOptions } from '@mui/material/styles';
 import { Poppins } from 'next/font/google';
 
 const poppins = Poppins({
@@ -12,7 +12,7 @@ const defaultTheme = createTheme(
   {
     palette: {
       primary: { main: '#008600' },
-      info: { main: '#2351DC', light: '#C5CBF5' },
+      info: { main: '#2351DC' },
     },
     typography: {
       fontFamily: poppins.style.fontFamily,
