@@ -10,6 +10,10 @@ const poppins = Poppins({
 
 const defaultTheme = createTheme(
   {
+    palette: {
+      primary: { main: '#008600' },
+      info: { main: '#2351DC', light: '#C5CBF5' },
+    },
     typography: {
       fontFamily: poppins.style.fontFamily,
       body1: { fontFamily: poppins.style.fontFamily },
