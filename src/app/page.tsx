@@ -10,11 +10,12 @@ import { useEffect, useState } from "react";
 
 import Container from '@mui/material/Container';
 
-import ReactCountryFlag from "react-country-flag"
 import { CircleFlag } from "react-circle-flags";
+import { CircularProgress } from "@mui/material";
 
 export default function Home() {
   const [countries, setCountries] = useState<ActorPart[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(true);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [countryDetails, setCountryDetails] = useState<ActorOverview | null>(null);
   const [subActorDetails, setSubActorDetails] = useState<ActorOverview[]>([]);
@@ -23,6 +24,7 @@ export default function Home() {
     const fetchData = async () => {
       const data = await getActorParts('EARTH');
       setCountries(data);
+      setLoading(false);
     }
 
     fetchData().catch(console.error);
@@ -31,6 +33,7 @@ export default function Home() {
   const onCountrySelected = (actorId: string) => {
     setSelectedCountry(actorId);
     loadEmissionsData(actorId).catch(console.error);
+    setLoading(true);
   }
 
   const loadEmissionsData = async (actorId: string) => {
@@ -44,6 +47,7 @@ export default function Home() {
     );
     setCountryDetails(countryEmissionsData);
     setSubActorDetails(subActorDetails);
+    setLoading(false);
   }
 
   const description = `
@@ -75,9 +79,10 @@ export default function Home() {
       />
       <Container maxWidth="xl" className="pb-8">
         <CountrySelect countries={countries} onSelected={onCountrySelected} />
+        {<CircularProgress className="align-bottom m-2 ml-4" />}
         <div className="text-xl font-bold pt-8">{countryDetails ?
           <div className="flex items-center space-x-4 mb-8 mt-2">
-            <CircleFlag countryCode={countryDetails.actor_id.toLowerCase()} aria-label={countryDetails.name} className="h-12"/>
+            <CircleFlag countryCode={countryDetails.actor_id.toLowerCase()} aria-label={countryDetails.name} className="h-12" />
             <p className="font-bold text-xl">{countryDetails.name}</p>
           </div> : 'No country selected'}</div>
       </Container>
