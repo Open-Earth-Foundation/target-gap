@@ -6,6 +6,7 @@ import { Card, CardContent, Chip } from '@mui/material';
 import { FunctionComponent } from 'react';
 import { Bar, BarChart, CartesianGrid, Label, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import PopperPortal from '../util/PopperPortal';
 
 type EmissionsProps = {
   actor: ActorOverview | null;
@@ -29,49 +30,51 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
   const sortedPayload = payload.sort((a, b) => b.value - a.value);
 
   return (
-    <div className="bg-white rounded-md p-4 drop-shadow-lg">
-      <div className="font-bold">
-        <InfoOutlinedIcon color="info" />{' '}
-        <span className="h-full align-middle">{label === 'Provinces' ? 'Subnational' : label} Emissions</span>
-      </div>
-      <hr className="my-4" />
-      <p className="font-bold">Total</p>
-      <p className="text-xl"><span className="font-bold">{totalEmissions.toFixed(3)}</span> MtCO2eq</p>
-      {payload.length > 1 && (
-        <>
-          <hr className="my-4" />
-          <table>
-            <thead>
-              <tr className="text-left">
-                <th className="pr-2">Ref.</th>
-                <th className="w-5/6">Name</th>
-                <th>MtCO2eq</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedPayload.map(entry => (
-                <tr key={entry.dataKey}>
-                  <td><span className="w-4 h-4 inline-block" style={{ backgroundColor: entry.fill }} /></td>
-                  <td>{entry.name}</td>
-                  <td className="text-right">{entry.value.toFixed(1)}</td>
+    <PopperPortal active={active}>
+      <div className="bg-white rounded-md p-4 drop-shadow-lg">
+        <div className="font-bold">
+          <InfoOutlinedIcon color="info" />{' '}
+          <span className="h-full align-middle">{label === 'Provinces' ? 'Subnational' : label} Emissions</span>
+        </div>
+        <hr className="my-4" />
+        <p className="font-bold">Total</p>
+        <p className="text-xl"><span className="font-bold">{totalEmissions.toFixed(3)}</span> MtCO2eq</p>
+        {payload.length > 1 && (
+          <>
+            <hr className="my-4" />
+            <table>
+              <thead>
+                <tr className="text-left">
+                  <th className="pr-2">Ref.</th>
+                  <th className="w-5/6">Name</th>
+                  <th>MtCO2eq</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <hr className="my-2" />
-          <p className="font-bold mb-2">Key</p>
-          <p className="mb-2">
-            <span className="w-4 h-4 inline-block mr-6" style={{ backgroundColor: '#F9A200' }} />
-            Expected value based on target
-          </p>
-          <p>
-            <span className="w-4 h-4 inline-block mr-6" style={{ backgroundColor: '#C5CBF5' }} />
-            No target; business-as-usual based on<br />
-            <span className="pl-10">most recent emissions</span>
-          </p>
-        </>
-      )}
-    </div>
+              </thead>
+              <tbody>
+                {sortedPayload.map(entry => (
+                  <tr key={entry.dataKey}>
+                    <td><span className="w-4 h-4 inline-block" style={{ backgroundColor: entry.fill }} /></td>
+                    <td>{entry.name}</td>
+                    <td className="text-right">{entry.value.toFixed(1)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <hr className="my-2" />
+            <p className="font-bold mb-2">Key</p>
+            <p className="mb-2">
+              <span className="w-4 h-4 inline-block mr-6" style={{ backgroundColor: '#F9A200' }} />
+              Expected value based on target
+            </p>
+            <p>
+              <span className="w-4 h-4 inline-block mr-6" style={{ backgroundColor: '#C5CBF5' }} />
+              No target; business-as-usual based on<br />
+              <span className="pl-10">most recent emissions</span>
+            </p>
+          </>
+        )}
+      </div>
+    </PopperPortal>
   )
 };
 
