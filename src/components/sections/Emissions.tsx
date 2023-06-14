@@ -65,7 +65,7 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
           <InfoOutlinedIcon color="info" />{' '}
           <span className="h-full align-middle">{label === 'Provinces' ? 'Subnational' : label} Emissions</span>
         </div>
-        <hr className="my-4" />
+        <hr className="my-4 -mx-4" />
         <p className="font-bold">Total</p>
         <p className="text-xl"><span className="font-bold">{totalEmissions.toFixed(3)}</span> MtCO2eq</p>
         {payload.length > 1 && (

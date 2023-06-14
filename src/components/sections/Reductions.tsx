@@ -66,7 +66,7 @@ const ReductionsTooltip = ({ active = false, payload = [], label = '' }: { activ
           <InfoOutlinedIcon color="info" />{' '}
           <span className="h-full align-middle">{label === 'Provinces' ? 'Subnational' : label} Reductions</span>
         </div>
-        <hr className="my-4" />
+        <hr className="my-4 -mx-4" />
         <p className="font-bold">Total</p>
         <p className="text-xl"><span className="font-bold">{totalReductions.toFixed(3)}</span> MtCO2eq</p>
         {payload.length > 1 && (
