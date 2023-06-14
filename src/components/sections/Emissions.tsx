@@ -159,9 +159,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
               <YAxis unit="Mt" />
               <Tooltip
                 content={<EmissionsTooltip />}
-                wrapperStyle={{ zIndex: 1000 }}
                 allowEscapeViewBox={{ x: true, y: true }}
-                position={{ x: 500, y: -100 }}
               />
               <Bar dataKey="emissions" name="National Emissions" unit="Mt" stackId="a" fill="#F23D33" radius={[16, 16, 0, 0]} />
               {subEmissions.map((subEmission, i) => (

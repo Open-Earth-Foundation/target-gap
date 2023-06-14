@@ -155,9 +155,7 @@ const Reductions: FunctionComponent<ReductionsProps> = ({ actor, parts }) => {
               <YAxis unit="Mt" />
               <Tooltip
                 content={<ReductionsTooltip />}
-                wrapperStyle={{ zIndex: 1000 }}
                 allowEscapeViewBox={{ x: true, y: true }}
-                position={{ x: -250, y: -100 }}
               />
               <Bar dataKey="reductions" name="National Reductions" unit="Mt" stackId="a" fill="#001EA7" radius={[16, 16, 0, 0]} />
               {subReductions.map((subEmission, i) => (
