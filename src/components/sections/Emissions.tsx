@@ -50,7 +50,7 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
         {emissions.map(entry => (
           <tr key={entry.dataKey}>
             <td><span className="w-4 h-4 inline-block" style={{ backgroundColor: entry.fill }} /></td>
-            <td>{entry.name}</td>
+            <td>{entry.name.split('(')[0]}</td>
             <td  className={showBorder ? "pr-4 text-right" : "text-right"}>{entry.value.toFixed(1)}</td>
           </tr>
         ))}
