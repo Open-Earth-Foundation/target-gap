@@ -42,7 +42,7 @@ const ReductionsTooltip = ({ active = false, payload = [], label = '' }: { activ
       <thead>
         <tr className="text-left">
           <th className="pr-2">Ref.</th>
-          <th className="w-5/6">Name</th>
+          <th className="w-full">Name</th>
           <th className={showBorder ? "pr-4" : ""}>MtCO2eq</th>
         </tr>
       </thead>
@@ -72,7 +72,7 @@ const ReductionsTooltip = ({ active = false, payload = [], label = '' }: { activ
         {payload.length > 1 && (
           <>
             <hr className="my-4" />
-            <div className="flex space-x-4">
+            <div className={shouldSplitSubReductions ? "flex space-x-4" : ""}>
               {renderSubReductions(sortedPayload, shouldSplitSubReductions)}
               {shouldSplitSubReductions && renderSubReductions(secondPayload)}
             </div>

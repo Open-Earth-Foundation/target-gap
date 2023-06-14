@@ -42,7 +42,7 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
       <thead>
         <tr className="text-left">
           <th className="pr-2">Ref.</th>
-          <th className="w-5/6">Name</th>
+          <th className="w-full">Name</th>
           <th className={showBorder ? "pr-4" : ""}>MtCO2eq</th>
         </tr>
       </thead>
@@ -71,7 +71,7 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
         {payload.length > 1 && (
           <>
             <hr className="my-4" />
-            <div className="flex space-x-4">
+            <div className={shouldSplitSubEmissions ? "flex space-x-4" : ""}>
               {renderSubEmissions(sortedPayload, shouldSplitSubEmissions)}
               {shouldSplitSubEmissions && renderSubEmissions(secondPayload)}
             </div>
