@@ -21,13 +21,42 @@ type BarData = {
 };
 
 const emissionsScale = 1e6; // transform to megatons
+const maxSubEmissionsLength = 8;
 
 const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active?: boolean, payload?: Array<any>, label?: string }) => {
   if (!(active && payload && payload.length)) {
     return null;
   }
   const totalEmissions = payload.reduce((acc, value) => acc + value.value, 0);
-  const sortedPayload = payload.sort((a, b) => b.value - a.value);
+  let sortedPayload = payload.sort((a, b) => b.value - a.value);
+  let secondPayload = [];
+  const shouldSplitSubEmissions = sortedPayload.length > maxSubEmissionsLength;
+  if (shouldSplitSubEmissions) {
+    const slicePosition = Math.ceil(sortedPayload.length / 2);
+    secondPayload = sortedPayload.slice(slicePosition, sortedPayload.length);
+    sortedPayload = sortedPayload.slice(0, slicePosition);
+  }
+
+  const renderSubEmissions = (emissions: Array<any>, showBorder: boolean = false) => (
+    <table className={showBorder ? "border-[#D7D8FA] border-r" : ""}>
+      <thead>
+        <tr className="text-left">
+          <th className="pr-2">Ref.</th>
+          <th className="w-5/6">Name</th>
+          <th className={showBorder ? "pr-4" : ""}>MtCO2eq</th>
+        </tr>
+      </thead>
+      <tbody>
+        {emissions.map(entry => (
+          <tr key={entry.dataKey}>
+            <td><span className="w-4 h-4 inline-block" style={{ backgroundColor: entry.fill }} /></td>
+            <td>{entry.name}</td>
+            <td  className={showBorder ? "pr-4 text-right" : "text-right"}>{entry.value.toFixed(1)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
 
   return (
     <PopperPortal active={active}>
@@ -42,24 +71,10 @@ const EmissionsTooltip = ({ active = false, payload = [], label = '' }: { active
         {payload.length > 1 && (
           <>
             <hr className="my-4" />
-            <table>
-              <thead>
-                <tr className="text-left">
-                  <th className="pr-2">Ref.</th>
-                  <th className="w-5/6">Name</th>
-                  <th>MtCO2eq</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sortedPayload.map(entry => (
-                  <tr key={entry.dataKey}>
-                    <td><span className="w-4 h-4 inline-block" style={{ backgroundColor: entry.fill }} /></td>
-                    <td>{entry.name}</td>
-                    <td className="text-right">{entry.value.toFixed(1)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="flex space-x-4">
+              {renderSubEmissions(sortedPayload, shouldSplitSubEmissions)}
+              {shouldSplitSubEmissions && renderSubEmissions(secondPayload)}
+            </div>
             <hr className="my-2" />
             <p className="font-bold mb-2">Key</p>
             <p className="mb-2">
@@ -166,7 +181,7 @@ const Emissions: FunctionComponent<EmissionsProps> = ({ actor, parts }) => {
         )}
       </CardContent>
     </Card>
-  )
+  );
 }
 
 export default Emissions;
