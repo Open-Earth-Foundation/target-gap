@@ -5,8 +5,9 @@ import Reductions from "@/components/sections/Reductions";
 import TextBox from "@/components/sections/TextBox";
 import CountrySelect from "@/components/ui/CountrySelect";
 import { getActorOverview, getActorParts } from "@/lib/api";
-import { ActorOverview, ActorPart, ActorType } from "@/lib/models";
-import { useEffect, useState } from "react";
+import { ActorOverview, ActorType } from "@/lib/models";
+import { useState } from "react";
+import validCountries from "@/lib/valid-countries.json";
 
 import Container from '@mui/material/Container';
 
@@ -15,21 +16,10 @@ import { CircularProgress } from "@mui/material";
 import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
 
 export default function Home() {
-  const [countries, setCountries] = useState<ActorPart[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [countryDetails, setCountryDetails] = useState<ActorOverview | null>(null);
   const [subActorDetails, setSubActorDetails] = useState<ActorOverview[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getActorParts('EARTH');
-      setCountries(data);
-      setLoading(false);
-    }
-
-    fetchData().catch(console.error);
-  });
 
   const onCountrySelected = (actorId: string) => {
     setSelectedCountry(actorId);
@@ -79,7 +69,7 @@ export default function Home() {
         description={description}
       />
       <Container maxWidth="xl" className="pb-2">
-        <CountrySelect countries={countries} onSelected={onCountrySelected} />
+        <CountrySelect countries={validCountries} onSelected={onCountrySelected} />
         {isLoading && <CircularProgress className="align-bottom m-2 ml-4" />}
         <div className="text-xl font-bold pt-8">
           {countryDetails ?
