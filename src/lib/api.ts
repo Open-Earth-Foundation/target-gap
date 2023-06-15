@@ -4,17 +4,32 @@ const API_URL = `https://openclimate.network/api/v1`;
 
 async function fetchAPI(route: String, params: Record<string, any> = {}): Promise<Record<string, any>> {
   const paramString = Object.keys(params).length > 0 ? '?' + new URLSearchParams(params) : '';
-  const res = await fetch(API_URL + route + paramString, {
-    method: 'GET',
-  });
 
-  const json = await res.json();
-  if (!json.success) {
-    console.error(json.message);
-    throw new Error('Failed to fetch API data! Cause: ' + json.message);
+  try {
+    const res = await fetch(API_URL + route + paramString, {
+      method: 'GET',
+    });
+
+    if (res.status >= 400) {
+      console.error('Failed to load request', route + paramString);
+      console.error(`Status: ${res.status} ${res.statusText}`);
+      console.error(await res.text());
+      throw new Error('Failed to fetch API data! No JSON present');
+    }
+
+    const json = await res.json();
+
+    if (!json.success) {
+      console.error(json.message);
+      throw new Error('Failed to fetch API data! Cause: ' + json.message);
+    }
+
+    return json.data;
+  } catch(err) {
+    console.error('Failed to load request', route + paramString);
+    console.error(err);
+    throw(err);
   }
-
-  return json.data;
 }
 
 export async function getActorParts(actorId: string, partType: string | undefined = undefined): Promise<ActorPart[]> {
