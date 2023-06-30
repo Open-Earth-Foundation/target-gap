@@ -1,0 +1,63 @@
+[
+  {
+    "name": "Austria",
+    "id": "AT"
+  },
+  {
+    "name": "Belgium",
+    "id": "BE"
+  },
+  {
+    "name": "Bulgaria",
+    "id": "BG"
+  },
+  {
+    "name": "Canada",
+    "id": "CA"
+  },
+  {
+    "name": "Croatia",
+    "id": "HR"
+  },
+  {
+    "name": "Denmark",
+    "id": "DK"
+  },
+  {
+    "name": "Germany",
+    "id": "DE"
+  },
+  {
+    "name": "Japan",
+    "id": "JP"
+  },
+  {
+    "name": "Lithuania",
+    "id": "LT"
+  },
+  {
+    "name": "Portugal",
+    "id": "PT"
+  },
+  {
+    "name": "Romania",
+    "id": "RO"
+  },
+  {
+    "name": "Sweden",
+    "id": "SE"
+  },
+  {
+    "name": "Switzerland",
+    "id": "CH"
+  },
+  {
+    "name": "United Kingdom of Great Britain and Northern Ireland",
+    "id": "GB"
+  },
+  {
+    "name": "United States of America",
+    "id": "US"
+  }
+]
+

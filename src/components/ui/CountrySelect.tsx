@@ -1,22 +1,21 @@
-'use client'
+'use client';
 
-import { ActorPart } from '@/lib/models';
 import { Autocomplete, FormControl, TextField } from '@mui/material';
 import { FunctionComponent } from 'react';
 
 type CountrySelectProps = {
-  countries: ActorPart[];
+  countries: { name: string, id: string }[];
   onSelected: (actorId: string) => void;
 }
 
-const CountrySelect: FunctionComponent<CountrySelectProps> = ({countries, onSelected}) => {
-  const handleCountryChanged = (_event: any, value: { label: string, id: string} | null, reason: string) => {
+const CountrySelect: FunctionComponent<CountrySelectProps> = ({ countries, onSelected }) => {
+  const handleCountryChanged = (_event: any, value: { label: string, id: string } | null, reason: string) => {
     if (value && reason === 'selectOption') {
       onSelected(value.id);
     }
   }
 
-  const options = countries.map((country) => ({ label: country.name, id: country.actor_id }));
+  const options = countries.map((country) => ({ label: country.name, id: country.id }));
 
   return (
     <FormControl>

@@ -5,32 +5,26 @@ import Reductions from "@/components/sections/Reductions";
 import TextBox from "@/components/sections/TextBox";
 import CountrySelect from "@/components/ui/CountrySelect";
 import { getActorOverview, getActorParts } from "@/lib/api";
-import { ActorOverview, ActorPart, ActorType } from "@/lib/models";
-import { useEffect, useState } from "react";
+import { ActorOverview, ActorType } from "@/lib/models";
+import { useState } from "react";
+import validCountries from "@/lib/valid-countries.json";
 
 import Container from '@mui/material/Container';
 
-import ReactCountryFlag from "react-country-flag"
 import { CircleFlag } from "react-circle-flags";
+import { CircularProgress } from "@mui/material";
+import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
 
 export default function Home() {
-  const [countries, setCountries] = useState<ActorPart[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState('');
   const [countryDetails, setCountryDetails] = useState<ActorOverview | null>(null);
   const [subActorDetails, setSubActorDetails] = useState<ActorOverview[]>([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await getActorParts('EARTH');
-      setCountries(data);
-    }
-
-    fetchData().catch(console.error);
-  });
-
   const onCountrySelected = (actorId: string) => {
     setSelectedCountry(actorId);
     loadEmissionsData(actorId).catch(console.error);
+    setLoading(true);
   }
 
   const loadEmissionsData = async (actorId: string) => {
@@ -44,6 +38,7 @@ export default function Home() {
     );
     setCountryDetails(countryEmissionsData);
     setSubActorDetails(subActorDetails);
+    setLoading(false);
   }
 
   const description = `
@@ -73,15 +68,20 @@ export default function Home() {
         otherTitle="Visualizer"
         description={description}
       />
-      <Container maxWidth="xl" className="pb-8">
-        <CountrySelect countries={countries} onSelected={onCountrySelected} />
-        <div className="text-xl font-bold pt-8">{countryDetails ?
-          <div className="flex items-center space-x-4 mb-8 mt-2">
-            <CircleFlag countryCode={countryDetails.actor_id.toLowerCase()} aria-label={countryDetails.name} className="h-12"/>
-            <p className="font-bold text-xl">{countryDetails.name}</p>
-          </div> : 'No country selected'}</div>
+      <Container maxWidth="xl" className="pb-2">
+        <CountrySelect countries={validCountries} onSelected={onCountrySelected} />
+        {isLoading && <CircularProgress className="align-bottom m-2 ml-4" />}
+        <div className="text-xl font-bold pt-8">
+          {countryDetails ?
+            <div className="flex items-center space-x-4 mb-8 mt-2">
+              <CircleFlag countryCode={countryDetails.actor_id.toLowerCase()} aria-label={countryDetails.name} className="h-12" />
+              <p className="font-bold text-xl">{countryDetails.name}</p>
+            </div>
+          : <p className="mb-8 mt-2"><HelpOutlinedIcon fontSize="large" style={{ color: '#C5CBF5', verticalAlign: -11, marginRight: 16 }} />No country selected</p>
+          }
+        </div>
       </Container>
-      <Container maxWidth="xl" className="space-x-4 pb-8 whitespace-nowrap inline-block">
+      <Container maxWidth="xl" className="lg:space-x-4 pb-8 whitespace-nowrap inline-block">
         <Emissions actor={countryDetails} parts={subActorDetails} />
         <Reductions actor={countryDetails} parts={subActorDetails} />
       </Container>
