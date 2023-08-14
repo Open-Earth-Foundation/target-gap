@@ -1,0 +1,201 @@
+actor_id,name,type,country_id,percent_with_targets
+GB,United Kingdom of Great Britain and Northern Ireland,country,GB,100.0
+CA,Canada,country,CA,76.92307692307693
+JP,Japan,country,JP,70.83333333333334
+ES,Spain,country,ES,45.0
+AU,Australia,country,AU,44.44444444444444
+DE,Germany,country,DE,37.5
+GQ,Equatorial Guinea,country,GQ,33.33333333333333
+MH,Marshall Islands,country,MH,33.33333333333333
+US,United States of America,country,US,31.57894736842105
+BE,Belgium,country,BE,25.0
+KM,Comoros,country,KM,25.0
+ZA,South Africa,country,ZA,22.22222222222222
+FM,Micronesia,country,FM,20.0
+MX,Mexico,country,MX,18.75
+TG,Togo,country,TG,16.666666666666664
+TO,Tonga,country,TO,16.666666666666664
+FR,France,country,FR,14.814814814814813
+DJ,Djibouti,country,DJ,14.285714285714285
+CY,Cyprus,country,CY,14.285714285714285
+GD,Grenada,country,GD,12.5
+IS,Iceland,country,IS,11.11111111111111
+CM,Cameroon,country,CM,9.090909090909092
+LS,Lesotho,country,LS,9.090909090909092
+DM,Dominica,country,DM,9.090909090909092
+SB,Solomon Islands,country,SB,9.090909090909092
+LT,Lithuania,country,LT,9.090909090909092
+WS,Samoa,country,WS,8.333333333333332
+LI,Liechtenstein,country,LI,8.333333333333332
+BB,Barbados,country,BB,8.333333333333332
+CG,Congo,country,CG,7.6923076923076925
+GE,Georgia,country,GE,7.6923076923076925
+LU,Luxembourg,country,LU,7.6923076923076925
+NO,Norway,country,NO,7.142857142857142
+GR,Greece,country,GR,6.666666666666667
+CZ,Czechia,country,CZ,6.666666666666667
+MY,Malaysia,country,MY,6.25
+MM,Myanmar,country,MM,6.25
+BW,Botswana,country,BW,5.88235294117647
+KR,"Korea, the Republic of",country,KR,5.88235294117647
+GH,Ghana,country,GH,5.88235294117647
+NZ,New Zealand,country,NZ,5.555555555555555
+NL,Netherlands,country,NL,5.263157894736842
+FI,Finland,country,FI,5.0
+IT,Italy,country,IT,4.761904761904762
+YE,Yemen,country,YE,4.3478260869565215
+TD,Chad,country,TD,4.166666666666666
+AR,Argentina,country,AR,4.0
+PE,Peru,country,PE,3.7037037037037033
+CD,"Congo, the Democratic Republic of the",country,CD,3.7037037037037033
+BR,Brazil,country,BR,3.571428571428571
+BG,Bulgaria,country,BG,3.4482758620689653
+CO,Colombia,country,CO,2.941176470588235
+MD,Moldova,country,MD,2.631578947368421
+RO,Romania,country,RO,2.3255813953488373
+LV,Latvia,country,LV,2.272727272727273
+AZ,Azerbaijan,country,AZ,1.4084507042253522
+MK,North Macedonia,country,MK,1.2345679012345678
+RU,Russian Federation,country,RU,1.1904761904761905
+PS,Palestine,country,PS,0.0
+PY,Paraguay,country,PY,0.0
+PL,Poland,country,PL,0.0
+PT,Portugal,country,PT,0.0
+PW,Palau,country,PW,0.0
+QA,Qatar,country,QA,0.0
+AD,Andorra,country,AD,0.0
+PK,Pakistan,country,PK,0.0
+PH,Philippines,country,PH,0.0
+PG,Papua New Guinea,country,PG,0.0
+PA,Panama,country,PA,0.0
+OM,Oman,country,OM,0.0
+NR,Nauru,country,NR,0.0
+RS,Serbia,country,RS,0.0
+NI,Nicaragua,country,NI,0.0
+NG,Nigeria,country,NG,0.0
+NE,Niger,country,NE,0.0
+NA,Namibia,country,NA,0.0
+MZ,Mozambique,country,MZ,0.0
+MW,Malawi,country,MW,0.0
+NP,Nepal,country,NP,0.0
+SM,San Marino,country,SM,0.0
+RW,Rwanda,country,RW,0.0
+TL,Timor-Leste,country,TL,0.0
+TN,Tunisia,country,TN,0.0
+TR,Türkiye,country,TR,0.0
+TT,Trinidad and Tobago,country,TT,0.0
+TV,Tuvalu,country,TV,0.0
+TW,Taiwan,country,TW,0.0
+TZ,Tanzania,country,TZ,0.0
+UA,Ukraine,country,UA,0.0
+UG,Uganda,country,UG,0.0
+UM,United States Minor Outlying Islands,country,UM,0.0
+UY,Uruguay,country,UY,0.0
+UZ,Uzbekistan,country,UZ,0.0
+VC,Saint Vincent and the Grenadines,country,VC,0.0
+VE,Venezuela,country,VE,0.0
+VN,Viet Nam,country,VN,0.0
+VU,Vanuatu,country,VU,0.0
+WF,Wallis and Futuna,country,WF,0.0
+ZM,Zambia,country,ZM,0.0
+TM,Turkmenistan,country,TM,0.0
+TJ,Tajikistan,country,TJ,0.0
+SA,Saudi Arabia,country,SA,0.0
+TH,Thailand,country,TH,0.0
+SC,Seychelles,country,SC,0.0
+SD,Sudan,country,SD,0.0
+SE,Sweden,country,SE,0.0
+SG,Singapore,country,SG,0.0
+SH,"Saint Helena, Ascension and Tristan da Cunha",country,SH,0.0
+SI,Slovenia,country,SI,0.0
+SK,Slovakia,country,SK,0.0
+SL,Sierra Leone,country,SL,0.0
+MU,Mauritius,country,MU,0.0
+SN,Senegal,country,SN,0.0
+SO,Somalia,country,SO,0.0
+SR,Suriname,country,SR,0.0
+SS,South Sudan,country,SS,0.0
+ST,Sao Tome and Principe,country,ST,0.0
+SV,El Salvador,country,SV,0.0
+SY,Syrian Arab Republic,country,SY,0.0
+SZ,Eswatini,country,SZ,0.0
+MV,Maldives,country,MV,0.0
+LC,Saint Lucia,country,LC,0.0
+MT,Malta,country,MT,0.0
+DK,Denmark,country,DK,0.0
+CH,Switzerland,country,CH,0.0
+CI,Côte d'Ivoire,country,CI,0.0
+CL,Chile,country,CL,0.0
+CN,China,country,CN,0.0
+CR,Costa Rica,country,CR,0.0
+CU,Cuba,country,CU,0.0
+CV,Cabo Verde,country,CV,0.0
+DO,Dominican Republic,country,DO,0.0
+BZ,Belize,country,BZ,0.0
+DZ,Algeria,country,DZ,0.0
+EC,Ecuador,country,EC,0.0
+EE,Estonia,country,EE,0.0
+EG,Egypt,country,EG,0.0
+ER,Eritrea,country,ER,0.0
+ET,Ethiopia,country,ET,0.0
+FJ,Fiji,country,FJ,0.0
+CF,Central African Republic,country,CF,0.0
+BY,Belarus,country,BY,0.0
+MR,Mauritania,country,MR,0.0
+BD,Bangladesh,country,BD,0.0
+AF,Afghanistan,country,AF,0.0
+AG,Antigua and Barbuda,country,AG,0.0
+AL,Albania,country,AL,0.0
+AM,Armenia,country,AM,0.0
+AO,Angola,country,AO,0.0
+AT,Austria,country,AT,0.0
+BA,Bosnia and Herzegovina,country,BA,0.0
+BF,Burkina Faso,country,BF,0.0
+BT,Bhutan,country,BT,0.0
+BH,Bahrain,country,BH,0.0
+BI,Burundi,country,BI,0.0
+BJ,Benin,country,BJ,0.0
+BN,Brunei Darussalam,country,BN,0.0
+BO,Bolivia,country,BO,0.0
+BQ,"Bonaire, Sint Eustatius and Saba",country,BQ,0.0
+BS,Bahamas,country,BS,0.0
+GA,Gabon,country,GA,0.0
+GL,Greenland,country,GL,0.0
+GM,Gambia,country,GM,0.0
+LK,Sri Lanka,country,LK,0.0
+KN,Saint Kitts and Nevis,country,KN,0.0
+KP,"Korea, the Democratic People's Republic of",country,KP,0.0
+KW,Kuwait,country,KW,0.0
+KZ,Kazakhstan,country,KZ,0.0
+LA,Lao People's Democratic Republic,country,LA,0.0
+LB,Lebanon,country,LB,0.0
+AE,United Arab Emirates,country,AE,0.0
+LR,Liberia,country,LR,0.0
+GN,Guinea,country,GN,0.0
+LY,Libya,country,LY,0.0
+MA,Morocco,country,MA,0.0
+MC,Monaco,country,MC,0.0
+ME,Montenegro,country,ME,0.0
+MG,Madagascar,country,MG,0.0
+ML,Mali,country,ML,0.0
+MN,Mongolia,country,MN,0.0
+KI,Kiribati,country,KI,0.0
+KH,Cambodia,country,KH,0.0
+KG,Kyrgyzstan,country,KG,0.0
+KE,Kenya,country,KE,0.0
+GT,Guatemala,country,GT,0.0
+GW,Guinea-Bissau,country,GW,0.0
+GY,Guyana,country,GY,0.0
+HN,Honduras,country,HN,0.0
+HR,Croatia,country,HR,0.0
+HT,Haiti,country,HT,0.0
+HU,Hungary,country,HU,0.0
+ID,Indonesia,country,ID,0.0
+IE,Ireland,country,IE,0.0
+IL,Israel,country,IL,0.0
+IN,India,country,IN,0.0
+IQ,Iraq,country,IQ,0.0
+IR,Iran,country,IR,0.0
+JM,Jamaica,country,JM,0.0
+JO,Jordan,country,JO,0.0
+ZW,Zimbabwe,country,ZW,0.0
