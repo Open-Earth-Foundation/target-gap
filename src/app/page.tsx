@@ -6,7 +6,7 @@ import TextBox from "@/components/sections/TextBox";
 import CountrySelect from "@/components/ui/CountrySelect";
 import { getActorOverview, getActorParts } from "@/lib/api";
 import { ActorOverview, ActorType } from "@/lib/models";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import validCountries from "@/lib/valid-countries.json";
 
 import Container from "@mui/material/Container";
@@ -47,6 +47,11 @@ export default function Home() {
     setLoading(false);
   };
 
+  const contentRef = useRef<null | HTMLDivElement>(null);
+  const scrollToContent = () => {
+    contentRef.current?.scrollIntoView();
+  };
+
   const description = `
   This target gap visualizer uses the OpenClimate API to shows the
   difference between the emissions reductions targets of national actors
@@ -75,11 +80,12 @@ export default function Home() {
           className="rounded-full px-6 py-4 text-white"
           color="secondary"
           endIcon={<ArrowForward />}
+          onClick={scrollToContent}
         >
           Start Exploring
         </Button>
       </Hero>
-      <div className="p-16">
+      <div className="p-16" ref={contentRef}>
         <TextBox
           coloredTitle="Target Gap"
           otherTitle="Visualizer"
