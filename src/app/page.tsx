@@ -12,8 +12,10 @@ import validCountries from "@/lib/valid-countries.json";
 import Container from '@mui/material/Container';
 
 import { CircleFlag } from "react-circle-flags";
-import { CircularProgress } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
+import Hero from "@/components/header/Hero";
+import { ArrowForward } from "@mui/icons-material";
 
 export default function Home() {
   const [isLoading, setLoading] = useState<boolean>(false);
@@ -63,6 +65,9 @@ export default function Home() {
 
   return (
     <div className="p-16 bg-[#FAFAFA]">
+      <Hero>
+        <Button variant="contained" className="rounded-lg" endIcon={<ArrowForward />}>Start Exploring</Button>
+      </Hero>
       <TextBox
         coloredTitle="Target Gap"
         otherTitle="Visualizer"
