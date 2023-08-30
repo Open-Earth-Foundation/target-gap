@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Emissions from "@/components/sections/Emissions";
 import Reductions from "@/components/sections/Reductions";
@@ -9,39 +9,43 @@ import { ActorOverview, ActorType } from "@/lib/models";
 import { useState } from "react";
 import validCountries from "@/lib/valid-countries.json";
 
-import Container from '@mui/material/Container';
+import Container from "@mui/material/Container";
 
 import { CircleFlag } from "react-circle-flags";
 import { Button, CircularProgress } from "@mui/material";
-import HelpOutlinedIcon from '@mui/icons-material/HelpOutlined';
+import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import Hero from "@/components/header/Hero";
 import { ArrowForward } from "@mui/icons-material";
 
 export default function Home() {
   const [isLoading, setLoading] = useState<boolean>(false);
-  const [selectedCountry, setSelectedCountry] = useState('');
-  const [countryDetails, setCountryDetails] = useState<ActorOverview | null>(null);
+  const [selectedCountry, setSelectedCountry] = useState("");
+  const [countryDetails, setCountryDetails] = useState<ActorOverview | null>(
+    null,
+  );
   const [subActorDetails, setSubActorDetails] = useState<ActorOverview[]>([]);
 
   const onCountrySelected = (actorId: string) => {
     setSelectedCountry(actorId);
     loadEmissionsData(actorId).catch(console.error);
     setLoading(true);
-  }
+  };
 
   const loadEmissionsData = async (actorId: string) => {
     const countryEmissionsData = await getActorOverview(actorId);
     const subActors = await getActorParts(actorId);
-    const adm1Actors = subActors.filter((actor) => actor.type === ActorType.Adm1);
+    const adm1Actors = subActors.filter(
+      (actor) => actor.type === ActorType.Adm1,
+    );
     const subActorDetails = await Promise.all(
       adm1Actors.map(async (subActor): Promise<ActorOverview> => {
         return await getActorOverview(subActor.actor_id);
-      })
+      }),
     );
     setCountryDetails(countryEmissionsData);
     setSubActorDetails(subActorDetails);
     setLoading(false);
-  }
+  };
 
   const description = `
   This target gap visualizer uses the OpenClimate API to shows the
@@ -66,7 +70,13 @@ export default function Home() {
   return (
     <div className="p-16 bg-[#FAFAFA]">
       <Hero>
-        <Button variant="contained" className="rounded-lg" endIcon={<ArrowForward />}>Start Exploring</Button>
+        <Button
+          variant="contained"
+          className="rounded-lg"
+          endIcon={<ArrowForward />}
+        >
+          Start Exploring
+        </Button>
       </Hero>
       <TextBox
         coloredTitle="Target Gap"
@@ -74,19 +84,40 @@ export default function Home() {
         description={description}
       />
       <Container maxWidth="xl" className="pb-2">
-        <CountrySelect countries={validCountries} onSelected={onCountrySelected} />
+        <CountrySelect
+          countries={validCountries}
+          onSelected={onCountrySelected}
+        />
         {isLoading && <CircularProgress className="align-bottom m-2 ml-4" />}
         <div className="text-xl font-bold pt-8">
-          {countryDetails ?
+          {countryDetails ? (
             <div className="flex items-center space-x-4 mb-8 mt-2">
-              <CircleFlag countryCode={countryDetails.actor_id.toLowerCase()} aria-label={countryDetails.name} className="h-12" />
+              <CircleFlag
+                countryCode={countryDetails.actor_id.toLowerCase()}
+                aria-label={countryDetails.name}
+                className="h-12"
+              />
               <p className="font-bold text-xl">{countryDetails.name}</p>
             </div>
-          : <p className="mb-8 mt-2"><HelpOutlinedIcon fontSize="large" style={{ color: '#C5CBF5', verticalAlign: -11, marginRight: 16 }} />No country selected</p>
-          }
+          ) : (
+            <p className="mb-8 mt-2">
+              <HelpOutlinedIcon
+                fontSize="large"
+                style={{
+                  color: "#C5CBF5",
+                  verticalAlign: -11,
+                  marginRight: 16,
+                }}
+              />
+              No country selected
+            </p>
+          )}
         </div>
       </Container>
-      <Container maxWidth="xl" className="lg:space-x-4 pb-8 whitespace-nowrap inline-block">
+      <Container
+        maxWidth="xl"
+        className="lg:space-x-4 pb-8 whitespace-nowrap inline-block"
+      >
         <Emissions actor={countryDetails} parts={subActorDetails} />
         <Reductions actor={countryDetails} parts={subActorDetails} />
       </Container>
