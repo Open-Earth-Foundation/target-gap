@@ -68,7 +68,7 @@ export default function Home() {
   `;
 
   return (
-    <div className="p-16 bg-[#FAFAFA]">
+    <div className="bg-[#FAFAFA]">
       <Hero>
         <Button
           variant="contained"
@@ -78,54 +78,57 @@ export default function Home() {
           Start Exploring
         </Button>
       </Hero>
-      <TextBox
-        coloredTitle="Target Gap"
-        otherTitle="Visualizer"
-        description={description}
-      />
-      <Container maxWidth="xl" className="pb-2">
-        <CountrySelect
-          countries={validCountries}
-          onSelected={onCountrySelected}
+      <div className="p-16">
+        <TextBox
+          coloredTitle="Target Gap"
+          otherTitle="Visualizer"
+          description={description}
         />
-        {isLoading && <CircularProgress className="align-bottom m-2 ml-4" />}
-        <div className="text-xl font-bold pt-8">
-          {countryDetails ? (
-            <div className="flex items-center space-x-4 mb-8 mt-2">
-              <CircleFlag
-                countryCode={countryDetails.actor_id.toLowerCase()}
-                aria-label={countryDetails.name}
-                className="h-12"
-              />
-              <p className="font-bold text-xl">{countryDetails.name}</p>
-            </div>
-          ) : (
-            <p className="mb-8 mt-2">
-              <HelpOutlinedIcon
-                fontSize="large"
-                style={{
-                  color: "#C5CBF5",
-                  verticalAlign: -11,
-                  marginRight: 16,
-                }}
-              />
-              No country selected
-            </p>
-          )}
-        </div>
-      </Container>
-      <Container
-        maxWidth="xl"
-        className="lg:space-x-4 pb-8 whitespace-nowrap inline-block"
-      >
-        <Emissions actor={countryDetails} parts={subActorDetails} />
-        <Reductions actor={countryDetails} parts={subActorDetails} />
-      </Container>
-      <TextBox
-        coloredTitle="Methodology"
-        otherTitle="used"
-        description={methodology}
-      />
+        <Container maxWidth="xl" className="pb-2" disableGutters>
+          <CountrySelect
+            countries={validCountries}
+            onSelected={onCountrySelected}
+          />
+          {isLoading && <CircularProgress className="align-bottom m-2 ml-4" />}
+          <div className="text-xl font-bold pt-8">
+            {countryDetails ? (
+              <div className="flex items-center space-x-4 mb-8 mt-2">
+                <CircleFlag
+                  countryCode={countryDetails.actor_id.toLowerCase()}
+                  aria-label={countryDetails.name}
+                  className="h-12"
+                />
+                <p className="font-bold text-xl">{countryDetails.name}</p>
+              </div>
+            ) : (
+              <p className="mb-8 mt-2">
+                <HelpOutlinedIcon
+                  fontSize="large"
+                  style={{
+                    color: "#C5CBF5",
+                    verticalAlign: -11,
+                    marginRight: 16,
+                  }}
+                />
+                No country selected
+              </p>
+            )}
+          </div>
+        </Container>
+        <Container
+          maxWidth="xl"
+          disableGutters
+          className="lg:space-x-4 pb-8 whitespace-nowrap inline-block"
+        >
+          <Emissions actor={countryDetails} parts={subActorDetails} />
+          <Reductions actor={countryDetails} parts={subActorDetails} />
+        </Container>
+        <TextBox
+          coloredTitle="Methodology"
+          otherTitle="used"
+          description={methodology}
+        />
+      </div>
     </div>
   );
 }
