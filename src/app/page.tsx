@@ -72,7 +72,8 @@ export default function Home() {
       <Hero>
         <Button
           variant="contained"
-          className="rounded-lg"
+          className="rounded-full px-6 py-4 text-white"
+          color="secondary"
           endIcon={<ArrowForward />}
         >
           Start Exploring
