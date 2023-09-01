@@ -5,6 +5,8 @@ import { Box, Container, List, ListItem, Typography } from "@mui/material";
 import React from "react";
 import { Open_Sans } from "next/font/google";
 import Link from "next/link";
+import Hero from "@/components/header/Hero";
+import ButtonMain from "@/components/button/Button";
 
 const opensans = Open_Sans({
   subsets: ["latin"],
@@ -14,6 +16,36 @@ const opensans = Open_Sans({
 const page = () => {
   return (
     <>
+      <Hero>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: {
+              xs: "column",
+              md: "row",
+            },
+          }}
+          gap="24px">
+          <ButtonMain
+            text="API DOCUMENTATION"
+            bgColor="#24BE00"
+            textColor="#FFFFFF"
+            border={false}
+            borderColor="#24BE00"
+            w="216px"
+            h="48px"
+          />
+          <ButtonMain
+            text="PYTHON CLIENT API ACCESS"
+            bgColor="none"
+            textColor="#24BE00"
+            border={true}
+            borderColor="#24BE00"
+            w="269px"
+            h="48px"
+          />
+        </Box>
+      </Hero>
       <Box paddingTop="64px" paddingBottom="24px">
         <Container maxWidth="lg">
           <Box display="flex" flexDirection="column" gap="24px">
@@ -311,6 +343,15 @@ const page = () => {
                 enough to meet the 2.0°C IPCC goal, our analysis indicates that
                 they may fall short of the more stringent 1.5°C goal.
               </Typography>
+              <ul className="list-disc ml-2 list-inside text-xs md:text-base">
+                <li>
+                  <Link
+                    href="https://docs.google.com/document/d/1hA8246oEDPvzs_6RJAe8PEJyYjm_X4FNFAevc-kUYR8/edit"
+                    className="text-[#2351DC] underline bodyText font-[600] leading-6">
+                    Read full paper
+                  </Link>
+                </li>
+              </ul>
             </Box>
             <Box display="flex" flexDirection="column" gap="24px">
               <Heading
@@ -371,6 +412,15 @@ const page = () => {
                 role in sculpting a more informed, effective approach to global
                 climate action.
               </Typography>
+              <ul className="list-disc ml-2 list-inside text-xs md:text-base">
+                <li>
+                  <Link
+                    href="https://uploads-ssl.webflow.com/62192ceb9199b3dd08431a6b/63288ad5701afc27ed83d2ef_Litepaper%20-%20A%20Digitally-Enabled%20Independent%20Global%20Stocktake.pdf"
+                    className="text-[#2351DC] underline bodyText font-[600] leading-6">
+                    Read the DIGS Litepaper
+                  </Link>
+                </li>
+              </ul>
             </Box>
           </div>
         </Container>
@@ -386,7 +436,7 @@ const page = () => {
               lineHeight="32px">
               Get started now
             </Typography>
-            <ul className="list-disc ml-2 list-inside text-xs">
+            <ul className="list-disc ml-2 list-inside text-xs md:text-base">
               <li>
                 <Link
                   href="https://github.com/Open-Earth-Foundation/OpenClimate/blob/develop/api/API.md"
@@ -405,11 +455,20 @@ const page = () => {
           </Box>
         </Container>
       </Box>
-      <Box paddingTop="24px" paddingBottom="24px">
+      <Box
+        sx={{
+          paddingTop: {
+            xs: "24px",
+            md: "48px",
+          },
+          height: {
+            xs: "200px",
+            md: "250px",
+          },
+        }}>
         <Container maxWidth="lg">
           <Box display="flex" flexDirection="column" gap="24px">
             <Typography
-              textAlign="center"
               align="center"
               variant="h2"
               color="#008600"
@@ -417,6 +476,10 @@ const page = () => {
                 fontSize: {
                   xs: "24px",
                   lg: "32px",
+                },
+                textAlign: {
+                  xs: "center",
+                  md: "left",
                 },
               }}
               fontWeight={600}

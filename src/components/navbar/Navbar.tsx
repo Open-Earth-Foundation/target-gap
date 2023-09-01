@@ -49,6 +49,7 @@ const Navbar: FC<NavbarProps> = ({ window }) => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
+            width: "100%",
           }}
           disableGutters>
           <Box display="flex" alignItems="center" gap="58px">
