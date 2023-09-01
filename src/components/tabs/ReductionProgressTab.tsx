@@ -11,9 +11,9 @@ import CountrySelect from "../ui/CountrySelect";
 
 export function ReductionProgressTab() {
   const [isLoading, setLoading] = useState<boolean>(false);
-  const [countryDetails, setCountryDetails] = useState<ActorOverview | undefined>(
-    undefined,
-  );
+  const [countryDetails, setCountryDetails] = useState<
+    ActorOverview | undefined
+  >(undefined);
 
   const onCountrySelected = (actorId: string) => {
     setLoading(true);
@@ -27,11 +27,11 @@ export function ReductionProgressTab() {
   };
 
   const description = `
-This target gap visualiser shows lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+This tool offers an intuitive way to gauge a city's progress toward its emission reduction targets. Drawing on the Hsu et al. (2020) methodology, the visualization serves as a guide for cities to evaluate their current emissions against a modelled linear reduction path from baseline to target years.
 `;
 
   const methodology = `
-The 1.5C target is calculated by lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The "Reduction Progress" visualization is based on the Hsu et al. (2020) approach. It compares a city's latest emissions data to a linear reduction scenario from baseline to target years. The linear model serves as a comparative benchmark, not as an expected reduction path. In the chart, an orange line represents current emissions and a dotted line indicates baseline emissions. A city is deemed "on track" if its current emissions are below the baseline, and "not on track" otherwise. The visualization aims to give cities a clear understanding of how effective their climate actions have been.
 `;
 
   return (
