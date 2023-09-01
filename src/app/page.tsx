@@ -7,6 +7,7 @@ import { TabPanel } from "@/components/tabs/TabPanel";
 import { TargetGapTab } from "@/components/tabs/TargetGapTab";
 import { ArrowForward } from "@mui/icons-material";
 import { Box, Button, Tab, Tabs } from "@mui/material";
+import { ReductionProgressTab } from "@/components/tabs/ReductionProgressTab";
 
 function a11yProps(index: number) {
   return {
@@ -55,7 +56,7 @@ export default function Home() {
           <TargetGapTab />
         </TabPanel>
         <TabPanel value={selectedTab} index={1}>
-          Item Two
+          <ReductionProgressTab />
         </TabPanel>
         <TabPanel value={selectedTab} index={2}>
           Item Three
