@@ -62,7 +62,7 @@ const Navbar: FC<NavbarProps> = ({ window }) => {
               sx={{
                 display: { xs: "none", md: "flex" },
               }}>
-              <Link href="/documentation">
+              <Link href="/">
                 <Image
                   src="/images/DIGSAnalyticsLogo.svg"
                   height={24}
@@ -73,7 +73,7 @@ const Navbar: FC<NavbarProps> = ({ window }) => {
             </Box>
           </Box>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Link href="">
+            <Link href="/documentation">
               <Typography fontWeight={600}>Documentation</Typography>
             </Link>
           </Box>
@@ -81,7 +81,7 @@ const Navbar: FC<NavbarProps> = ({ window }) => {
             sx={{
               display: { xs: "flex", md: "none" },
             }}>
-            <Link href="/documentation">
+            <Link href="/">
               <Image
                 src="/images/DIGSAnalyticsLogo.svg"
                 height={24}
