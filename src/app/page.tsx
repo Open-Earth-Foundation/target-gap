@@ -6,18 +6,31 @@ import TextBox from "@/components/sections/TextBox";
 import CountrySelect from "@/components/ui/CountrySelect";
 import { getActorOverview, getActorParts } from "@/lib/api";
 import { ActorOverview, ActorType } from "@/lib/models";
-import { useRef, useState } from "react";
+import { SyntheticEvent, useRef, useState } from "react";
 import validCountries from "@/lib/valid-countries.json";
 
 import Container from "@mui/material/Container";
 
 import { CircleFlag } from "react-circle-flags";
-import { Button, CircularProgress } from "@mui/material";
+import { Box, Button, CircularProgress, Tab, Tabs } from "@mui/material";
 import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import Hero from "@/components/header/Hero";
 import { ArrowForward } from "@mui/icons-material";
+import { TabPanel } from "@/components/tabs/TabPanel";
+
+function a11yProps(index: number) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
 
 export default function Home() {
+  const [selectedTab, setSelectedTab] = useState(0);
+  const handleTabChange = (event: SyntheticEvent, newValue: number) => {
+    setSelectedTab(newValue);
+  }
+
   const [isLoading, setLoading] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [countryDetails, setCountryDetails] = useState<ActorOverview | null>(
@@ -86,6 +99,26 @@ export default function Home() {
         </Button>
       </Hero>
       <div className="p-16" ref={contentRef}>
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Tabs
+            value={selectedTab}
+            onChange={handleTabChange}
+            aria-label="basic tabs example"
+          >
+            <Tab label="Target Gap Visualizer" {...a11yProps(0)} />
+            <Tab label="Reduction Progress" {...a11yProps(1)} />
+            <Tab label="Actors with Targets" {...a11yProps(2)} />
+          </Tabs>
+        </Box>
+        <TabPanel value={selectedTab} index={0}>
+          Item One
+        </TabPanel>
+        <TabPanel value={selectedTab} index={1}>
+          Item Two
+        </TabPanel>
+        <TabPanel value={selectedTab} index={2}>
+          Item Three
+        </TabPanel>
         <TextBox
           coloredTitle="Target Gap"
           otherTitle="Visualizer"
