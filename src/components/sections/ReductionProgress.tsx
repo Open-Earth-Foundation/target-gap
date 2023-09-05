@@ -1,3 +1,5 @@
+"use client";
+
 import type { ActorOverview } from "@/lib/models";
 
 export function ReductionProgress({ actor }: { actor?: ActorOverview }) {

@@ -1,3 +1,5 @@
+"use client";
+
 import { getActorOverview } from "@/lib/api";
 import type { ActorOverview } from "@/lib/models";
 import validCountries from "@/lib/valid-countries.json";
