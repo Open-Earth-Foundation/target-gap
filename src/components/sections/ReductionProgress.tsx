@@ -217,7 +217,9 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
               name="Total emissions"
               unit="Mt"
               stroke="#FA7200"
-              fill="#FA720032"
+              fill="#FA7200"
+              fillOpacity="0.2"
+              dot={{ fill: "#FA7200", strokeWidth: 3, r: 2, stroke: "#FA7200" }}
             />
             <Area
               type="monotone"
@@ -225,7 +227,9 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
               name="Future emissions"
               unit="Mt"
               stroke="#2351DC"
-              fill="#2351DC33"
+              fill="#2351DC"
+              fillOpacity="0.2"
+              dot={{ fill: "#2351DC", strokeWidth: 3, r: 2, stroke: "#2351DC" }}
             />
             <ReferenceDot
               x={pledgeTarget.year}
