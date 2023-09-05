@@ -169,15 +169,17 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
                 );
               }}
             >
-              <MenuItem value="BP">
-                BP
-                <div className="w-full" />
-                <ListItemIcon>
-                  <OpenInNewIcon />
-                </ListItemIcon>
-              </MenuItem>
-              <MenuItem value="JRC">JRC</MenuItem>
-              <MenuItem value="UNFCC">UNFCC</MenuItem>
+              {sources.map((source) => (
+                <MenuItem value={source.name} key={source.name}>
+                  {source.name}
+                  <div className="w-full" />
+                  <ListItemIcon>
+                    <a href={source.url} target="_blank" rel="noreferrer">
+                      <OpenInNewIcon />
+                    </a>
+                  </ListItemIcon>
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Box>
