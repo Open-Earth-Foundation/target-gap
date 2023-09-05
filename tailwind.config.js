@@ -14,9 +14,11 @@ module.exports = {
       },
       colors: {
         secondary: "#2351DC",
+        "content-secondary": "#232640",
+        "content-alternative": "#001EA7",
         tertiary: "#7A7B9A",
         control: "#7A7B9A",
-        white: "#FFF",
+        "background-neutral": "#E8EAFB",
       },
     },
   },
