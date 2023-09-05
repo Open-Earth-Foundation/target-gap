@@ -36,51 +36,80 @@ const ReductionProgressTooltip = ({
   active = false,
   payload = [],
   label = "",
+  source = "",
+  targetData,
 }: {
   active?: boolean;
   payload?: Array<any>;
   label?: string;
+  source?: string;
+  targetData: { reductionPercent: number; year: number; fromYear: number };
 }) => {
   if (!(active && payload && payload.length)) {
     return null;
   }
-  const totalEmissions = payload.reduce((acc, value) => acc + value.value, 0);
+  const totalEmissions = payload[0].value;
+  const isTarget = payload[0].payload.year === targetData.year;
+  const color = isTarget ? "#24BE00" : payload[0].stroke;
+
+  const methodologies = [
+    "Remote sensing",
+    "Machine learning",
+    "Satellite imagery",
+    "Very long source name that overflows",
+  ];
 
   return (
     <PopperPortal active={active}>
       <div className="bg-white rounded-md p-4 drop-shadow-lg">
         <div className="font-bold">
-          <InfoOutlinedIcon color="info" />{" "}
-          <span className="h-full align-middle">
-            {label === "Provinces" ? "Subnational" : label} Emissions
-          </span>
+          <span className="h-full align-middle font-bold text-xl">{label}</span>
         </div>
         <hr className="my-4 -mx-4" />
-        <p className="font-bold">Total</p>
-        <p className="text-xl">
-          <span className="font-bold">{totalEmissions.toFixed(3)}</span> MtCO2eq
-        </p>
-        {payload.length > 1 && (
+        {isTarget ? (
           <>
-            <hr className="my-4" />
-            <hr className="my-2" />
-            <p className="font-bold mb-2">Key</p>
-            <p className="mb-2">
-              <span
-                className="w-4 h-4 inline-block mr-6"
-                style={{ backgroundColor: "#F9A200" }}
-              />
-              Expected value based on target
+            <p className="text-base font-bold" style={{ color }}>
+              Absolute emissions reduction
             </p>
-            <p>
-              <span
-                className="w-4 h-4 inline-block mr-6"
-                style={{ backgroundColor: "#C5CBF5" }}
-              />
-              No target; business-as-usual based on
-              <br />
-              <span className="pl-10">most recent emissions</span>
+            <p className="text-content-tertiary mb-6">
+              GHG Emissions
             </p>
+            <p className="text-base font-bold" style={{ color }}>
+              {(targetData.reductionPercent * 100).toFixed(1)}
+            </p>
+            <p className="text-content-tertiary mb-6">
+              by {targetData.year} relative to {targetData.fromYear}
+            </p>
+            <p className="text-base font-bold" style={{ color }}>
+              {totalEmissions.toFixed(3)}
+            </p>
+            <p className="text-content-tertiary">
+              Total emissions in MtCO2eq
+            </p>
+          </>
+        ) : (
+          <>
+            <p className="text-xl font-bold" style={{ color }}>
+              {totalEmissions.toFixed(3)}
+            </p>
+            <p className="text-content-tertiary mb-6">
+              Total emissions in MtCO2eq
+            </p>
+            <p className="text-xl font-bold" style={{ color }}>
+              {source}
+            </p>
+            <p className="text-content-tertiary mb-6">Source</p>
+            <div className="flex flex-row flex-wrap gap-3 max-w-[270px] mb-3 shrink-0">
+              {methodologies.map((methodology) => (
+                <div
+                  key={methodology}
+                  className="bg-background-neutral text-content-alternative text-[12px] rounded-full px-3 py-1"
+                >
+                  {methodology}
+                </div>
+              ))}
+            </div>
+            <p className="text-content-tertiary">Methodologies used</p>
           </>
         )}
       </div>
@@ -124,6 +153,7 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
   ];
 
   const pledgeTarget = { year: 2045, emissions: 12.3 };
+  const targetData = { reductionPercent: 0.4, year: 2045, fromYear: 2005 };
 
   return (
     <Card sx={{ boxShadow: 3 }}>
@@ -133,9 +163,11 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             <h1 className="text-lg font-bold pb-1">
               Emissions Reduction Progress
             </h1>
-            <p className="text-tertiary">Last updated in {lastUpdateYear}</p>
+            <p className="text-content-tertiary">
+              Last updated in {lastUpdateYear}
+            </p>
             {source && (
-              <p className="text-tertiary">
+              <p className="text-content-tertiary">
                 Source: {source.name} ({source.year}){" "}
                 <a href={source.url} target="_blank" rel="noreferrer">
                   <OpenInNewIcon
@@ -210,7 +242,12 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             />
             <YAxis unit="Mt" type="number" axisLine={false} />
             <Tooltip
-              content={<ReductionProgressTooltip />}
+              content={
+                <ReductionProgressTooltip
+                  source={source?.name}
+                  targetData={targetData}
+                />
+              }
               allowEscapeViewBox={{ x: true, y: true }}
             />
             <Area
@@ -270,11 +307,7 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             </span>
           </div>
           <div className="bg-background-neutral rounded-full px-3 py-1 pr-6">
-            <svg
-              width="25"
-              height="24"
-              className="inline"
-            >
+            <svg width="25" height="24" className="inline">
               <path id="icon" d="M4.5 8L12.5 16L20.5 8H4.5Z" fill="#24BE00" />
             </svg>
             <span className="text-content-alternative text-sm">

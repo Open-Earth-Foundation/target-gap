@@ -16,7 +16,7 @@ module.exports = {
         secondary: "#2351DC",
         "content-secondary": "#232640",
         "content-alternative": "#001EA7",
-        tertiary: "#7A7B9A",
+        "content-tertiary": "#7A7B9A",
         control: "#7A7B9A",
         "background-neutral": "#E8EAFB",
       },
