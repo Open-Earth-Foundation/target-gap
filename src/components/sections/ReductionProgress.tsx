@@ -208,30 +208,6 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
     }
   }
 
-  // interface DiagramEntry {
-  //   year: number;
-  //   emissions?: number;
-  //   emissionsAfterBaseline?: number;
-  //   emissionsReduction?: number;
-  // }
-
-  // const data = [
-  //   { year: 2005, emissions: 35.4 },
-  //   { year: 2010, emissions: 38.4 },
-  //   {
-  //     year: 2017,
-  //     emissions: 45.5,
-  //     emissionsAfterBaseline: 45.5,
-  //     emissionsReduction: 45.5,
-  //   },
-  //   { year: 2018, emissionsAfterBaseline: 48.5 },
-  //   { year: 2019, emissionsAfterBaseline: 51.5 },
-  //   { year: 2025, emissionsAfterBaseline: 52.3 },
-  //   { year: 2045, emissionsReduction: 12.3 },
-  // ];
-
-  // const pledgeTarget = { year: 2045, emissions: 12.3 };
-  // const targetData = { reductionPercent: 0.4, year: 2045, fromYear: 2017 };
   const baselineEmissions = data.find(
     (entry) => entry.year === targetData.fromYear,
   )?.emissions;
