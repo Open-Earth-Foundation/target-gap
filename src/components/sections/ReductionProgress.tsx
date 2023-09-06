@@ -177,10 +177,12 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
           const reductionPercent = Number(selectedTarget.target_value) / 100;
           pledgeTarget = {
             year: selectedTarget.target_year,
-            emissions: reductionPercent * baselineData.total_emissions / emissionsScale,
+            emissions:
+              (reductionPercent * baselineData.total_emissions) /
+              emissionsScale,
           };
           targetData = {
-            reductionPercent, 
+            reductionPercent,
             year: selectedTarget.target_year,
             fromYear: selectedTarget.baseline_year,
           };
@@ -196,7 +198,10 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
                 entry.year == baselineYear ? emissions : undefined,
             };
           });
-          data.push({ year: pledgeTarget.year, emissionsReduction: pledgeTarget.emissions });
+          data.push({
+            year: pledgeTarget.year,
+            emissionsReduction: pledgeTarget.emissions,
+          });
         } else {
           console.log("Baseline data missing!");
         }
@@ -251,7 +256,7 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
               onChange={handleSourceChange}
               displayEmpty
               input={<OutlinedInput />}
-              renderValue={(selected) => {
+              renderValue={() => {
                 return (
                   <>
                     <InputIcon className="text-control" />{" "}
@@ -309,6 +314,15 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
               }
               allowEscapeViewBox={{ x: true, y: true }}
             />
+            <ReferenceLine
+              stroke="#505050CC"
+              strokeDasharray="4 4"
+              strokeWidth={2}
+              segment={[
+                { x: targetData.fromYear, y: baselineEmissions },
+                { x: endYear, y: baselineEmissions },
+              ]}
+            />
             <Area
               dataKey="emissionsReduction"
               connectNulls
@@ -341,15 +355,6 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
               fillOpacity="0.0"
               strokeWidth="2"
               dot={{ fill: "#FA7200", strokeWidth: 3, r: 2, stroke: "#FA7200" }}
-            />
-            <ReferenceLine
-              stroke="#505050CC"
-              strokeDasharray="4 4"
-              strokeWidth={2}
-              segment={[
-                { x: targetData.fromYear, y: baselineEmissions },
-                { x: endYear, y: baselineEmissions },
-              ]}
             />
             <ReferenceDot
               x={pledgeTarget.year}
