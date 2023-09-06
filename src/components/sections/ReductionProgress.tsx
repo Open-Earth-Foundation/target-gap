@@ -252,6 +252,7 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             <Select
               id="source-select"
               value={selectedSourceId}
+              disabled={sources.length === 0}
               label="Source"
               onChange={handleSourceChange}
               displayEmpty
