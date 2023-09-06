@@ -311,32 +311,32 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
         </ResponsiveContainer>
         <p className="text-content-secondary text-sm mb-3">References</p>
         <div className="flex flex-row flex-wrap items-center gap-x-2 gap-y-2">
-          <div className="bg-background-neutral rounded-full px-3 py-1 pr-6">
+          <div className="bg-background-neutral rounded-full px-3 py-1">
             <span className="w-5 h-1 align-middle bg-[#FA7200] inline-block mr-2" />
             <span className="text-content-alternative text-sm">
               Total GHG Emissions
             </span>
           </div>
-          <div className="bg-background-neutral rounded-full px-3 py-1 pr-6">
+          <div className="bg-background-neutral rounded-full px-3 py-1">
             <span className="w-2 h-1 align-middle bg-[#232640] inline-block mr-0.5" />
             <span className="w-2 h-1 align-middle bg-[#232640] inline-block mr-2" />
             <span className="text-content-alternative text-sm">
               Baseline Year Emissions Level
             </span>
           </div>
-          <div className="bg-background-neutral rounded-full px-3 py-1 pr-6">
+          <div className="bg-background-neutral rounded-full px-3 py-1">
             <span className="w-5 h-1 align-middle bg-[#2351DC] inline-block mr-2" />
             <span className="text-content-alternative text-sm">
               Achieved Reduction
             </span>
           </div>
-          <div className="bg-background-neutral rounded-full px-3 py-1 pr-6">
+          <div className="bg-background-neutral rounded-full px-3 py-1">
             <span className="w-5 h-1 align-middle bg-[#008600] inline-block mr-2" />
             <span className="text-content-alternative text-sm">
               Required Reduction Based on Target
             </span>
           </div>
-          <div className="bg-background-neutral rounded-full px-3 py-1 pr-6">
+          <div className="bg-background-neutral rounded-full px-3 py-1">
             <svg width="25" height="24" className="inline">
               <path id="icon" d="M4.5 8L12.5 16L20.5 8H4.5Z" fill="#24BE00" />
             </svg>
