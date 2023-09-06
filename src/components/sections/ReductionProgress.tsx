@@ -71,9 +71,7 @@ const ReductionProgressTooltip = ({
             <p className="text-base font-bold" style={{ color }}>
               Absolute emissions reduction
             </p>
-            <p className="text-content-tertiary mb-6">
-              GHG Emissions
-            </p>
+            <p className="text-content-tertiary mb-6">GHG Emissions</p>
             <p className="text-base font-bold" style={{ color }}>
               {(targetData.reductionPercent * 100).toFixed(1)}%
             </p>
@@ -83,9 +81,7 @@ const ReductionProgressTooltip = ({
             <p className="text-base font-bold" style={{ color }}>
               {totalEmissions.toFixed(3)}
             </p>
-            <p className="text-content-tertiary">
-              Total emissions in MtCO2eq
-            </p>
+            <p className="text-content-tertiary">Total emissions in MtCO2eq</p>
           </>
         ) : (
           <>
@@ -146,7 +142,12 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
   const data = [
     { year: 2005, emissions: 35.4 },
     { year: 2010, emissions: 38.4 },
-    { year: 2017, emissions: 45.5, emissionsAfterBaseline: 45.5, emissionsReduction: 45.5 },
+    {
+      year: 2017,
+      emissions: 45.5,
+      emissionsAfterBaseline: 45.5,
+      emissionsReduction: 45.5,
+    },
     { year: 2018, emissionsAfterBaseline: 48.5, emissionsReduction: 41.1 },
     { year: 2019, emissionsAfterBaseline: 51.5, emissionsReduction: 38.2 },
     { year: 2025, emissionsAfterBaseline: 52.3, emissionsReduction: 36 },
@@ -155,7 +156,9 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
 
   const pledgeTarget = { year: 2045, emissions: 12.3 };
   const targetData = { reductionPercent: 0.4, year: 2045, fromYear: 2017 };
-  const baselineEmissions = data.find((entry) => entry.year === targetData.fromYear)?.emissions;
+  const baselineEmissions = data.find(
+    (entry) => entry.year === targetData.fromYear,
+  )?.emissions;
 
   return (
     <Card sx={{ boxShadow: 3 }}>
@@ -165,19 +168,21 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             <h1 className="text-lg font-bold pb-1">
               Emissions Reduction Progress
             </h1>
-            <p className="text-content-tertiary">
-              Last updated in {lastUpdateYear}
-            </p>
             {source && (
-              <p className="text-content-tertiary">
-                Source: {source.name} ({source.year}){" "}
-                <a href={source.url} target="_blank" rel="noreferrer">
-                  <OpenInNewIcon
-                    fontSize="small"
-                    className="-mt-1 text-secondary"
-                  />
-                </a>
-              </p>
+              <>
+                <p className="text-content-tertiary">
+                  Last updated in {lastUpdateYear}
+                </p>
+                <p className="text-content-tertiary">
+                  Source: {source.name} ({source.year}){" "}
+                  <a href={source.url} target="_blank" rel="noreferrer">
+                    <OpenInNewIcon
+                      fontSize="small"
+                      className="-mt-1 text-secondary"
+                    />
+                  </a>
+                </p>
+              </>
             )}
           </Stack>
           <div className="grow" />
