@@ -148,9 +148,9 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
       emissionsAfterBaseline: 45.5,
       emissionsReduction: 45.5,
     },
-    { year: 2018, emissionsAfterBaseline: 48.5, emissionsReduction: 41.1 },
-    { year: 2019, emissionsAfterBaseline: 51.5, emissionsReduction: 38.2 },
-    { year: 2025, emissionsAfterBaseline: 52.3, emissionsReduction: 36 },
+    { year: 2018, emissionsAfterBaseline: 48.5 },
+    { year: 2019, emissionsAfterBaseline: 51.5 },
+    { year: 2025, emissionsAfterBaseline: 52.3 },
     { year: 2045, emissionsReduction: 12.3 },
   ];
 
@@ -260,6 +260,7 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             />
             <Area
               dataKey="emissionsReduction"
+              connectNulls
               name="Achieved Reduction"
               unit="Mt"
               stroke="#2351DC"
@@ -294,7 +295,10 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
               stroke="#505050CC"
               strokeDasharray="4 4"
               strokeWidth={2}
-              segment={[{x: targetData.fromYear, y: baselineEmissions }, {x: endYear, y: baselineEmissions}]}
+              segment={[
+                { x: targetData.fromYear, y: baselineEmissions },
+                { x: endYear, y: baselineEmissions },
+              ]}
             />
             <ReferenceDot
               x={pledgeTarget.year}
