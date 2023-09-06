@@ -4,7 +4,7 @@ import { getActorOverview } from "@/lib/api";
 import type { ActorOverview } from "@/lib/models";
 import validCountries from "@/lib/valid-countries.json";
 import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
-import { CircularProgress, Container } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { CircleFlag } from "react-circle-flags";
 import { ReductionProgress } from "../sections/ReductionProgress";
@@ -43,7 +43,7 @@ The "Reduction Progress" visualization is based on the Hsu et al. (2020) approac
         otherTitle="Progress"
         description={description}
       />
-      <Container maxWidth="xl" className="pb-2" disableGutters>
+      <div className="pb-2 max-w-4xl">
         <CountrySelect
           countries={validCountries}
           onSelected={onCountrySelected}
@@ -73,14 +73,10 @@ The "Reduction Progress" visualization is based on the Hsu et al. (2020) approac
             </p>
           )}
         </div>
-      </Container>
-      <Container
-        maxWidth="xl"
-        disableGutters
-        className="lg:space-x-4 pb-8 whitespace-nowrap inline-block"
-      >
+      </div>
+      <div className="max-w-4xl w-full lg:space-x-4 pb-8 whitespace-nowrap inline-block">
         <ReductionProgress actor={countryDetails} />
-      </Container>
+      </div>
       <TextBox
         coloredTitle="Methodology"
         otherTitle="used"
