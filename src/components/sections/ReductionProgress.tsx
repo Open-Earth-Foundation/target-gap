@@ -31,6 +31,23 @@ import {
   YAxis,
 } from "recharts";
 import PopperPortal from "../util/PopperPortal";
+import { actorNextTarget } from "@/lib/util";
+
+interface Source {
+  id: string;
+  name: string;
+  year: number;
+  url: string;
+}
+
+interface DiagramEntry {
+  year: number;
+  emissions?: number;
+  emissionsAfterBaseline?: number;
+  emissionsReduction?: number;
+}
+
+const emissionsScale = 1e6; // transform to megatons
 
 const ReductionProgressTooltip = ({
   active = false,
@@ -127,36 +144,94 @@ const PledgesArrow = ({ cx, cy }: { cx?: number; cy?: number }) => (
 export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
   const [selectedSourceId, setSelectedSourceId] = useState<string>("");
   const lastUpdateYear = 2019;
-  const sources = [
-    { name: "BP", year: 2018, url: "https://unfccc.int/" },
-    { name: "JRC", year: 2019, url: "https://unfccc.int/" },
-    { name: "UNFCC", year: 2016, url: "https://unfccc.int/" },
-  ];
-  const source = sources.find((source) => source.name === selectedSourceId);
+  const endYear = 2050; // last year shown on diagram
+  let sources: Source[] = [];
+  let selectedSource: Source | undefined;
+  let data: DiagramEntry[] = [];
+  let pledgeTarget = { year: 0, emissions: 0 };
+  let targetData = { reductionPercent: 0, year: 0, fromYear: 0 };
 
   const handleSourceChange = (event: SelectChangeEvent) => {
     setSelectedSourceId(event.target.value as string);
     // TODO update loaded data
   };
 
-  const data = [
-    { year: 2005, emissions: 35.4 },
-    { year: 2010, emissions: 38.4 },
-    {
-      year: 2017,
-      emissions: 45.5,
-      emissionsAfterBaseline: 45.5,
-      emissionsReduction: 45.5,
-    },
-    { year: 2018, emissionsAfterBaseline: 48.5 },
-    { year: 2019, emissionsAfterBaseline: 51.5 },
-    { year: 2025, emissionsAfterBaseline: 52.3 },
-    { year: 2045, emissionsReduction: 12.3 },
-  ];
+  if (actor != null) {
+    sources = Object.entries(actor.emissions).map(([key, value]) => ({
+      id: key,
+      name: value.publisher,
+      year: new Date(value.published).getFullYear(),
+      url: value.URL,
+    }));
+    selectedSource = sources.find((source) => source.id === selectedSourceId);
+    if (selectedSource != null) {
+      const selectedTarget = actor.targets.find((target) => {
+        return target.target_type === "Absolute emission reduction";
+      });
+      if (selectedTarget !== undefined) {
+        const baselineYear = selectedTarget.baseline_year;
+        const baselineData = actor.emissions[selectedSource.id].data.find(
+          (entry) => entry.year === baselineYear,
+        );
+        if (baselineData) {
+          const reductionPercent = Number(selectedTarget.target_value) / 100;
+          pledgeTarget = {
+            year: selectedTarget.target_year,
+            emissions: reductionPercent * baselineData.total_emissions / emissionsScale,
+          };
+          targetData = {
+            reductionPercent, 
+            year: selectedTarget.target_year,
+            fromYear: selectedTarget.baseline_year,
+          };
 
-  const pledgeTarget = { year: 2045, emissions: 12.3 };
-  const endYear = 2050; // last year shown on diagram
-  const targetData = { reductionPercent: 0.4, year: 2045, fromYear: 2017 };
+          data = actor.emissions[selectedSource.id].data.map((entry) => {
+            const emissions = entry.total_emissions / emissionsScale;
+            return {
+              year: entry.year,
+              emissions: entry.year <= baselineYear ? emissions : undefined,
+              emissionsAfterBaseline:
+                entry.year >= baselineYear ? emissions : undefined,
+              emissionsReduction:
+                entry.year == baselineYear ? emissions : undefined,
+            };
+          });
+          data.push({ year: pledgeTarget.year, emissionsReduction: pledgeTarget.emissions });
+        } else {
+          console.log("Baseline data missing!");
+        }
+      } else {
+        console.log("Selected target missing!");
+      }
+    } else {
+      console.log("Selected source missing!");
+    }
+  }
+
+  // interface DiagramEntry {
+  //   year: number;
+  //   emissions?: number;
+  //   emissionsAfterBaseline?: number;
+  //   emissionsReduction?: number;
+  // }
+
+  // const data = [
+  //   { year: 2005, emissions: 35.4 },
+  //   { year: 2010, emissions: 38.4 },
+  //   {
+  //     year: 2017,
+  //     emissions: 45.5,
+  //     emissionsAfterBaseline: 45.5,
+  //     emissionsReduction: 45.5,
+  //   },
+  //   { year: 2018, emissionsAfterBaseline: 48.5 },
+  //   { year: 2019, emissionsAfterBaseline: 51.5 },
+  //   { year: 2025, emissionsAfterBaseline: 52.3 },
+  //   { year: 2045, emissionsReduction: 12.3 },
+  // ];
+
+  // const pledgeTarget = { year: 2045, emissions: 12.3 };
+  // const targetData = { reductionPercent: 0.4, year: 2045, fromYear: 2017 };
   const baselineEmissions = data.find(
     (entry) => entry.year === targetData.fromYear,
   )?.emissions;
@@ -169,14 +244,14 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             <h1 className="text-lg font-bold pb-1">
               Emissions Reduction Progress
             </h1>
-            {source && (
+            {selectedSource && (
               <>
                 <p className="text-content-tertiary">
                   Last updated in {lastUpdateYear}
                 </p>
                 <p className="text-content-tertiary">
-                  Source: {source.name} ({source.year}){" "}
-                  <a href={source.url} target="_blank" rel="noreferrer">
+                  Source: {selectedSource.name} ({selectedSource.year}){" "}
+                  <a href={selectedSource.url} target="_blank" rel="noreferrer">
                     <OpenInNewIcon
                       fontSize="small"
                       className="-mt-1 text-secondary"
@@ -204,13 +279,13 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
                 return (
                   <>
                     <InputIcon className="text-control" />{" "}
-                    {selected || "Source"}
+                    {selectedSource?.name || "Source"}
                   </>
                 );
               }}
             >
               {sources.map((source) => (
-                <MenuItem value={source.name} key={source.name}>
+                <MenuItem value={source.id} key={source.name}>
                   {source.name}
                   <div className="w-full" />
                   <ListItemIcon>
@@ -252,7 +327,7 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             <Tooltip
               content={
                 <ReductionProgressTooltip
-                  source={source?.name}
+                  source={selectedSource?.name}
                   targetData={targetData}
                 />
               }
