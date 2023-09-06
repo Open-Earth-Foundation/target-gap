@@ -155,6 +155,7 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
   ];
 
   const pledgeTarget = { year: 2045, emissions: 12.3 };
+  const endYear = 2050; // last year shown on diagram
   const targetData = { reductionPercent: 0.4, year: 2045, fromYear: 2017 };
   const baselineEmissions = data.find(
     (entry) => entry.year === targetData.fromYear,
@@ -243,7 +244,7 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             <XAxis
               dataKey="year"
               type="number"
-              domain={["dataMin", 2050]}
+              domain={["dataMin", endYear]}
               axisLine={false}
               tickCount={10}
             />
@@ -290,10 +291,10 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
               dot={{ fill: "#FA7200", strokeWidth: 3, r: 2, stroke: "#FA7200" }}
             />
             <ReferenceLine
-              y={baselineEmissions}
               stroke="#505050CC"
               strokeDasharray="4 4"
               strokeWidth={2}
+              segment={[{x: targetData.fromYear, y: baselineEmissions }, {x: endYear, y: baselineEmissions}]}
             />
             <ReferenceDot
               x={pledgeTarget.year}
