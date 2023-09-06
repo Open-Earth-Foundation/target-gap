@@ -1,8 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 :root {
     height: 100vh;
 }
 
+.bodyText{
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+.MuiTabs-indicator {
+    background: #2351DC !important;
+}
+
+.Mui-selected {
+    color: #2351DC !important;
+    font-weight: 600 !important;
+    line-height: 24px !important;
+}
