@@ -300,11 +300,11 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             <XAxis
               dataKey="year"
               type="number"
-              domain={["dataMin", endYear]}
+              domain={[pledgeTarget.year === 0 ? 1990 : "dataMin", endYear]}
               axisLine={false}
               tickCount={10}
             />
-            <YAxis unit="Mt" type="number" axisLine={false} />
+            <YAxis unit="Mt" type="number" axisLine={false} domain={pledgeTarget.year === 0 ? [0, 120] : undefined} />
             <Tooltip
               content={
                 <ReductionProgressTooltip
@@ -356,13 +356,15 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
               strokeWidth="2"
               dot={{ fill: "#FA7200", strokeWidth: 3, r: 2, stroke: "#FA7200" }}
             />
-            <ReferenceDot
-              x={pledgeTarget.year}
-              y={pledgeTarget.emissions}
-              shape={<PledgesArrow />}
-              isFront
-              ifOverflow="extendDomain"
-            />
+            {pledgeTarget.year !== 0 && (
+              <ReferenceDot
+                x={pledgeTarget.year}
+                y={pledgeTarget.emissions}
+                shape={<PledgesArrow />}
+                isFront
+                ifOverflow="extendDomain"
+              />
+            )}
           </AreaChart>
         </ResponsiveContainer>
         <p className="text-content-secondary text-sm mb-3">References</p>
