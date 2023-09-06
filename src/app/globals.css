@@ -12,3 +12,12 @@
     font-family: 'Open Sans', sans-serif !important;
 }
 
+.MuiTabs-indicator {
+    background: #2351DC !important;
+}
+
+.Mui-selected {
+    color: #2351DC !important;
+    font-weight: 600 !important;
+    line-height: 24px !important;
+}
