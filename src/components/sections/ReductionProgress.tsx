@@ -2,7 +2,6 @@
 
 import type { ActorOverview } from "@/lib/models";
 import DownloadIcon from "@mui/icons-material/Download";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import InputIcon from "@mui/icons-material/Input";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import {
@@ -25,6 +24,7 @@ import {
   AreaChart,
   CartesianGrid,
   ReferenceDot,
+  ReferenceLine,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -75,7 +75,7 @@ const ReductionProgressTooltip = ({
               GHG Emissions
             </p>
             <p className="text-base font-bold" style={{ color }}>
-              {(targetData.reductionPercent * 100).toFixed(1)}
+              {(targetData.reductionPercent * 100).toFixed(1)}%
             </p>
             <p className="text-content-tertiary mb-6">
               by {targetData.year} relative to {targetData.fromYear}
@@ -144,16 +144,18 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
   };
 
   const data = [
-    { year: 2017, emissions: 45.5 },
-    { year: 2018, emissions: 48.5 },
-    { year: 2019, emissions: 51.5 },
-    { year: 2025, emissions: 52.3, futureEmissions: 52.3 },
-    { year: 2030, futureEmissions: 32.3 },
-    { year: 2045, futureEmissions: 12.3 },
+    { year: 2005, emissions: 35.4 },
+    { year: 2010, emissions: 38.4 },
+    { year: 2017, emissions: 45.5, emissionsAfterBaseline: 45.5, emissionsReduction: 45.5 },
+    { year: 2018, emissionsAfterBaseline: 48.5, emissionsReduction: 41.1 },
+    { year: 2019, emissionsAfterBaseline: 51.5, emissionsReduction: 38.2 },
+    { year: 2025, emissionsAfterBaseline: 52.3, emissionsReduction: 36 },
+    { year: 2045, emissionsReduction: 12.3 },
   ];
 
   const pledgeTarget = { year: 2045, emissions: 12.3 };
-  const targetData = { reductionPercent: 0.4, year: 2045, fromYear: 2005 };
+  const targetData = { reductionPercent: 0.4, year: 2045, fromYear: 2017 };
+  const baselineEmissions = data.find((entry) => entry.year === targetData.fromYear)?.emissions;
 
   return (
     <Card sx={{ boxShadow: 3 }}>
@@ -251,6 +253,16 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
               allowEscapeViewBox={{ x: true, y: true }}
             />
             <Area
+              dataKey="emissionsReduction"
+              name="Achieved Reduction"
+              unit="Mt"
+              stroke="#2351DC"
+              fill="#2351DC"
+              fillOpacity="0.2"
+              strokeWidth="2"
+              dot={{ fill: "#2351DC", strokeWidth: 3, r: 2, stroke: "#2351DC" }}
+            />
+            <Area
               type="monotone"
               dataKey="emissions"
               name="Total emissions"
@@ -258,17 +270,25 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
               stroke="#FA7200"
               fill="#FA7200"
               fillOpacity="0.2"
+              strokeWidth="2"
               dot={{ fill: "#FA7200", strokeWidth: 3, r: 2, stroke: "#FA7200" }}
             />
             <Area
               type="monotone"
-              dataKey="futureEmissions"
-              name="Future emissions"
+              dataKey="emissionsAfterBaseline"
+              name="Total emissions"
               unit="Mt"
-              stroke="#2351DC"
-              fill="#2351DC"
-              fillOpacity="0.2"
-              dot={{ fill: "#2351DC", strokeWidth: 3, r: 2, stroke: "#2351DC" }}
+              stroke="#FA7200"
+              fill="#FA7200"
+              fillOpacity="0.0"
+              strokeWidth="2"
+              dot={{ fill: "#FA7200", strokeWidth: 3, r: 2, stroke: "#FA7200" }}
+            />
+            <ReferenceLine
+              y={baselineEmissions}
+              stroke="#505050CC"
+              strokeDasharray="4 4"
+              strokeWidth={2}
             />
             <ReferenceDot
               x={pledgeTarget.year}
