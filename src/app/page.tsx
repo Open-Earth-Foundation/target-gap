@@ -1,6 +1,6 @@
 "use client";
 
-import { SyntheticEvent, useRef, useState } from "react";
+import { SyntheticEvent, useEffect, useRef, useState } from "react";
 
 import Hero from "@/components/header/Hero";
 import { TabPanel } from "@/components/tabs/TabPanel";
@@ -14,9 +14,11 @@ import {
   MenuItem,
   Tab,
   Tabs,
+  Typography,
 } from "@mui/material";
-import useMediaQuery from "@mui/material/useMediaQuery";
+
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import ActorsWithTargetsTabs from "@/components/tabs/ActorsWithTargetsTabs";
 
 function a11yProps(index: number) {
   return {
@@ -27,6 +29,7 @@ function a11yProps(index: number) {
 
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState(0);
+  const [screenSize, setScreenSize] = useState(getCurrentDimension());
   const handleTabChange = (event: SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
   };
@@ -40,7 +43,23 @@ export default function Home() {
   };
 
   // listen to media queries that match css
-  const matches = useMediaQuery("(min-width: 600px)");
+
+  function getCurrentDimension() {
+    return {
+      width: window.innerWidth,
+    };
+  }
+
+  useEffect(() => {
+    const updateDimension = () => {
+      setScreenSize(getCurrentDimension());
+    };
+    window.addEventListener("resize", updateDimension);
+
+    return () => {
+      window.removeEventListener("resize", updateDimension);
+    };
+  }, [screenSize]);
 
   return (
     <div className="bg-[#FAFAFA]">
@@ -54,13 +73,13 @@ export default function Home() {
           Start Exploring
         </Button>
       </Hero>
-      <div className="p-16" ref={contentRef}>
+      <div className="px-[16px] pt-[63px] md:p-16" ref={contentRef}>
         <Box
           sx={{
             borderBottom: { xs: "none", md: 1 },
             borderColor: { xs: "none", md: "divider" },
           }}>
-          {matches ? (
+          {screenSize.width > 600 ? (
             <Tabs
               value={selectedTab}
               onChange={handleTabChange}
@@ -72,11 +91,18 @@ export default function Home() {
               <Tab label="Actors with Targets" {...a11yProps(2)} />
             </Tabs>
           ) : (
-            <Box>
+            <Box display="flex" flexDirection="column" gap="8px">
+              <Typography
+                textAlign="center"
+                color="#7A7B9A"
+                variant="body1"
+                fontSize="12px"
+                fontWeight={500}
+                lineHeight="16px"
+                letterSpacing="0.5px">
+                Select a visualization
+              </Typography>
               <FormControl fullWidth>
-                <p className="text-center pb-2 text-[12px] font-semibold text-[#7A7B9A] tracking-[0.5px]">
-                  Select a visualization
-                </p>
                 <Box className="flex w-full justify-center">
                   <Select
                     sx={{
@@ -86,6 +112,7 @@ export default function Home() {
                       height: "44px",
                       fontWeight: 500,
                       lineHeight: "20px",
+                      fontSize: "14px",
                       letterSpacing: "0.5px",
                       ":focus": {
                         borderColor: "blue",
@@ -110,7 +137,7 @@ export default function Home() {
           Item Two
         </TabPanel>
         <TabPanel value={selectedTab} index={2}>
-          Item Three
+          <ActorsWithTargetsTabs />
         </TabPanel>
       </div>
     </div>

@@ -10,7 +10,7 @@ const Footer = () => {
     <Box
       sx={{
         height: {
-          xs: "592px",
+          xs: "650px",
           md: "320px",
         },
       }}
@@ -18,13 +18,13 @@ const Footer = () => {
       <Container maxWidth="lg">
         <Box className="flex flex-col gap-[48px]">
           <Box className="flex flex-col md:pt-[48px] md:flex-row md:items-center h-1/2 justify-between gap-[36px]">
-            <Box className="pt-[130px] md:pt-0 flex flex-col md:flex-row gap-[36px]">
+            <Box className="pt-[100px] md:pt-0 flex flex-col md:flex-row gap-[36px]">
               <Box>
                 <Image
-                  src="/images/DIGSAnalyticsFooter.svg"
+                  src="/images/OpenClimateDIGSDataExplorerLogo.svg"
                   alt="digs footer logo"
                   height={200}
-                  width={148}
+                  width={200}
                 />
               </Box>
               <Box className="grid grid-cols-2 md:grid-cols-4 gap-[24px]">

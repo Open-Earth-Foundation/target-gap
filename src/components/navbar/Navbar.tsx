@@ -65,7 +65,7 @@ const Navbar: FC<NavbarProps> = ({ window }) => {
               }}>
               <Link href="/">
                 <Image
-                  src="/images/DIGSAnalyticsLogo.svg"
+                  src="/images/OpenClimateDIGSDataExplorer.png"
                   height={24}
                   width={123}
                   alt="OEF_Logo"
@@ -84,9 +84,9 @@ const Navbar: FC<NavbarProps> = ({ window }) => {
             }}>
             <Link href="/">
               <Image
-                src="/images/DIGSAnalyticsLogo.svg"
+                src="/images/OpenClimateDIGSDataExplorer.png"
                 height={24}
-                width={123}
+                width={260}
                 alt="OEF_Logo"
               />
             </Link>
