@@ -1,4 +1,4 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import Heading from "../typography/Heading";
 import { Open_Sans } from "next/font/google";
@@ -215,63 +215,80 @@ const ActorsWithTargetsTabs = () => {
         these areas of opportunity, and collaborate with us to further develop
         and enrich our collective climate dataset.
       </Typography>
-      <Box
-        border="1px solid #E6E7FF"
-        borderRadius="8px"
-        boxShadow="0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10)"
-        padding="16px"
-        bgcolor="#ffffff">
-        <Box borderBottom="2px solid #D7D8FA" paddingBottom="16px">
-          <Typography fontWeight={600} fontSize="14px">
-            Percentage of Actors with Emissions and Pledges Data
+      {isLoading ? (
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          gap="8px">
+          <CircularProgress />
+          <Typography variant="body2" fontFamily="sans-serif">
+            Loading Chart Data
           </Typography>
         </Box>
-        <ResponsiveContainer className="h-[440px] w-full">
-          <BarChart
-            width={550}
-            height={300}
-            data={diagramData}
-            margin={{
-              top: 30,
-              right: 16,
-              left: 0,
-              bottom: 0,
-            }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#E6E7FF" height={1} />
-            <XAxis dataKey="name" capHeight={30} />
-            <YAxis
-              tick={(props) => (
-                <text {...props} className="text-[12px]">
-                  {props.payload.value} %
-                </text>
-              )}
-              stroke="eeffee"
-            />
-            <Legend content={<LegendContent />} />
-            <Bar
-              barSize={100}
-              style={{ marginRight: "10px" }}
-              dataKey="Emissions"
-              fill="#FA7200">
-              <LabelList
+      ) : (
+        <Box
+          border="1px solid #E6E7FF"
+          borderRadius="8px"
+          boxShadow="0px 2px 4px -2px rgba(0, 0, 0, 0.10), 0px 4px 6px -1px rgba(0, 0, 0, 0.10)"
+          padding="16px"
+          bgcolor="#ffffff">
+          <Box borderBottom="2px solid #D7D8FA" paddingBottom="16px">
+            <Typography fontWeight={600} fontSize="14px">
+              Percentage of Actors with Emissions and Pledges Data
+            </Typography>
+          </Box>
+          <ResponsiveContainer className="h-[440px] w-full">
+            <BarChart
+              width={550}
+              height={300}
+              data={diagramData}
+              margin={{
+                top: 30,
+                right: 16,
+                left: 0,
+                bottom: 0,
+              }}>
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="#E6E7FF"
+                height={1}
+              />
+              <XAxis dataKey="name" capHeight={30} />
+              <YAxis
+                tick={(props) => (
+                  <text {...props} className="text-[12px]">
+                    {props.payload.value} %
+                  </text>
+                )}
+                stroke="eeffee"
+              />
+              <Legend content={<LegendContent />} />
+              <Bar
+                barSize={100}
+                style={{ marginRight: "10px" }}
                 dataKey="Emissions"
-                position="top"
-                dy={0}
-                dx={50}
-                content={customEmissionsLabel} // Render the value on top of the bar
-              />
-            </Bar>
-            <Bar barSize={100} dataKey="Pledges" fill="#24BE00">
-              <LabelList
-                dataKey="Pledges"
-                position="top"
-                dy={0}
-                content={customPledgesLabel} // Render the value on top of the bar
-              />
-            </Bar>
-          </BarChart>
-        </ResponsiveContainer>
-      </Box>
+                fill="#FA7200">
+                <LabelList
+                  dataKey="Emissions"
+                  position="top"
+                  dy={0}
+                  dx={50}
+                  content={customEmissionsLabel} // Render the value on top of the bar
+                />
+              </Bar>
+              <Bar barSize={100} dataKey="Pledges" fill="#24BE00">
+                <LabelList
+                  dataKey="Pledges"
+                  position="top"
+                  dy={0}
+                  content={customPledgesLabel} // Render the value on top of the bar
+                />
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </Box>
+      )}
       <Box display="flex" flexDirection="column" gap="24px">
         <Box
           sx={{
@@ -319,6 +336,7 @@ const ActorsWithTargetsTabs = () => {
           alt="Target map"
           height={179}
           width={328}
+          className="md:h-[732px] w-full"
         />
       </Box>
     </Box>
