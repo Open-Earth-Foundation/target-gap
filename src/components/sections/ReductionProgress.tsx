@@ -145,6 +145,7 @@ const PledgesArrow = ({ cx, cy }: { cx?: number; cy?: number }) => (
 export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
   const [selectedSourceId, setSelectedSourceId] = useState<string>("");
   const lastUpdateYear = 2019;
+  const startYear = 1990;
   const endYear = 2050; // last year shown on diagram
   let sources: Source[] = [];
   let selectedSource: Source | undefined;
@@ -216,18 +217,20 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             fromYear: selectedTarget.baseline_year,
           };
 
-          data = actor.emissions[selectedSource.id].data.map((entry) => {
-            const emissions = entry.total_emissions / emissionsScale;
-            // sort emissions value into differently rendered parts of the diagram
-            return {
-              year: entry.year,
-              emissions: entry.year <= baselineYear ? emissions : undefined,
-              emissionsAfterBaseline:
-                entry.year >= baselineYear ? emissions : undefined,
-              emissionsReduction:
-                entry.year == baselineYear ? emissions : undefined,
-            };
-          });
+          data = actor.emissions[selectedSource.id].data
+            .filter((entry) => entry.year >= startYear)
+            .map((entry) => {
+              const emissions = entry.total_emissions / emissionsScale;
+              // sort emissions value into differently rendered parts of the diagram
+              return {
+                year: entry.year,
+                emissions: entry.year <= baselineYear ? emissions : undefined,
+                emissionsAfterBaseline:
+                  entry.year >= baselineYear ? emissions : undefined,
+                emissionsReduction:
+                  entry.year == baselineYear ? emissions : undefined,
+              };
+            });
           data.push({
             year: pledgeTarget.year,
             emissionsReduction: pledgeTarget.emissions,
