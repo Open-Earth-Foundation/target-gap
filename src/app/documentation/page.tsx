@@ -47,7 +47,7 @@ const page = () => {
         </Box>
       </Hero>
       <Box paddingTop="64px" paddingBottom="24px">
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="24px">
             <Heading
               titleHighlighted="Our Journey: "
@@ -105,10 +105,10 @@ const page = () => {
               </li>
             </ul>
           </Box>
-        </Container>
+        </div>
       </Box>
       <Box paddingBottom="24px">
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="24px">
             <Heading
               titleHighlighted="What is a "
@@ -154,7 +154,7 @@ const page = () => {
               </li>
             </ul>
           </Box>
-        </Container>
+        </div>
       </Box>
       <Box
         paddingBottom="24px"
@@ -164,7 +164,7 @@ const page = () => {
             lg: "none",
           },
         }}>
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="24px">
             <Heading
               titleHighlighted="Target Gaps: "
@@ -211,7 +211,7 @@ const page = () => {
               </li>
             </ul>
           </Box>
-        </Container>
+        </div>
       </Box>
       <Box
         paddingBottom="24px"
@@ -221,7 +221,7 @@ const page = () => {
             lg: "none",
           },
         }}>
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="24px">
             <Heading
               titleHighlighted="Call to Action for Data and Policy Analysts: "
@@ -264,7 +264,7 @@ const page = () => {
               </li>
             </ul>
           </Box>
-        </Container>
+        </div>
       </Box>
       <Box
         paddingBottom="24px"
@@ -274,7 +274,7 @@ const page = () => {
             lg: "block",
           },
         }}>
-        <Container>
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <div className="grid grid-cols-2 gap-[48px]">
             <Box
               display="flex"
@@ -423,10 +423,10 @@ const page = () => {
               </ul>
             </Box>
           </div>
-        </Container>
+        </div>
       </Box>
       <Box height="152px" width="100%" bgcolor="#E6E7FF" paddingTop="24px">
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="20px">
             <Typography
               variant="h2"
@@ -453,7 +453,7 @@ const page = () => {
               </li>
             </ul>
           </Box>
-        </Container>
+        </div>
       </Box>
       <Box
         sx={{
@@ -466,7 +466,7 @@ const page = () => {
             md: "250px",
           },
         }}>
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="24px">
             <Typography
               align="center"
@@ -512,7 +512,7 @@ const page = () => {
               have.
             </Typography>
           </Box>
-        </Container>
+        </div>
       </Box>
     </>
   );

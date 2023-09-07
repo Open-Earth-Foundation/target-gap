@@ -73,7 +73,9 @@ export default function Home() {
           Start Exploring
         </Button>
       </Hero>
-      <div className="px-[16px] pt-[63px] md:p-16" ref={contentRef}>
+      <div
+        className="px-[16px] pt-[63px] md:p-16 max-w-[1440px] mx-auto"
+        ref={contentRef}>
         <Box
           sx={{
             borderBottom: { xs: "none", md: 1 },
