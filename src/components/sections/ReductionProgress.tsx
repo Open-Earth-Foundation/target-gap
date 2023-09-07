@@ -210,6 +210,7 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
 
           data = actor.emissions[selectedSource.id].data.map((entry) => {
             const emissions = entry.total_emissions / emissionsScale;
+            // sort emissions value into differently rendered parts of the diagram
             return {
               year: entry.year,
               emissions: entry.year <= baselineYear ? emissions : undefined,
@@ -356,7 +357,7 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             <Area
               dataKey="emissionsReduction"
               connectNulls
-              name="Achieved Reduction"
+              name="Required Reduction Based on Target"
               unit="Mt"
               stroke="#2351DC"
               fill="#2351DC"
@@ -414,12 +415,6 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
           </div>
           <div className="bg-background-neutral rounded-full px-3 py-1">
             <span className="w-5 h-1 align-middle bg-[#2351DC] inline-block mr-2" />
-            <span className="text-content-alternative text-sm">
-              Achieved Reduction
-            </span>
-          </div>
-          <div className="bg-background-neutral rounded-full px-3 py-1">
-            <span className="w-5 h-1 align-middle bg-[#008600] inline-block mr-2" />
             <span className="text-content-alternative text-sm">
               Required Reduction Based on Target
             </span>
