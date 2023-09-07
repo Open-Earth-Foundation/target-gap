@@ -200,6 +200,7 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             year: selectedTarget.target_year,
             emissions:
               (reductionPercent * baselineData.total_emissions) /
+              ((1.0 - reductionPercent) * baselineData.total_emissions) /
               emissionsScale,
           };
           targetData = {
