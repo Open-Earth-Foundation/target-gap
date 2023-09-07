@@ -153,43 +153,48 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
 
   const handleSourceChange = (event: SelectChangeEvent) => {
     setSelectedSourceId(event.target.value as string);
-    // TODO update loaded data
   };
 
   if (actor != null) {
-    sources = Object.entries(actor.emissions).map(([key, value]) => ({
-      id: key,
-      name: value.publisher,
-      year: new Date(value.published).getFullYear(),
-      url: value.URL,
-    }));
-    selectedSource = sources.find((source) => source.id === selectedSourceId);
-    if (selectedSource != null) {
-      const currentYear = new Date().getFullYear();
-      const validTargets = actor.targets.filter((target) => {
-        return (
-          target.target_type === "Absolute emission reduction" &&
-          target.target_year >= currentYear
-        );
-      });
+    const currentYear = new Date().getFullYear();
+    const validTargets = actor.targets.filter(
+      (target) =>
+        target.target_type === "Absolute emission reduction" &&
+        target.target_year >= currentYear,
+    );
 
-      let selectedTarget: Target | null = null;
-      let selectedYear: number = Infinity;
-      let selectedReduction: number = Infinity;
-      for (const target of validTargets) {
-        // select lowest year, if there are multiple selected lowest reduction
-        if (
-          target.target_year < selectedYear ||
-          (target.target_year === selectedYear &&
-            Number(target.target_value) < selectedReduction)
-        ) {
-          selectedTarget = target;
-          selectedYear = target.target_year;
-          selectedReduction = Number(target.target_value);
-        }
+    let selectedTarget: Target | null = null;
+    let selectedYear: number = Infinity;
+    let selectedReduction: number = Infinity;
+    for (const target of validTargets) {
+      // select lowest year, if there are multiple selected lowest reduction
+      if (
+        target.target_year < selectedYear ||
+        (target.target_year === selectedYear &&
+          Number(target.target_value) < selectedReduction)
+      ) {
+        selectedTarget = target;
+        selectedYear = target.target_year;
+        selectedReduction = Number(target.target_value);
       }
+    }
 
-      if (selectedTarget != null) {
+    if (selectedTarget != null) {
+      sources = Object.entries(actor.emissions)
+        .filter(([_key, value]) => {
+          // don't consider sources that don't have emissions for the baseline year
+          return value.data.some(
+            (entry) => entry.year === selectedTarget?.baseline_year,
+          );
+        })
+        .map(([key, value]) => ({
+          id: key,
+          name: value.publisher,
+          year: new Date(value.published).getFullYear(),
+          url: value.URL,
+        }));
+      selectedSource = sources.find((source) => source.id === selectedSourceId);
+      if (selectedSource != null) {
         const baselineYear = selectedTarget.baseline_year;
         const baselineData = actor.emissions[selectedSource.id].data.find(
           (entry) => entry.year === baselineYear,
@@ -199,7 +204,6 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
           pledgeTarget = {
             year: selectedTarget.target_year,
             emissions:
-              (reductionPercent * baselineData.total_emissions) /
               ((1.0 - reductionPercent) * baselineData.total_emissions) /
               emissionsScale,
           };
@@ -229,10 +233,10 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
           console.log("Baseline data missing!");
         }
       } else {
-        console.log("Selected target missing!");
+        console.log("Selected source missing!");
       }
     } else {
-      console.log("Selected source missing!");
+      console.log("Selected target missing!");
     }
   }
 
