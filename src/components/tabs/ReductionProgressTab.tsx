@@ -1,11 +1,10 @@
 "use client";
 
-import { getActorOverview } from "@/lib/api";
+import { getActorOverview, getActorParts } from "@/lib/api";
 import type { ActorOverview } from "@/lib/models";
-import validCountries from "@/lib/valid-countries.json";
 import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import { CircularProgress } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CircleFlag } from "react-circle-flags";
 import { ReductionProgress } from "../sections/ReductionProgress";
 import TextBox from "../sections/TextBox";
@@ -13,9 +12,21 @@ import CountrySelect from "../ui/CountrySelect";
 
 export function ReductionProgressTab() {
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [countries, setCountries] = useState<{ id: string; name: string }[]>(
+    [],
+  );
   const [countryDetails, setCountryDetails] = useState<
     ActorOverview | undefined
   >(undefined);
+
+  useEffect(() => {
+    const loadCountries = async () => {
+      const actorParts = await getActorParts("EARTH");
+      const countryData = actorParts.map((actor) => ({ id: actor.actor_id, name: actor.name }));
+      setCountries(countryData);
+    };
+    loadCountries();
+  }, []);
 
   const onCountrySelected = (actorId: string) => {
     setLoading(true);
@@ -44,10 +55,7 @@ The "Reduction Progress" visualization is based on the Hsu et al. (2020) approac
         description={description}
       />
       <div className="pb-2 max-w-4xl">
-        <CountrySelect
-          countries={validCountries}
-          onSelected={onCountrySelected}
-        />
+        <CountrySelect countries={countries} onSelected={onCountrySelected} />
         {isLoading && <CircularProgress className="align-bottom m-2 ml-4" />}
         <div className="text-xl font-bold pt-8">
           {countryDetails ? (
