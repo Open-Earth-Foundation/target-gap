@@ -50,6 +50,6 @@ export async function getActorEmissions(actorId: string): Promise<ActorEmissions
 }
 
 export function getActorEmissionsDownloadURL(actorId: string): string {
-  return API_URL + `/actor/${actorId}/emissions.csv`;
+  return API_URL + `/download/${actorId}-emissions.csv`;
 }
 
