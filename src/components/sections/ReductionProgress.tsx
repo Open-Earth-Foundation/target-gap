@@ -32,6 +32,7 @@ import {
 } from "recharts";
 import PopperPortal from "../util/PopperPortal";
 import { actorNextTarget } from "@/lib/util";
+import { getActorEmissionsDownloadURL } from "@/lib/api";
 
 interface Source {
   id: string;
@@ -150,12 +151,14 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
   let data: DiagramEntry[] = [];
   let pledgeTarget = { year: 0, emissions: 0 };
   let targetData = { reductionPercent: 0, year: 0, fromYear: 0 };
+  let downloadUrl: string = "";
 
   const handleSourceChange = (event: SelectChangeEvent) => {
     setSelectedSourceId(event.target.value as string);
   };
 
   if (actor != null) {
+    downloadUrl = getActorEmissionsDownloadURL(actor.actor_id);
     const currentYear = new Date().getFullYear();
     const validTargets = actor.targets.filter(
       (target) =>
@@ -270,7 +273,11 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
             )}
           </Stack>
           <div className="grow" />
-          <DownloadIcon className="text-control" />
+          {downloadUrl && (
+            <a href={downloadUrl}>
+              <DownloadIcon className="text-control" />
+            </a>
+          )}
         </div>
         <Divider className="mt-6" />
         <Box className="my-6" sx={{ width: 200 }}>

@@ -49,3 +49,7 @@ export async function getActorEmissions(actorId: string): Promise<ActorEmissions
   return await fetchAPI(`/actor/${actorId}/emissions`) as Promise<ActorEmissionsMap>;
 }
 
+export function getActorEmissionsDownloadURL(actorId: string): string {
+  return API_URL + `/actor/${actorId}/emissions.csv`;
+}
+
