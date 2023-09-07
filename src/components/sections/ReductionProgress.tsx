@@ -1,6 +1,6 @@
 "use client";
 
-import type { ActorOverview } from "@/lib/models";
+import type { ActorOverview, Target } from "@/lib/models";
 import DownloadIcon from "@mui/icons-material/Download";
 import InputIcon from "@mui/icons-material/Input";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -165,10 +165,31 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
     }));
     selectedSource = sources.find((source) => source.id === selectedSourceId);
     if (selectedSource != null) {
-      const selectedTarget = actor.targets.find((target) => {
-        return target.target_type === "Absolute emission reduction";
+      const currentYear = new Date().getFullYear();
+      const validTargets = actor.targets.filter((target) => {
+        return (
+          target.target_type === "Absolute emission reduction" &&
+          target.target_year >= currentYear
+        );
       });
-      if (selectedTarget !== undefined) {
+
+      let selectedTarget: Target | null = null;
+      let selectedYear: number = Infinity;
+      let selectedReduction: number = Infinity;
+      for (const target of validTargets) {
+        // select lowest year, if there are multiple selected lowest reduction
+        if (
+          target.target_year < selectedYear ||
+          (target.target_year === selectedYear &&
+            Number(target.target_value) < selectedReduction)
+        ) {
+          selectedTarget = target;
+          selectedYear = target.target_year;
+          selectedReduction = Number(target.target_value);
+        }
+      }
+
+      if (selectedTarget != null) {
         const baselineYear = selectedTarget.baseline_year;
         const baselineData = actor.emissions[selectedSource.id].data.find(
           (entry) => entry.year === baselineYear,
@@ -304,8 +325,16 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
               domain={[pledgeTarget.year === 0 ? 1990 : "dataMin", endYear]}
               axisLine={false}
               tickCount={10}
+              tickSize={10}
+              tickMargin={8}
             />
-            <YAxis unit="Mt" type="number" axisLine={false} domain={pledgeTarget.year === 0 ? [0, 120] : undefined} />
+            <YAxis
+              unit="Mt"
+              type="number"
+              tickLine={false}
+              axisLine={false}
+              domain={pledgeTarget.year === 0 ? [0, 120] : undefined}
+            />
             <Tooltip
               content={
                 <ReductionProgressTooltip
