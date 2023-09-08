@@ -145,7 +145,7 @@ const PledgesArrow = ({ cx, cy }: { cx?: number; cy?: number }) => (
 export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
   const [selectedSourceId, setSelectedSourceId] = useState<string>("");
   const lastUpdateYear = 2019;
-  const startYear = 1990;
+  const startYear = 1980;
   const endYear = 2050; // last year shown on diagram
   let sources: Source[] = [];
   let selectedSource: Source | undefined;
