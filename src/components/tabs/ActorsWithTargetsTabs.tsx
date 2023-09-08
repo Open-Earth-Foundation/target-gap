@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import { CoverageData, CoverageDiagramEntry } from "@/lib/models";
 import { getCoverageData } from "@/lib/api";
+import TextBox from "../sections/TextBox";
 
 const ActorsWithTargetsTabs = () => {
   const [isLoading, setLoading] = useState(true);
@@ -146,7 +147,7 @@ const ActorsWithTargetsTabs = () => {
 
   const LegendContent = () => {
     return (
-      <div className="h-[100px] w-[400px] flex gap-8 top-[40px] relative">
+      <div className="h-[100px] w-[400px] flex gap-4 top-[40px] relative">
         <div className="flex bg-[#E8EAFB] gap-[10px] h-[24px] items-center justify-center p-[8px] rounded-[50px] text-xs">
           <div className="h-[5px] w-[16px] bg-[#E9750A]" />
           <Typography
@@ -171,11 +172,18 @@ const ActorsWithTargetsTabs = () => {
     );
   };
   return (
-    <Box display="flex" flexDirection="column" gap="24px">
-      <Heading
-        titleHighlighted="Percentage of Actors "
-        titleDark="with Targets"
-        color=""
+    <Box display="flex" flexDirection="column">
+      <TextBox
+        coloredTitle="Percentage of Actors "
+        otherTitle="with Targets"
+        description={`This visualization provides a snapshot of the availability of emissions
+        and pledges data across countries, regions, cities, and companies within
+        OpenClimate. By showcasing the percentages of available data, we
+        highlight both the progress made and the gaps that remain. We believe
+        that by identifying these gaps, we can spur more entities to contribute
+        and complete the picture. We encourage stakeholders to dive in, identify
+        these areas of opportunity, and collaborate with us to further develop
+        and enrich our collective climate dataset.`}
       />
       <Typography
         fontSize="12px"
@@ -184,14 +192,6 @@ const ActorsWithTargetsTabs = () => {
         variant="body2"
         fontFamily="sans-serif"
         letterSpacing="0.5px">
-        This visualization provides a snapshot of the availability of emissions
-        and pledges data across countries, regions, cities, and companies within
-        OpenClimate. By showcasing the percentages of available data, we
-        highlight both the progress made and the gaps that remain. We believe
-        that by identifying these gaps, we can spur more entities to contribute
-        and complete the picture. We encourage stakeholders to dive in, identify
-        these areas of opportunity, and collaborate with us to further develop
-        and enrich our collective climate dataset.
       </Typography>
       {isLoading ? (
         <Box
@@ -267,43 +267,7 @@ const ActorsWithTargetsTabs = () => {
           </ResponsiveContainer>
         </Box>
       )}
-      <Box display="flex" flexDirection="column" gap="24px">
-        <Box
-          sx={{
-            display: {
-              xs: "flex",
-              md: "none",
-            },
-          }}>
-          <Typography
-            color="#008600"
-            fontSize="14px"
-            fontWeight="600"
-            lineHeight="20px">
-            Methodology&nbsp;
-          </Typography>
-          <Typography fontSize="14px" fontWeight="600" lineHeight="20px">
-            used
-          </Typography>
-        </Box>
-        <Typography
-          fontSize="12px"
-          fontWeight="400"
-          lineHeight="16px"
-          variant="body2"
-          fontFamily="sans-serif"
-          letterSpacing="0.5px">
-          The 1.5C target is calculated by lorem ipsum dolor sit amet,
-          consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-          dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-          proident, sunt in culpa qui officia deserunt mollit anim id est
-          laborum.
-        </Typography>
-      </Box>
-      <Box display="flex" flexDirection="column" gap="24px">
+      <Box display="flex" flexDirection="column" gap="24px" className="mt-8">
         <Heading
           titleHighlighted="Percentage of Subnationals "
           titleDark="with 2030 Targets"
