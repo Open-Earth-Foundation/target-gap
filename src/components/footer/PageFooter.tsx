@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Divider } from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import Image from "next/image";
 import Link from "next/link";
@@ -31,17 +31,35 @@ const Footer = () => {
                 <Link
                   className="text-white text-[14px]"
                   href="https://www.openearth.org/projects/openclimate">
-                  About OpenClimate
+                  <Typography
+                    sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                    fontWeight="500"
+                    lineHeight="20px"
+                    letterSpacing="0.5px">
+                    About OpenClimate
+                  </Typography>
                 </Link>
                 <Link
                   className="text-white text-[14px]"
                   href="https://www.openearth.org/projects/openclimate">
-                  Go to GitHub
+                  <Typography
+                    sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                    fontWeight="500"
+                    lineHeight="20px"
+                    letterSpacing="0.5px">
+                    Go to GitHub
+                  </Typography>
                 </Link>
                 <Link
                   className="text-white text-[14px]"
                   href="https://www.openearth.org/projects/openclimate">
-                  Read the Docs
+                  <Typography
+                    sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                    fontWeight="500"
+                    lineHeight="20px"
+                    letterSpacing="0.5px">
+                    Read the Docs
+                  </Typography>
                 </Link>
               </Box>
             </Box>
