@@ -378,20 +378,57 @@ const page = () => {
                 Paris Agreement. The findings revealed stark contrasts:
               </Typography>
               <ul className="list-disc ml-8 -mt-5 list-outside bodyText text-[12px] md:text-[16px] leading-[24px] text-xs">
-                <li>
-                  Canada: Most Canadian provinces have emissions target goals,
-                  but the aggregate of these subnational goals overshoots
-                  Canada&apos;s national target by 144 MtCO2e, highlighting a
-                  need for better coordination.
+                <li className="flex gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Canada: Most Canadian provinces have emissions target goals,
+                    but the aggregate of these subnational goals overshoots
+                    Canada&apos;s national target by 144 MtCO2e, highlighting a
+                    need for better coordination.{" "}
+                  </Typography>
                 </li>
-                <li>
-                  Great Britain: In contrast, all countries within Great Britain
-                  have their own emission targets that align with the nationally
-                  determined targets and are in line with the IPCC goals.
+                <li className="flex items-center gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Great Britain: In contrast, all countries within Great
+                    Britain have their own emission targets that align with the
+                    nationally determined targets and are in line with the IPCC
+                    goals.{" "}
+                  </Typography>
                 </li>
-                <li>
-                  Engage with policy recommendations, informed by precise and
-                  reliable data.
+                <li className="flex items-center gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Engage with policy recommendations, informed by precise and
+                    reliable data.{" "}
+                  </Typography>
                 </li>
               </ul>
               <Typography
@@ -464,17 +501,53 @@ const page = () => {
                 our findings. Here’s your opportunity:
               </Typography>
               <ul className="list-disc ml-8 -mt-5 list-outside bodyText text-[12px] md:text-[16px] leading-[24px] text-xs">
-                <li>
-                  Enhance our analyses with additional layers of data or new
-                  methodologies.
+                <li className="flex items-center gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Enhance our analyses with additional layers of data or new
+                    methodologies.{" "}
+                  </Typography>
                 </li>
-                <li>
-                  Forge new paths with innovative stocktaking projects of your
-                  own.
+                <li className="flex items-center gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Forge new paths with innovative stocktaking projects of your
+                    own.{" "}
+                  </Typography>
                 </li>
-                <li>
-                  Engage with policy recommendations, informed by precise and
-                  reliable data.
+                <li className="flex items-center gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Engage with policy recommendations, informed by precise and
+                    reliable data.{" "}
+                  </Typography>
                 </li>
               </ul>
               <Typography
