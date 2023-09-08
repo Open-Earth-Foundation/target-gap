@@ -7,8 +7,6 @@ import { ActorOverview, ActorType } from "@/lib/models";
 import validCountries from "@/lib/valid-countries.json";
 import { useState } from "react";
 
-import Container from "@mui/material/Container";
-
 import HelpOutlinedIcon from "@mui/icons-material/HelpOutlined";
 import { CircularProgress } from "@mui/material";
 import { CircleFlag } from "react-circle-flags";
@@ -70,7 +68,7 @@ export function TargetGapTab() {
         otherTitle="Visualizer"
         description={description}
       />
-      <Container maxWidth="xl" className="pb-2" disableGutters>
+      <div className="max-w-4xl pb-2">
         <CountrySelect
           countries={validCountries}
           onSelected={onCountrySelected}
@@ -100,15 +98,11 @@ export function TargetGapTab() {
             </p>
           )}
         </div>
-      </Container>
-      <Container
-        maxWidth="xl"
-        disableGutters
-        className="lg:space-x-4 pb-8 whitespace-nowrap inline-block"
-      >
+      </div>
+      <div className="max-w-4xl lg:space-x-4 pb-8 whitespace-nowrap inline-block">
         <Emissions actor={countryDetails} parts={subActorDetails} />
         <Reductions actor={countryDetails} parts={subActorDetails} />
-      </Container>
+      </div>
       <TextBox
         coloredTitle="Methodology"
         otherTitle="used"

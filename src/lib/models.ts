@@ -43,7 +43,7 @@ export interface EmissionsSource {
   URL: string;
   citation: string;
   tags: Tag[];
-  data: EmissionsEntry;
+  data: EmissionsEntry[];
   population: PopulationData[];
   gdp: GdpData[];
   targets: Target[];
@@ -134,6 +134,7 @@ export interface ActorOverview {
   lat: number;
   lng: number;
   emissions: Record<string, EmissionsSource>;
+  targets: Target[];
 }
 
 export interface ActorEmissions {
