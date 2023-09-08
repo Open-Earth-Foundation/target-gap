@@ -21,7 +21,7 @@ function a11yProps(index: number) {
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState(0);
   const [screenSize, setScreenSize] = useState(getCurrentDimension());
-  const handleTabChange = (event: SyntheticEvent, newValue: number) => {
+  const handleTabChange = (_event: SyntheticEvent, newValue: number) => {
     setSelectedTab(newValue);
   };
   const handleTabChangeMobile = (event: any) => {
@@ -35,10 +35,14 @@ export default function Home() {
 
   // listen to media queries that match css
 
-  function getCurrentDimension() {
-    return {
-      width: window.innerWidth,
-    };
+  function getCurrentDimension(): { width: number } {
+    if (typeof window !== "undefined") {
+      return {
+        width: window.innerWidth,
+      };
+    } else {
+      return { width: 1080 };
+    }
   }
 
   useEffect(() => {

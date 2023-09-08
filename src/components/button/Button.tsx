@@ -32,7 +32,7 @@ const ButtonMain: FC<ButtonMainProps> = ({
         letterSpacing: "1.25px",
         lineHeight: "16px",
         fontSize: "14px",
-        border: border && "2px solid #24BE00",
+        border: border ? "2px solid #24BE00" : undefined,
       }}>
       {text}
     </Button>
