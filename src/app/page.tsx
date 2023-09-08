@@ -7,7 +7,7 @@ import ActorsWithTargetsTabs from "@/components/tabs/ActorsWithTargetsTabs";
 import { TabPanel } from "@/components/tabs/TabPanel";
 import { TargetGapTab } from "@/components/tabs/TargetGapTab";
 import { ArrowForward } from "@mui/icons-material";
-import { Box, Button, FormControl, MenuItem, Tab, Tabs } from "@mui/material";
+import { Box, Button, FormControl, MenuItem, Tab, Tabs, Typography } from "@mui/material";
 import Select from "@mui/material/Select";
 import { ReductionProgressTab } from "@/components/tabs/ReductionProgressTab";
 
