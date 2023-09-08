@@ -1,7 +1,6 @@
 "use client";
 
 import { Box, Button, Divider, Typography } from "@mui/material";
-import Container from "@mui/material/Container";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,7 +14,7 @@ const Footer = () => {
         },
       }}
       bgcolor="#00001F">
-      <div className="max-w-[1440px] mx-auto px-[16px]">
+      <div className="max-w-layout mx-auto px-[16px]">
         <Box className="flex flex-col gap-[48px]">
           <Box className="flex flex-col md:pt-[48px] md:flex-row md:items-center h-1/2 justify-between gap-[36px]">
             <Box className="pt-[100px] md:pt-0 flex flex-col md:flex-row gap-[36px]">
