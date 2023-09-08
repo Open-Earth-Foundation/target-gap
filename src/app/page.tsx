@@ -3,14 +3,13 @@
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
 
 import Hero from "@/components/header/Hero";
+import ActorsWithTargetsTabs from "@/components/tabs/ActorsWithTargetsTabs";
 import { TabPanel } from "@/components/tabs/TabPanel";
 import { TargetGapTab } from "@/components/tabs/TargetGapTab";
 import { ArrowForward } from "@mui/icons-material";
 import { Box, Button, FormControl, MenuItem, Tab, Tabs } from "@mui/material";
 import Select from "@mui/material/Select";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import ActorsWithTargetsTabs from "@/components/tabs/ActorsWithTargetsTabs";
+import { ReductionProgressTab } from "@/components/tabs/ReductionProgressTab";
 
 function a11yProps(index: number) {
   return {
@@ -70,12 +69,14 @@ export default function Home() {
       </Hero>
       <div
         className="px-[16px] pt-[63px] md:p-16 max-w-[1440px] mx-auto"
-        ref={contentRef}>
+        ref={contentRef}
+      >
         <Box
           sx={{
             borderBottom: { xs: "none", md: 1 },
             borderColor: { xs: "none", md: "divider" },
-          }}>
+          }}
+        >
           {screenSize.width > 600 ? (
             <Tabs
               value={selectedTab}
@@ -97,7 +98,8 @@ export default function Home() {
                 fontSize="12px"
                 fontWeight={500}
                 lineHeight="16px"
-                letterSpacing="0.5px">
+                letterSpacing="0.5px"
+              >
                 Select a visualization
               </Typography>
               <FormControl fullWidth>
