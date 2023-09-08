@@ -61,7 +61,7 @@ export default function Home() {
         window.removeEventListener("resize", updateDimension);
       };
     }
-  }, [screenSize]);
+  }, []);
 
   return (
     <div className="bg-[#FAFAFA]">
