@@ -1,12 +1,12 @@
 export enum ActorType {
-  Planet = 'planet',
-  Country = 'country',
-  Adm1 = 'adm1',
-  Adm2 = 'adm2',
-  City = 'city',
-  Organization = 'organization',
-  Site = 'site',
-};
+  Planet = "planet",
+  Country = "country",
+  Adm1 = "adm1",
+  Adm2 = "adm2",
+  City = "city",
+  Organization = "organization",
+  Site = "site",
+}
 
 export interface ActorPart {
   actor_id: string;
@@ -153,5 +153,22 @@ export interface EmissionsData {
   tags: Tag[];
 }
 
-export type ActorEmissionsMap = Record<string, ActorEmissions>;
+export interface CoverageData {
+  number_of_countries: number;
+  number_of_regions: number;
+  number_of_cities: number;
+  number_of_countries_with_targets: number;
+  number_of_regions_with_targets: number;
+  number_of_cities_with_targets: number;
+  number_of_countries_with_emissions: number;
+  number_of_regions_with_emissions: number;
+  number_of_cities_with_emissions: number;
+}
 
+export interface CoverageDiagramEntry {
+  name: string;
+  Emissions: number;
+  Pledges: number;
+}
+
+export type ActorEmissionsMap = Record<string, ActorEmissions>;
