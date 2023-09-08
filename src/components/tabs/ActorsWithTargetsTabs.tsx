@@ -14,115 +14,93 @@ import {
   YAxis,
 } from "recharts";
 import Image from "next/image";
-
-interface CoverageData {
-  number_of_countries: number;
-  number_of_regions: number;
-  number_of_cities: number;
-  number_of_countries_with_targets: number;
-  number_of_regions_with_targets: number;
-  number_of_cities_with_targets: number;
-}
-
-interface CoverageDiagramEntry {
-  name: string;
-  Emissions: number;
-  Pledges: number;
-}
+import { CoverageData, CoverageDiagramEntry } from "@/lib/models";
+import { getCoverageData } from "@/lib/api";
 
 const ActorsWithTargetsTabs = () => {
   const [isLoading, setLoading] = useState(true);
   const [coverageData, setCoverageData] = useState<CoverageData>();
   const [diagramData, setDiagramData] = useState<CoverageDiagramEntry[]>([]);
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const result = await fetch(
-          `https://openclimate.openearth.dev/api/v1/coverage/stats`
-        );
-        const data = await result.json();
+    async function loadData() {
+      const data = await getCoverageData();
+      const calc = (value: number, sum_of_actors: number) => {
+        return Math.round((value / sum_of_actors) * 100);
+      };
 
-        const calc = (value: number, sum_of_actors: number) => {
-          return Math.round((value / sum_of_actors) * 100);
+      let countryData = {
+        emissions: 0,
+        pledges: 0,
+      };
+
+      let regionalData = {
+        emissions: 0,
+        pledges: 0,
+      };
+
+      let cityData = {
+        emissions: 0,
+        pledges: 0,
+      };
+
+      if (!isLoading && coverageData) {
+        countryData = {
+          emissions: calc(
+            data.number_of_countries_with_emissions,
+            coverageData?.number_of_countries
+          ),
+          pledges: calc(
+            data.number_of_countries_with_targets,
+            coverageData?.number_of_countries
+          ),
         };
 
-        let countryData = {
-          emissions: 0,
-          pledges: 0,
+        regionalData = {
+          emissions: calc(
+            data.number_of_regions_with_emissions,
+            coverageData?.number_of_regions
+          ),
+          pledges: calc(
+            data.number_of_regions_with_targets,
+            coverageData?.number_of_regions
+          ),
         };
 
-        let regionalData = {
-          emissions: 0,
-          pledges: 0,
+        cityData = {
+          emissions: calc(
+            data.number_of_cities_with_emissions,
+            coverageData?.number_of_cities
+          ),
+          pledges: calc(
+            data.number_of_cities_with_targets,
+            coverageData?.number_of_cities
+          ),
         };
-
-        let cityData = {
-          emissions: 0,
-          pledges: 0,
-        };
-
-        if (!isLoading && coverageData) {
-          countryData = {
-            emissions: calc(
-              data.number_of_countries_with_emissions,
-              coverageData?.number_of_countries
-            ),
-            pledges: calc(
-              data.number_of_countries_with_targets,
-              coverageData?.number_of_countries
-            ),
-          };
-
-          regionalData = {
-            emissions: calc(
-              data.number_of_regions_with_emissions,
-              coverageData?.number_of_regions
-            ),
-            pledges: calc(
-              data.number_of_regions_with_targets,
-              coverageData?.number_of_regions
-            ),
-          };
-
-          cityData = {
-            emissions: calc(
-              data.number_of_cities_with_emissions,
-              coverageData?.number_of_cities
-            ),
-            pledges: calc(
-              data.number_of_cities_with_targets,
-              coverageData?.number_of_cities
-            ),
-          };
-        }
-
-        setCoverageData(data);
-        setLoading(false);
-
-        setDiagramData([
-          {
-            name: "Countries",
-            Emissions: countryData.emissions,
-            Pledges: countryData.pledges,
-          },
-          {
-            name: "Regions",
-            Emissions: regionalData.emissions,
-            Pledges: regionalData.pledges,
-          },
-          {
-            name: "Cities",
-            Emissions: cityData.emissions,
-            Pledges: cityData.pledges,
-          },
-        ]);
-      } catch (err) {
-        console.log("Failed to load coverage data!", err);
-        setLoading(false);
       }
+
+      setCoverageData(data);
+      setLoading(false);
+
+      setDiagramData([
+        {
+          name: "Countries",
+          Emissions: countryData.emissions,
+          Pledges: countryData.pledges,
+        },
+        {
+          name: "Regions",
+          Emissions: regionalData.emissions,
+          Pledges: regionalData.pledges,
+        },
+        {
+          name: "Cities",
+          Emissions: cityData.emissions,
+          Pledges: cityData.pledges,
+        },
+      ]);
     }
 
-    fetchData();
+    loadData();
   }, [coverageData, isLoading]);
 
   const customEmissionsLabel = useCallback(
