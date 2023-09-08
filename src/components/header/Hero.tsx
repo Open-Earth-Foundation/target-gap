@@ -13,7 +13,7 @@ export default function Hero({ children }: { children: ReactNode }) {
       <div className="relative z-10 p-16 pb-36 max-w-[1440px] mx-auto">
         <h1 className="text-3xl font-bold pb-3">
           <span className="text-[#008600]">DIGS</span>{" "}
-          <span className="text-white">Analytics</span>
+          <span className="text-white">Data Explorer</span>
         </h1>
         <p className="mb-12 text-white">
           Using data available at OpenClimate, we&apos;ve conducted a Digitally
