@@ -54,11 +54,13 @@ export default function Home() {
     const updateDimension = () => {
       setScreenSize(getCurrentDimension());
     };
-    window.addEventListener("resize", updateDimension);
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", updateDimension);
 
-    return () => {
-      window.removeEventListener("resize", updateDimension);
-    };
+      return () => {
+        window.removeEventListener("resize", updateDimension);
+      };
+    }
   }, [screenSize]);
 
   return (

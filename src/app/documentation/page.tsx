@@ -168,9 +168,9 @@ const page = () => {
               from satellites, interoperability standards and advanced
               amdorithms, to track everyone&apos;s progress, especially for
               cities and companies. By using these tools, the DIGS vision is to
-              make the whole process more open, trustworthy, and efficient. It's
-              about making sure everyone&apos;s efforts count and pushing the
-              world closer to its climate goals.
+              make the whole process more open, trustworthy, and efficient.
+              It&apos;s about making sure everyone&apos;s efforts count and
+              pushing the world closer to its climate goals.
             </Typography>
             <ul className="list-none ml-2 list-inside text-xs">
               <li>
