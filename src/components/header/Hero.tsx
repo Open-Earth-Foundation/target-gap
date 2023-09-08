@@ -10,7 +10,7 @@ export default function Hero({ children }: { children: ReactNode }) {
         fill
         className="absolute inset-0 object-cover"
       />
-      <div className="relative z-10 p-16 pb-36 max-w-3xl">
+      <div className="relative z-10 p-16 pb-36 max-w-[1440px] mx-auto">
         <h1 className="text-3xl font-bold pb-3">
           <span className="text-[#008600]">DIGS</span>{" "}
           <span className="text-white">Analytics</span>
