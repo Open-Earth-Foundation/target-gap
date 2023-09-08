@@ -645,7 +645,7 @@ const page = () => {
                         md: "16px",
                       },
                     }}>
-                    Python Client that access API
+                    Python Client for API access
                   </Typography>
                 </Link>
               </li>
