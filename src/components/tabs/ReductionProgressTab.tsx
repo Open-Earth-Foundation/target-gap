@@ -54,7 +54,7 @@ The "Reduction Progress" visualization is based on the Hsu et al. (2020) approac
         otherTitle="Progress"
         description={description}
       />
-      <div className="pb-2 max-w-[1440px] mx-auto">
+      <div className="pb-2 max-w-layout mx-auto">
         <CountrySelect countries={countries} onSelected={onCountrySelected} />
         {isLoading && <CircularProgress className="align-bottom m-2 ml-4" />}
         <div className="text-xl font-bold pt-8">
@@ -82,7 +82,7 @@ The "Reduction Progress" visualization is based on the Hsu et al. (2020) approac
           )}
         </div>
       </div>
-      <div className="max-w-4xl w-full lg:space-x-4 pb-8 whitespace-nowrap inline-block">
+      <div className="max-w-layout w-full lg:space-x-4 pb-8 whitespace-nowrap inline-block">
         <ReductionProgress actor={countryDetails} />
       </div>
       <TextBox

@@ -68,7 +68,7 @@ export function TargetGapTab() {
         otherTitle="Visualizer"
         description={description}
       />
-      <div className="max-w-4xl pb-2">
+      <div className="max-w-layout pb-2">
         <CountrySelect
           countries={validCountries}
           onSelected={onCountrySelected}
@@ -99,7 +99,7 @@ export function TargetGapTab() {
           )}
         </div>
       </div>
-      <div className="max-w-4xl lg:space-x-4 pb-8 whitespace-nowrap inline-block">
+      <div className="max-w-layout lg:space-x-4 pb-8 whitespace-nowrap">
         <Emissions actor={countryDetails} parts={subActorDetails} />
         <Reductions actor={countryDetails} parts={subActorDetails} />
       </div>

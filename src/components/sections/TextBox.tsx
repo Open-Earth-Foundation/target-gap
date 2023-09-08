@@ -10,7 +10,7 @@ interface HeroProps {
 
 const TextBox: FC<HeroProps> = ({ description, coloredTitle, otherTitle }) => {
   return (
-    <div className="max-w-4xl items-center h-full">
+    <div className="max-w-layout items-center h-full">
       <h1 className="text-3xl font-bold pb-4">
         <span className="text-[#008600]">{coloredTitle}</span>{" "}
         <span className="text-[#00001F]">{otherTitle}</span>
