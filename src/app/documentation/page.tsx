@@ -47,7 +47,7 @@ const page = () => {
         </Box>
       </Hero>
       <Box paddingTop="64px" paddingBottom="24px">
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="24px">
             <Heading
               titleHighlighted="Our Journey: "
@@ -55,7 +55,6 @@ const page = () => {
               color=""
             />
             <Typography
-              className="bodyText"
               sx={{
                 fontSize: {
                   xs: "12px",
@@ -66,6 +65,8 @@ const page = () => {
                   md: "24px",
                 },
               }}
+              variant="body2"
+              fontFamily="sans-serif"
               lineHeight="16px"
               letterSpacing="0.5px">
               The primary goal of DIGS (Digitally Enabled Independent Global
@@ -88,27 +89,53 @@ const page = () => {
               quest for understanding and action in the global response to
               climate change.
             </Typography>
-            <ul className="list-disc ml-2 list-inside text-xs">
+            <ul className="list-none ml-2 list-inside text-xs">
               <li>
                 <Link
                   href="/"
-                  className="text-[#2351DC] underline bodyText font-[600] leading-6">
-                  API documentation
+                  className="text-[#2351DC] flex items-center gap-2 font-[600] leading-6">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    className="underline"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    API documentation
+                  </Typography>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/"
-                  className="text-[#2351DC] underline bodyText font-[600]">
-                  Python Client that access API
+                  className="text-[#2351DC] flex items-center gap-2 font-[600]">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    className="underline"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Python Client that access API
+                  </Typography>
                 </Link>
               </li>
             </ul>
           </Box>
-        </Container>
+        </div>
       </Box>
       <Box paddingBottom="24px">
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="24px">
             <Heading
               titleHighlighted="What is a "
@@ -116,7 +143,6 @@ const page = () => {
               color=""
             />
             <Typography
-              className="bodyText"
               sx={{
                 fontSize: {
                   xs: "12px",
@@ -127,6 +153,8 @@ const page = () => {
                   md: "24px",
                 },
               }}
+              variant="body2"
+              fontFamily="sans-serif"
               lineHeight="16px"
               letterSpacing="0.5px">
               The Paris Agreement set up a five-yearly check-in, called the
@@ -140,21 +168,34 @@ const page = () => {
               from satellites, interoperability standards and advanced
               amdorithms, to track everyone&apos;s progress, especially for
               cities and companies. By using these tools, the DIGS vision is to
-              make the whole process more open, trustworthy, and efficient. It's
-              about making sure everyone&apos;s efforts count and pushing the
-              world closer to its climate goals.
+              make the whole process more open, trustworthy, and efficient.
+              It&apos;s about making sure everyone&apos;s efforts count and
+              pushing the world closer to its climate goals.
             </Typography>
-            <ul className="list-disc ml-2 list-inside text-xs">
+            <ul className="list-none ml-2 list-inside text-xs">
               <li>
                 <Link
                   href="https://uploads-ssl.webflow.com/62192ceb9199b3dd08431a6b/63288ad5701afc27ed83d2ef_Litepaper%20-%20A%20Digitally-Enabled%20Independent%20Global%20Stocktake.pdf"
-                  className="text-[#2351DC] underline bodyText font-[600] leading-6">
-                  Read the DIGS Litepaper
+                  className="text-[#2351DC] flex items-center gap-2 font-[600] leading-6">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    className="underline"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Read the DIGS Litepaper
+                  </Typography>
                 </Link>
               </li>
             </ul>
           </Box>
-        </Container>
+        </div>
       </Box>
       <Box
         paddingBottom="24px"
@@ -164,7 +205,7 @@ const page = () => {
             lg: "none",
           },
         }}>
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="24px">
             <Heading
               titleHighlighted="Target Gaps: "
@@ -172,7 +213,6 @@ const page = () => {
               color=""
             />
             <Typography
-              className="bodyText"
               sx={{
                 fontSize: {
                   xs: "12px",
@@ -183,6 +223,8 @@ const page = () => {
                   md: "24px",
                 },
               }}
+              variant="body2"
+              fontFamily="sans-serif"
               lineHeight="16px"
               letterSpacing="0.5px">
               Our recent paper, “Target Gaps: A case study for Canada and Great
@@ -201,17 +243,30 @@ const page = () => {
               enough to meet the 2.0°C IPCC goal, our analysis indicates that
               they may fall short of the more stringent 1.5°C goal.
             </Typography>
-            <ul className="list-disc ml-2 list-inside text-xs">
+            <ul className="list-none ml-2 list-inside text-xs">
               <li>
                 <Link
                   href="https://docs.google.com/document/u/0/d/1hA8246oEDPvzs_6RJAe8PEJyYjm_X4FNFAevc-kUYR8/edit?pli=1"
-                  className="text-[#2351DC] underline bodyText font-[600] leading-6">
-                  Read full paper
+                  className="text-[#2351DC] flex items-center gap-2 font-[600] leading-6">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    className="underline"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Read full paper
+                  </Typography>
                 </Link>
               </li>
             </ul>
           </Box>
-        </Container>
+        </div>
       </Box>
       <Box
         paddingBottom="24px"
@@ -221,7 +276,7 @@ const page = () => {
             lg: "none",
           },
         }}>
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="24px">
             <Heading
               titleHighlighted="Call to Action for Data and Policy Analysts: "
@@ -229,7 +284,6 @@ const page = () => {
               color=""
             />
             <Typography
-              className="bodyText"
               sx={{
                 fontSize: {
                   xs: "12px",
@@ -240,6 +294,8 @@ const page = () => {
                   md: "24px",
                 },
               }}
+              variant="body2"
+              fontFamily="sans-serif"
               lineHeight="16px"
               letterSpacing="0.5px">
               The insights we&apos;ve unearthed through our stocktaking analyses
@@ -254,17 +310,30 @@ const page = () => {
               sculpting a more informed, effective approach to global climate
               action.
             </Typography>
-            <ul className="list-disc ml-2 list-inside text-xs">
+            <ul className="ml-2 list-inside text-xs">
               <li>
                 <Link
                   href="https://docs.google.com/document/d/1hA8246oEDPvzs_6RJAe8PEJyYjm_X4FNFAevc-kUYR8/edit"
-                  className="text-[#2351DC] underline bodyText font-[600] leading-6">
-                  Read full paper
+                  className="text-[#2351DC] flex items-center gap-2 font-[600] leading-6">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    className="underline"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Read full paper
+                  </Typography>
                 </Link>
               </li>
             </ul>
           </Box>
-        </Container>
+        </div>
       </Box>
       <Box
         paddingBottom="24px"
@@ -274,7 +343,7 @@ const page = () => {
             lg: "block",
           },
         }}>
-        <Container>
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <div className="grid grid-cols-2 gap-[48px]">
             <Box
               display="flex"
@@ -287,7 +356,6 @@ const page = () => {
                 color=""
               />
               <Typography
-                className="bodyText"
                 sx={{
                   fontSize: {
                     xs: "12px",
@@ -298,6 +366,8 @@ const page = () => {
                     md: "24px",
                   },
                 }}
+                variant="body2"
+                fontFamily="sans-serif"
                 lineHeight="16px"
                 letterSpacing="0.5px">
                 Our recent paper, “Target Gaps: A case study for Canada and
@@ -308,24 +378,60 @@ const page = () => {
                 Paris Agreement. The findings revealed stark contrasts:
               </Typography>
               <ul className="list-disc ml-8 -mt-5 list-outside bodyText text-[12px] md:text-[16px] leading-[24px] text-xs">
-                <li>
-                  Canada: Most Canadian provinces have emissions target goals,
-                  but the aggregate of these subnational goals overshoots
-                  Canada&apos;s national target by 144 MtCO2e, highlighting a
-                  need for better coordination.
+                <li className="flex gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Canada: Most Canadian provinces have emissions target goals,
+                    but the aggregate of these subnational goals overshoots
+                    Canada&apos;s national target by 144 MtCO2e, highlighting a
+                    need for better coordination.{" "}
+                  </Typography>
                 </li>
-                <li>
-                  Great Britain: In contrast, all countries within Great Britain
-                  have their own emission targets that align with the nationally
-                  determined targets and are in line with the IPCC goals.
+                <li className="flex items-center gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Great Britain: In contrast, all countries within Great
+                    Britain have their own emission targets that align with the
+                    nationally determined targets and are in line with the IPCC
+                    goals.{" "}
+                  </Typography>
                 </li>
-                <li>
-                  Engage with policy recommendations, informed by precise and
-                  reliable data.
+                <li className="flex items-center gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Engage with policy recommendations, informed by precise and
+                    reliable data.{" "}
+                  </Typography>
                 </li>
               </ul>
               <Typography
-                className="bodyText"
                 sx={{
                   fontSize: {
                     xs: "12px",
@@ -336,6 +442,8 @@ const page = () => {
                     md: "24px",
                   },
                 }}
+                variant="body2"
+                fontFamily="sans-serif"
                 marginTop="-24px"
                 lineHeight="16px"
                 letterSpacing="0.5px">
@@ -343,12 +451,25 @@ const page = () => {
                 enough to meet the 2.0°C IPCC goal, our analysis indicates that
                 they may fall short of the more stringent 1.5°C goal.
               </Typography>
-              <ul className="list-disc ml-2 list-inside text-xs md:text-base">
+              <ul className="list-none ml-2 list-inside text-xs md:text-base">
                 <li>
                   <Link
                     href="https://docs.google.com/document/d/1hA8246oEDPvzs_6RJAe8PEJyYjm_X4FNFAevc-kUYR8/edit"
-                    className="text-[#2351DC] underline bodyText font-[600] leading-6">
-                    Read full paper
+                    className="text-[#2351DC] flex items-center gap-2 font-[600] leading-6">
+                    <span>&bull;</span>
+                    <Typography
+                      variant="body2"
+                      className="underline"
+                      fontFamily="sans-serif"
+                      color="text-[#2351DC]"
+                      sx={{
+                        fontSize: {
+                          xs: "12px",
+                          md: "16px",
+                        },
+                      }}>
+                      Read full paper
+                    </Typography>
                   </Link>
                 </li>
               </ul>
@@ -360,7 +481,6 @@ const page = () => {
                 color=""
               />
               <Typography
-                className="bodyText"
                 sx={{
                   fontSize: {
                     xs: "12px",
@@ -371,6 +491,8 @@ const page = () => {
                     md: "24px",
                   },
                 }}
+                variant="body2"
+                fontFamily="sans-serif"
                 lineHeight="16px"
                 letterSpacing="0.5px">
                 The insights we&apos;ve unearthed through our stocktaking
@@ -379,21 +501,56 @@ const page = () => {
                 our findings. Here’s your opportunity:
               </Typography>
               <ul className="list-disc ml-8 -mt-5 list-outside bodyText text-[12px] md:text-[16px] leading-[24px] text-xs">
-                <li>
-                  Enhance our analyses with additional layers of data or new
-                  methodologies.
+                <li className="flex items-center gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Enhance our analyses with additional layers of data or new
+                    methodologies.{" "}
+                  </Typography>
                 </li>
-                <li>
-                  Forge new paths with innovative stocktaking projects of your
-                  own.
+                <li className="flex items-center gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Forge new paths with innovative stocktaking projects of your
+                    own.{" "}
+                  </Typography>
                 </li>
-                <li>
-                  Engage with policy recommendations, informed by precise and
-                  reliable data.
+                <li className="flex items-center gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Engage with policy recommendations, informed by precise and
+                    reliable data.{" "}
+                  </Typography>
                 </li>
               </ul>
               <Typography
-                className="bodyText"
                 marginTop="-24px"
                 sx={{
                   fontSize: {
@@ -405,6 +562,8 @@ const page = () => {
                     md: "24px",
                   },
                 }}
+                variant="body2"
+                fontFamily="sans-serif"
                 lineHeight="16px"
                 letterSpacing="0.5px">
                 Our tools and datasets are at your disposal, free and open for
@@ -412,21 +571,34 @@ const page = () => {
                 role in sculpting a more informed, effective approach to global
                 climate action.
               </Typography>
-              <ul className="list-disc ml-2 list-inside text-xs md:text-base">
+              <ul className="list-none ml-2 list-inside text-xs md:text-base">
                 <li>
                   <Link
                     href="https://uploads-ssl.webflow.com/62192ceb9199b3dd08431a6b/63288ad5701afc27ed83d2ef_Litepaper%20-%20A%20Digitally-Enabled%20Independent%20Global%20Stocktake.pdf"
-                    className="text-[#2351DC] underline bodyText font-[600] leading-6">
-                    Read the DIGS Litepaper
+                    className="text-[#2351DC] flex items-center gap-2 font-[600] leading-6">
+                    <span>&bull;</span>
+                    <Typography
+                      variant="body2"
+                      className="underline"
+                      fontFamily="sans-serif"
+                      color="text-[#2351DC]"
+                      sx={{
+                        fontSize: {
+                          xs: "12px",
+                          md: "16px",
+                        },
+                      }}>
+                      Read the DIGS Litepaper
+                    </Typography>
                   </Link>
                 </li>
               </ul>
             </Box>
           </div>
-        </Container>
+        </div>
       </Box>
       <Box height="152px" width="100%" bgcolor="#E6E7FF" paddingTop="24px">
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="20px">
             <Typography
               variant="h2"
@@ -436,24 +608,50 @@ const page = () => {
               lineHeight="32px">
               Get started now
             </Typography>
-            <ul className="list-disc ml-2 list-inside text-xs md:text-base">
+            <ul className="list-none ml-2 list-inside text-xs md:text-base">
               <li>
                 <Link
                   href="https://github.com/Open-Earth-Foundation/OpenClimate/blob/develop/api/API.md"
-                  className="text-[#2351DC] underline bodyText font-[600] leading-6">
-                  API documentation
+                  className="text-[#2351DC] font-[600] leading-6 flex items-center gap-2">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    className="underline"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    API documentation
+                  </Typography>
                 </Link>
               </li>
               <li>
                 <Link
                   href="https://openclimate-pyclient.readthedocs.io/en/latest/"
-                  className="text-[#2351DC] underline bodyText font-[600] leading-6">
-                  Python Client that access API
+                  className="text-[#2351DC] flex items-center gap-2 font-[600] leading-6">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    className="underline"
+                    fontFamily="sans-serif"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Python Client for API access
+                  </Typography>
                 </Link>
               </li>
             </ul>
           </Box>
-        </Container>
+        </div>
       </Box>
       <Box
         sx={{
@@ -466,7 +664,7 @@ const page = () => {
             md: "250px",
           },
         }}>
-        <Container maxWidth="lg">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="24px">
             <Typography
               align="center"
@@ -487,7 +685,6 @@ const page = () => {
               Get started now
             </Typography>
             <Typography
-              className="bodyText"
               sx={{
                 fontSize: {
                   xs: "12px",
@@ -498,6 +695,8 @@ const page = () => {
                   md: "24px",
                 },
               }}
+              variant="body2"
+              fontFamily="sans-serif"
               lineHeight="16px"
               letterSpacing="0.5px">
               If you have any inquiries or require further clarification on the
@@ -512,7 +711,7 @@ const page = () => {
               have.
             </Typography>
           </Box>
-        </Container>
+        </div>
       </Box>
     </>
   );

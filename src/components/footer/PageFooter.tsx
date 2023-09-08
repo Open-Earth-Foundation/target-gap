@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Divider } from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,38 +10,56 @@ const Footer = () => {
     <Box
       sx={{
         height: {
-          xs: "592px",
+          xs: "650px",
           md: "320px",
         },
       }}
       bgcolor="#00001F">
-      <Container maxWidth="lg">
+      <div className="max-w-[1440px] mx-auto px-[16px]">
         <Box className="flex flex-col gap-[48px]">
           <Box className="flex flex-col md:pt-[48px] md:flex-row md:items-center h-1/2 justify-between gap-[36px]">
-            <Box className="pt-[130px] md:pt-0 flex flex-col md:flex-row gap-[36px]">
+            <Box className="pt-[100px] md:pt-0 flex flex-col md:flex-row gap-[36px]">
               <Box>
                 <Image
-                  src="/images/DIGSAnalyticsFooter.svg"
+                  src="/images/OpenClimateDIGSDataExplorerLogo.svg"
                   alt="digs footer logo"
                   height={200}
-                  width={148}
+                  width={200}
                 />
               </Box>
               <Box className="grid grid-cols-2 md:grid-cols-4 gap-[24px]">
                 <Link
                   className="text-white text-[14px]"
                   href="https://www.openearth.org/projects/openclimate">
-                  About OpenClimate
+                  <Typography
+                    sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                    fontWeight="500"
+                    lineHeight="20px"
+                    letterSpacing="0.5px">
+                    About OpenClimate
+                  </Typography>
                 </Link>
                 <Link
                   className="text-white text-[14px]"
                   href="https://www.openearth.org/projects/openclimate">
-                  Go to GitHub
+                  <Typography
+                    sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                    fontWeight="500"
+                    lineHeight="20px"
+                    letterSpacing="0.5px">
+                    Go to GitHub
+                  </Typography>
                 </Link>
                 <Link
                   className="text-white text-[14px]"
                   href="https://www.openearth.org/projects/openclimate">
-                  Read the Docs
+                  <Typography
+                    sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                    fontWeight="500"
+                    lineHeight="20px"
+                    letterSpacing="0.5px">
+                    Read the Docs
+                  </Typography>
                 </Link>
               </Box>
             </Box>
@@ -71,14 +89,27 @@ const Footer = () => {
               <Box className="bg-[#D7D8FA] flex justify-center font-medium pt-[2px] text-center w-[45px] h-[20px] text-[11px] leading-4 rounded-full mr-5">
                 BETA
               </Box>
-              <p className="text-white text-[12px] leading-4 mr-5">
+              <Typography
+                sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                fontWeight="500"
+                lineHeight="20px"
+                letterSpacing="0.5px"
+                variant="body2"
+                color="white"
+                fontFamily="sans-serif">
                 This site is a beta version, we appreciate all feedback to
                 improve the platform
-              </p>
-              <Link
-                className="text-white font-[500] text-[12px] underline"
-                href="mailto:ux@openearth.org">
-                Send Feedback
+              </Typography>
+              <Link href="mailto:ux@openearth.org">
+                <Typography
+                  sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                  fontWeight="500"
+                  className="underline"
+                  color="white"
+                  lineHeight="20px"
+                  letterSpacing="0.5px">
+                  Send Feedback
+                </Typography>
               </Link>
             </Box>
             <Box className="flex justify-end w-full md:w-1/4">
@@ -94,7 +125,7 @@ const Footer = () => {
             </Box>
           </Box>
         </Box>
-      </Container>
+      </div>
     </Box>
   );
 };
