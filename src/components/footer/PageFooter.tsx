@@ -89,14 +89,27 @@ const Footer = () => {
               <Box className="bg-[#D7D8FA] flex justify-center font-medium pt-[2px] text-center w-[45px] h-[20px] text-[11px] leading-4 rounded-full mr-5">
                 BETA
               </Box>
-              <p className="text-white text-[12px] leading-4 mr-5">
+              <Typography
+                sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                fontWeight="500"
+                lineHeight="20px"
+                letterSpacing="0.5px"
+                variant="body2"
+                color="white"
+                fontFamily="sans-serif">
                 This site is a beta version, we appreciate all feedback to
                 improve the platform
-              </p>
-              <Link
-                className="text-white font-[500] text-[12px] underline"
-                href="mailto:ux@openearth.org">
-                Send Feedback
+              </Typography>
+              <Link href="mailto:ux@openearth.org">
+                <Typography
+                  sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                  fontWeight="500"
+                  className="underline"
+                  color="white"
+                  lineHeight="20px"
+                  letterSpacing="0.5px">
+                  Send Feedback
+                </Typography>
               </Link>
             </Box>
             <Box className="flex justify-end w-full md:w-1/4">
