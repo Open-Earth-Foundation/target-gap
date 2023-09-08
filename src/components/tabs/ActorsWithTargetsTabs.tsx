@@ -316,6 +316,7 @@ const ActorsWithTargetsTabs = () => {
           width={328}
           className="md:h-[732px] w-full"
         />
+        <p className="w-full text-right">Image by L. Gloege</p>
       </Box>
     </Box>
   );
