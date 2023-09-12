@@ -11,7 +11,7 @@ export default function Hero({ children }: { children: ReactNode }) {
         fill
         className="absolute inset-0 object-cover"
       />
-      <div className="relative z-10 px-[16px] py-[32px] md:p-16 pb-36 max-w-[1440px] mx-auto h-[430px]">
+      <div className="relative z-10 px-[16px] py-[32px] md:p-16 pb-36 max-w-[1440px] mx-auto h-[430px] md:h-[530px]">
         <Box className="pb-[24px] md:flex gap-2">
           <Typography
             color="#24BE00"
@@ -66,7 +66,7 @@ export default function Hero({ children }: { children: ReactNode }) {
           letterSpacing="0.5px"
           fontStyle="normal"
           lineHeight="16px"
-          className="mb-[24px] w-[245px] md:w-[656px] text-white">
+          className="mb-[24px] md:mb-[48px] w-[245px] md:w-[656px] text-white">
           Using data available at OpenClimate, we&apos;ve conducted a Digitally
           Enabled Independent Global Stocktake exercise to spotlight the
           alignment and gaps between climate targets and actions of nations,

@@ -1,5 +1,6 @@
 "use client";
 
+import { Typography } from "@mui/material";
 import React, { FC } from "react";
 
 interface HeroProps {
@@ -15,7 +16,25 @@ const TextBox: FC<HeroProps> = ({ description, coloredTitle, otherTitle }) => {
         <span className="text-[#008600]">{coloredTitle}</span>{" "}
         <span className="text-[#00001F]">{otherTitle}</span>
       </h1>
-      <p className="text-lg font-light pb-8">{description}</p>
+      <Typography
+        variant="body2"
+        fontFamily="sans-serif"
+        sx={{
+          fontSize: {
+            xs: "12px",
+            md: "16px",
+          },
+          lineHeight: {
+            xs: "16px",
+            md: "24px",
+          },
+        }}
+        fontStyle="normal"
+        fontWeight="400"
+        letterSpacing="0.5px"
+        className="pb-8">
+        {description}
+      </Typography>
     </div>
   );
 };

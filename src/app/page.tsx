@@ -71,11 +71,11 @@ export default function Home() {
       <Hero>
         <Button
           variant="contained"
-          className="rounded-full px-6 py-4 text-white"
+          className="rounded-full font-bold leading-[16px] tracking-[1.25px] px-6 py-4 text-white h-[48px] w-[147px]"
           color="secondary"
           endIcon={<ArrowForward />}
           onClick={scrollToContent}>
-          Start Exploring
+          Explore
         </Button>
       </Hero>
       <div
