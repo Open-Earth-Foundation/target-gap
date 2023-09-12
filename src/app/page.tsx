@@ -7,7 +7,15 @@ import ActorsWithTargetsTabs from "@/components/tabs/ActorsWithTargetsTabs";
 import { TabPanel } from "@/components/tabs/TabPanel";
 import { TargetGapTab } from "@/components/tabs/TargetGapTab";
 import { ArrowForward } from "@mui/icons-material";
-import { Box, Button, FormControl, MenuItem, Tab, Tabs, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  MenuItem,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import Select from "@mui/material/Select";
 import { ReductionProgressTab } from "@/components/tabs/ReductionProgressTab";
 
@@ -66,29 +74,25 @@ export default function Home() {
           className="rounded-full px-6 py-4 text-white"
           color="secondary"
           endIcon={<ArrowForward />}
-          onClick={scrollToContent}
-        >
+          onClick={scrollToContent}>
           Start Exploring
         </Button>
       </Hero>
       <div
         className="px-[16px] pt-[63px] md:p-16 max-w-[1440px] mx-auto"
-        ref={contentRef}
-      >
+        ref={contentRef}>
         <Box
           sx={{
             borderBottom: { xs: "none", md: 1 },
             borderColor: { xs: "none", md: "divider" },
-          }}
-        >
+          }}>
           {screenSize.width > 600 ? (
             <Tabs
               value={selectedTab}
               onChange={handleTabChange}
               aria-label="basic tabs example"
               textColor="primary"
-              indicatorColor="primary"
-            >
+              indicatorColor="primary">
               <Tab label="Target Gap Visualizer" {...a11yProps(0)} />
               <Tab label="Reduction Progress" {...a11yProps(1)} />
               <Tab label="Actors with Targets" {...a11yProps(2)} />
@@ -100,16 +104,13 @@ export default function Home() {
                 color="#7A7B9A"
                 variant="body1"
                 fontSize="12px"
+                fontStyle="normal"
                 fontWeight={500}
                 lineHeight="16px"
-                letterSpacing="0.5px"
-              >
+                letterSpacing="0.5px">
                 Select a visualization
               </Typography>
               <FormControl fullWidth>
-                <p className="text-center pb-2 text-[12px] font-semibold text-[#7A7B9A] tracking-[0.5px]">
-                  Select a visualization
-                </p>
                 <Box className="flex w-full justify-center">
                   <Select
                     sx={{
@@ -127,8 +128,7 @@ export default function Home() {
                     }}
                     id="demo-simple-select"
                     value={selectedTab}
-                    onChange={handleTabChangeMobile}
-                  >
+                    onChange={handleTabChangeMobile}>
                     <MenuItem value={0}>Target Gap Visualizer</MenuItem>
                     <MenuItem value={1}>Reduction Progress</MenuItem>
                     <MenuItem value={2}>Actors with Targets</MenuItem>

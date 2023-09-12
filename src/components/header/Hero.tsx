@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import Image from "next/image";
+import { Box, Typography } from "@mui/material";
 
 export default function Hero({ children }: { children: ReactNode }) {
   return (
@@ -10,12 +11,62 @@ export default function Hero({ children }: { children: ReactNode }) {
         fill
         className="absolute inset-0 object-cover"
       />
-      <div className="relative z-10 p-16 pb-36 max-w-[1440px] mx-auto">
-        <h1 className="text-3xl font-bold pb-3">
-          <span className="text-[#008600]">DIGS</span>{" "}
-          <span className="text-white">Data Explorer</span>
-        </h1>
-        <p className="mb-12 text-white">
+      <div className="relative z-10 px-[16px] py-[32px] md:p-16 pb-36 max-w-[1440px] mx-auto h-[430px]">
+        <Box className="pb-[24px] md:flex gap-2">
+          <Typography
+            color="#24BE00"
+            sx={{
+              fontSize: {
+                xs: "28px",
+                md: "57px",
+              },
+              lineHeight: {
+                xs: "36px",
+                md: "64px",
+              },
+            }}
+            fontWeight={600}
+            lineHeight="36px"
+            fontStyle="normal"
+            className="text-[#24BE00]">
+            OpenClimate
+          </Typography>{" "}
+          <Typography
+            color="#24BE00"
+            sx={{
+              fontSize: {
+                xs: "28px",
+                md: "57px",
+              },
+              lineHeight: {
+                xs: "36px",
+                md: "64px",
+              },
+            }}
+            fontWeight={400}
+            fontStyle="normal"
+            className="text-white">
+            DIGS Data Explorer
+          </Typography>
+        </Box>
+        <Typography
+          variant="body2"
+          fontFamily="sans-serif"
+          sx={{
+            fontSize: {
+              xs: "12px",
+              md: "16px",
+            },
+            lineHeight: {
+              xs: "16px",
+              md: "24px",
+            },
+          }}
+          fontSize="12px"
+          letterSpacing="0.5px"
+          fontStyle="normal"
+          lineHeight="16px"
+          className="mb-[24px] w-[245px] md:w-[656px] text-white">
           Using data available at OpenClimate, we&apos;ve conducted a Digitally
           Enabled Independent Global Stocktake exercise to spotlight the
           alignment and gaps between climate targets and actions of nations,
@@ -24,7 +75,7 @@ export default function Hero({ children }: { children: ReactNode }) {
           <br />
           Join us at OpenClimate for collaborative efforts towards an informed
           global climate response.
-        </p>
+        </Typography>
         {children}
       </div>
     </div>
