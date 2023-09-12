@@ -197,7 +197,24 @@ export function ReductionProgress({ actor }: { actor?: ActorOverview }) {
           year: new Date(value.published).getFullYear(),
           url: value.URL,
         }));
+
+      if (!selectedSourceId && sources.length > 0) {
+        const defaultSource = sources.find(
+          (source) => source.name === "UNFCCC",
+        );
+        if (defaultSource) {
+          setSelectedSourceId(defaultSource.id);
+        } else {
+          setSelectedSourceId(sources[0].id);
+        }
+      }
+
       selectedSource = sources.find((source) => source.id === selectedSourceId);
+      if (!selectedSource && sources.length > 0) {
+        setSelectedSourceId(sources[0].id);
+        selectedSource = sources[0];
+      }
+
       if (selectedSource != null) {
         const baselineYear = selectedTarget.baseline_year;
         const baselineData = actor.emissions[selectedSource.id].data.find(
