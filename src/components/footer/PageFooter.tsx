@@ -17,7 +17,7 @@ const Footer = () => {
       <div className="max-w-layout mx-auto px-[16px]">
         <Box className="flex flex-col gap-[48px]">
           <Box className="flex flex-col md:pt-[48px] md:flex-row md:items-center h-1/2 justify-between gap-[36px]">
-            <Box className="pt-[100px] md:pt-0 flex flex-col md:flex-row gap-[36px]">
+            <Box className="pt-[100px] md:pt-0 flex flex-col md:flex-row gap-[36px] md:gap-[48px]">
               <Box>
                 <Image
                   src="/images/OpenClimateDIGSDataExplorerLogo.svg"
@@ -26,7 +26,18 @@ const Footer = () => {
                   width={200}
                 />
               </Box>
-              <Box className="grid grid-cols-2 md:grid-cols-4 gap-[24px]">
+              <Box className="grid grid-cols-2 md:flex gap-[24px] md:gap-[48px]">
+                <Link
+                  className="text-white text-[14px]"
+                  href="https://www.openearth.org/projects/openclimate">
+                  <Typography
+                    sx={{ fontSize: { xs: "12px", md: "14px" } }}
+                    fontWeight="500"
+                    lineHeight="20px"
+                    letterSpacing="0.5px">
+                    About US
+                  </Typography>
+                </Link>
                 <Link
                   className="text-white text-[14px]"
                   href="https://www.openearth.org/projects/openclimate">
@@ -94,8 +105,7 @@ const Footer = () => {
                 lineHeight="20px"
                 letterSpacing="0.5px"
                 variant="body2"
-                color="white"
-                fontFamily="sans-serif">
+                color="white">
                 This site is a beta version, we appreciate all feedback to
                 improve the platform
               </Typography>

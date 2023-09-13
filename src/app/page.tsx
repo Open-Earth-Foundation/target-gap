@@ -1,9 +1,15 @@
 "use client";
 
 import { SyntheticEvent, useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
+
+const ActorsWithTargetsTabs = dynamic(
+  () => import("@/components/tabs/ActorsWithTargetsTabs"),
+  { ssr: false }
+);
 
 import Hero from "@/components/header/Hero";
-import ActorsWithTargetsTabs from "@/components/tabs/ActorsWithTargetsTabs";
+// import ActorsWithTargetsTabs from "@/components/tabs/ActorsWithTargetsTabs";
 import { TabPanel } from "@/components/tabs/TabPanel";
 import { TargetGapTab } from "@/components/tabs/TargetGapTab";
 import { ArrowForward } from "@mui/icons-material";

@@ -54,7 +54,7 @@ const Navbar: FC<NavbarProps> = ({ window }) => {
           disableGutters>
           <Box display="flex" alignItems="center" gap="58px">
             <Image
-              src="/images/OEFLogo.png"
+              src="/images/OEFLogoNavbar.svg"
               height={36}
               width={36}
               alt="OEF_Logo"

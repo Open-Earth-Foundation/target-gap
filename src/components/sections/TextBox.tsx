@@ -18,7 +18,6 @@ const TextBox: FC<HeroProps> = ({ description, coloredTitle, otherTitle }) => {
       </h1>
       <Typography
         variant="body2"
-        fontFamily="sans-serif"
         sx={{
           fontSize: {
             xs: "12px",
@@ -32,7 +31,7 @@ const TextBox: FC<HeroProps> = ({ description, coloredTitle, otherTitle }) => {
         fontStyle="normal"
         fontWeight="400"
         letterSpacing="0.5px"
-        className="pb-8">
+        paddingBottom="32px">
         {description}
       </Typography>
     </div>

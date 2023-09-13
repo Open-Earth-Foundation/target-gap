@@ -1,3 +1,5 @@
+"use client";
+
 import { ReactNode } from "react";
 import Image from "next/image";
 import { Box, Typography } from "@mui/material";
@@ -27,12 +29,11 @@ export default function Hero({ children }: { children: ReactNode }) {
             }}
             fontWeight={600}
             lineHeight="36px"
-            fontStyle="normal"
-            className="text-[#24BE00]">
+            fontStyle="normal">
             OpenClimate
           </Typography>{" "}
           <Typography
-            color="#24BE00"
+            color="white"
             sx={{
               fontSize: {
                 xs: "28px",
@@ -44,14 +45,12 @@ export default function Hero({ children }: { children: ReactNode }) {
               },
             }}
             fontWeight={400}
-            fontStyle="normal"
-            className="text-white">
+            fontStyle="normal">
             DIGS Data Explorer
           </Typography>
         </Box>
         <Typography
           variant="body2"
-          fontFamily="sans-serif"
           sx={{
             fontSize: {
               xs: "12px",
@@ -61,12 +60,20 @@ export default function Hero({ children }: { children: ReactNode }) {
               xs: "16px",
               md: "24px",
             },
+            width: {
+              xs: "245px",
+              md: "656px",
+            },
+            marginBottom: {
+              xs: "24px",
+              md: "48px",
+            },
           }}
           fontSize="12px"
           letterSpacing="0.5px"
           fontStyle="normal"
           lineHeight="16px"
-          className="mb-[24px] md:mb-[48px] w-[245px] md:w-[656px] text-white">
+          color="white">
           Using data available at OpenClimate, we&apos;ve conducted a Digitally
           Enabled Independent Global Stocktake exercise to spotlight the
           alignment and gaps between climate targets and actions of nations,

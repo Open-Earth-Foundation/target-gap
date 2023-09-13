@@ -66,7 +66,6 @@ const page = () => {
                 },
               }}
               variant="body2"
-              fontFamily="sans-serif"
               lineHeight="16px"
               letterSpacing="0.5px">
               The primary goal of DIGS (Digitally Enabled Independent Global
@@ -98,7 +97,6 @@ const page = () => {
                   <Typography
                     variant="body2"
                     className="underline"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -118,7 +116,6 @@ const page = () => {
                   <Typography
                     variant="body2"
                     className="underline"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -154,7 +151,6 @@ const page = () => {
                 },
               }}
               variant="body2"
-              fontFamily="sans-serif"
               lineHeight="16px"
               letterSpacing="0.5px">
               The Paris Agreement set up a five-yearly check-in, called the
@@ -181,7 +177,6 @@ const page = () => {
                   <Typography
                     variant="body2"
                     className="underline"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -224,7 +219,6 @@ const page = () => {
                 },
               }}
               variant="body2"
-              fontFamily="sans-serif"
               lineHeight="16px"
               letterSpacing="0.5px">
               Our recent paper, “Target Gaps: A case study for Canada and Great
@@ -252,7 +246,6 @@ const page = () => {
                   <Typography
                     variant="body2"
                     className="underline"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -295,7 +288,6 @@ const page = () => {
                 },
               }}
               variant="body2"
-              fontFamily="sans-serif"
               lineHeight="16px"
               letterSpacing="0.5px">
               The insights we&apos;ve unearthed through our stocktaking analyses
@@ -319,7 +311,6 @@ const page = () => {
                   <Typography
                     variant="body2"
                     className="underline"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -367,7 +358,6 @@ const page = () => {
                   },
                 }}
                 variant="body2"
-                fontFamily="sans-serif"
                 lineHeight="16px"
                 letterSpacing="0.5px">
                 Our recent paper, “Target Gaps: A case study for Canada and
@@ -382,7 +372,6 @@ const page = () => {
                   <span>&bull;</span>
                   <Typography
                     variant="body2"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -400,7 +389,6 @@ const page = () => {
                   <span>&bull;</span>
                   <Typography
                     variant="body2"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -418,7 +406,6 @@ const page = () => {
                   <span>&bull;</span>
                   <Typography
                     variant="body2"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -443,7 +430,6 @@ const page = () => {
                   },
                 }}
                 variant="body2"
-                fontFamily="sans-serif"
                 marginTop="-24px"
                 lineHeight="16px"
                 letterSpacing="0.5px">
@@ -460,7 +446,6 @@ const page = () => {
                     <Typography
                       variant="body2"
                       className="underline"
-                      fontFamily="sans-serif"
                       color="text-[#2351DC]"
                       sx={{
                         fontSize: {
@@ -492,7 +477,6 @@ const page = () => {
                   },
                 }}
                 variant="body2"
-                fontFamily="sans-serif"
                 lineHeight="16px"
                 letterSpacing="0.5px">
                 The insights we&apos;ve unearthed through our stocktaking
@@ -505,7 +489,6 @@ const page = () => {
                   <span>&bull;</span>
                   <Typography
                     variant="body2"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -521,7 +504,6 @@ const page = () => {
                   <span>&bull;</span>
                   <Typography
                     variant="body2"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -537,7 +519,6 @@ const page = () => {
                   <span>&bull;</span>
                   <Typography
                     variant="body2"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -563,7 +544,6 @@ const page = () => {
                   },
                 }}
                 variant="body2"
-                fontFamily="sans-serif"
                 lineHeight="16px"
                 letterSpacing="0.5px">
                 Our tools and datasets are at your disposal, free and open for
@@ -580,7 +560,6 @@ const page = () => {
                     <Typography
                       variant="body2"
                       className="underline"
-                      fontFamily="sans-serif"
                       color="text-[#2351DC]"
                       sx={{
                         fontSize: {
@@ -617,7 +596,6 @@ const page = () => {
                   <Typography
                     variant="body2"
                     className="underline"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -637,7 +615,6 @@ const page = () => {
                   <Typography
                     variant="body2"
                     className="underline"
-                    fontFamily="sans-serif"
                     color="text-[#2351DC]"
                     sx={{
                       fontSize: {
@@ -696,7 +673,6 @@ const page = () => {
                 },
               }}
               variant="body2"
-              fontFamily="sans-serif"
               lineHeight="16px"
               letterSpacing="0.5px">
               If you have any inquiries or require further clarification on the
