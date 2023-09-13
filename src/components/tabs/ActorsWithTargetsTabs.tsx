@@ -150,21 +150,13 @@ const ActorsWithTargetsTabs = () => {
       <div className="h-[100px] w-[400px] flex gap-4 top-[40px] relative">
         <div className="flex bg-[#E8EAFB] gap-[10px] h-[24px] items-center justify-center p-[8px] rounded-[50px] text-xs">
           <div className="h-[5px] w-[16px] bg-[#E9750A]" />
-          <Typography
-            variant="body2"
-            fontFamily="sans-serif"
-            color="#001EA7"
-            fontSize="12px">
+          <Typography variant="body2" color="#001EA7" fontSize="12px">
             Emissions
           </Typography>
         </div>
         <div className="flex bg-[#E8EAFB] gap-[10px] h-[24px] items-center justify-center p-[8px] rounded-[50px] text-xs">
           <div className="h-[5px] w-[16px]  bg-[#24BE00]" />
-          <Typography
-            variant="body2"
-            fontFamily="sans-serif"
-            color="#001EA7"
-            fontSize="12px">
+          <Typography variant="body2" color="#001EA7" fontSize="12px">
             Pledges
           </Typography>
         </div>
@@ -190,9 +182,7 @@ const ActorsWithTargetsTabs = () => {
         fontWeight="400"
         lineHeight="16px"
         variant="body2"
-        fontFamily="sans-serif"
-        letterSpacing="0.5px">
-      </Typography>
+        letterSpacing="0.5px"></Typography>
       {isLoading ? (
         <Box
           display="flex"
@@ -200,9 +190,7 @@ const ActorsWithTargetsTabs = () => {
           alignItems="center"
           gap="8px">
           <CircularProgress />
-          <Typography variant="body2" fontFamily="sans-serif">
-            Loading Chart Data
-          </Typography>
+          <Typography variant="body2">Loading Chart Data</Typography>
         </Box>
       ) : (
         <Box
