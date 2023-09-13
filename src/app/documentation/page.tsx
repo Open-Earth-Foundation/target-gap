@@ -91,7 +91,7 @@ const page = () => {
             <ul className="list-none ml-2 list-inside text-xs">
               <li>
                 <Link
-                  href="/"
+                  href="https://github.com/Open-Earth-Foundation/OpenClimate/blob/develop/api/API.md"
                   className="text-[#2351DC] flex items-center gap-2 font-[600] leading-6">
                   <span>&bull;</span>
                   <Typography
@@ -110,7 +110,7 @@ const page = () => {
               </li>
               <li>
                 <Link
-                  href="/"
+                  href="https://openclimate-pyclient.readthedocs.io/en/latest/"
                   className="text-[#2351DC] flex items-center gap-2 font-[600]">
                   <span>&bull;</span>
                   <Typography

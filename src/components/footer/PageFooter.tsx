@@ -42,7 +42,7 @@ const Footer = () => {
                   className="text-white text-[14px]"
                   href="https://www.openearth.org/projects/openclimate">
                   <Typography
-                    sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                    sx={{ fontSize: { xs: "12px", md: "14px" } }}
                     fontWeight="500"
                     lineHeight="20px"
                     letterSpacing="0.5px">
@@ -53,7 +53,7 @@ const Footer = () => {
                   className="text-white text-[14px]"
                   href="https://www.openearth.org/projects/openclimate">
                   <Typography
-                    sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                    sx={{ fontSize: { xs: "12px", md: "14px" } }}
                     fontWeight="500"
                     lineHeight="20px"
                     letterSpacing="0.5px">
@@ -64,7 +64,7 @@ const Footer = () => {
                   className="text-white text-[14px]"
                   href="https://www.openearth.org/projects/openclimate">
                   <Typography
-                    sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                    sx={{ fontSize: { xs: "12px", md: "14px" } }}
                     fontWeight="500"
                     lineHeight="20px"
                     letterSpacing="0.5px">
@@ -100,7 +100,7 @@ const Footer = () => {
                 BETA
               </Box>
               <Typography
-                sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                sx={{ fontSize: { xs: "12px", md: "14px" } }}
                 fontWeight="500"
                 lineHeight="20px"
                 letterSpacing="0.5px"
@@ -111,7 +111,7 @@ const Footer = () => {
               </Typography>
               <Link href="mailto:ux@openearth.org">
                 <Typography
-                  sx={{ fontFamily: { xs: "12px", md: "14px" } }}
+                  sx={{ fontSize: { xs: "12px", md: "14px" } }}
                   fontWeight="500"
                   className="underline"
                   color="white"
