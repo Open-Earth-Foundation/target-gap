@@ -6,7 +6,7 @@ import React from "react";
 import { Open_Sans } from "next/font/google";
 import Link from "next/link";
 import Hero from "@/components/header/Hero";
-import ButtonMain from "@/components/button/Button";
+import ButtonMain from "@/components/button/ButtonMain";
 
 const opensans = Open_Sans({
   subsets: ["latin"],
@@ -50,6 +50,67 @@ const page = () => {
         <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="24px">
             <Heading
+              titleHighlighted="What is a "
+              titleDark="Digitally-enabled Independent Global Stocktake (DIGS)?"
+              color=""
+            />
+            <Typography
+              sx={{
+                fontSize: {
+                  xs: "12px",
+                  md: "16px",
+                },
+                lineHeight: {
+                  xs: "16px",
+                  md: "24px",
+                },
+              }}
+              variant="body2"
+              lineHeight="16px"
+              letterSpacing="0.5px">
+              The Paris Agreement set up a five-yearly check-in, called the
+              Global Stocktake (GST), to see how nations are doing on their
+              climate commitments. However, there are gaps in this system: many
+              countries struggle with old-fashioned methods of tracking their
+              progress, and lots of important players, Non-State actors, like
+              cities and companies aren&apos;t included at all. The
+              Digitally-enabled Independent Global Stocktake (DIGS) is a new
+              effort to bring modern digital infrastructure tools, like data
+              from satellites, interoperability standards and advanced
+              algorithms, to track everyone&apos;s progress, especially for
+              cities and companies. By using these tools, the DIGS vision is to
+              make the whole process more open, trustworthy, and efficient.
+              It&apos;s about making sure everyone&apos;s efforts count and
+              pushing the world closer to its climate goals.
+            </Typography>
+            <ul className="list-none ml-2 list-inside text-xs">
+              <li>
+                <Link
+                  href="https://uploads-ssl.webflow.com/62192ceb9199b3dd08431a6b/63288ad5701afc27ed83d2ef_Litepaper%20-%20A%20Digitally-Enabled%20Independent%20Global%20Stocktake.pdf"
+                  className="text-[#2351DC] flex items-center gap-2 font-[600] leading-6">
+                  <span>&bull;</span>
+                  <Typography
+                    variant="body2"
+                    className="underline"
+                    color="text-[#2351DC]"
+                    sx={{
+                      fontSize: {
+                        xs: "12px",
+                        md: "16px",
+                      },
+                    }}>
+                    Read the DIGS Litepaper
+                  </Typography>
+                </Link>
+              </li>
+            </ul>
+          </Box>
+        </div>
+      </Box>
+      <Box paddingBottom="24px">
+        <div className="max-w-[1440px] mx-auto px-[16px]">
+          <Box display="flex" flexDirection="column" gap="24px">
+            <Heading
               titleHighlighted="Our Journey: "
               titleDark="A Story of Innovation with the OpenClimate API "
               color=""
@@ -68,25 +129,23 @@ const page = () => {
               variant="body2"
               lineHeight="16px"
               letterSpacing="0.5px">
-              The primary goal of DIGS (Digitally Enabled Independent Global
-              Stocktake) is to illustrate the vast potential of utilizing
-              OpenClimate data for multifaceted climate analysis. At the core of
-              this initiative, we harness the OpenClimate API—a comprehensive
-              and reliable source of emissions data and nationally determined
-              contributions (NDCs)—to conduct a detailed examination of national
-              and subnational climate targets and actions. DIGS serves as a
-              tangible example of how OpenClimate data can be transformed into
-              valuable insights. By comparing national emissions reduction
-              targets with the collective ambitions of subnational actors, our
-              analysis sheds light on the alignment, or lack thereof, between
-              different governance levels. This approach surfaces critical
-              information about the gaps that exist between national ambitions
-              and the sum of subnational efforts. For data and policy analysts,
-              DIGS offers a rich template for further exploration. Our
-              methodologies, openly documented, are invitations for others to
-              refine our analyses, introduce new perspectives, and continue the
-              quest for understanding and action in the global response to
-              climate change.
+              The main objective of this project is to prototype what a
+              Digitally-Enabled Independent Global Stocktake (DIGS) would look
+              like, by leveraging the OpenClimate data to display the actions
+              and commitments of both state and non-state actors. Our DIGS
+              prototype shows the transformative power of OpenClimate data. We
+              compared national emission reduction aspirations against the
+              collective intent of cities, regions, and companies, highlighting
+              the synergies and discrepancies across governance tiers. This
+              analysis reveals insights about the gaps that may arise when we
+              compare a country&apos;s overarching ambition with the cumulative
+              efforts of its individual regions and cities. With the OpenClimate
+              Python Client, we hope to encourage other climate data
+              enthusiasts, researchers, and policy analysts to conduct their own
+              stocktaking exercises and craft visualizations. Our methodologies,
+              transparently laid out, allow others to iterate on our work,
+              analyze data with different angles, and contribute to the
+              development of a Digitally-enable Independent Global Stocktake.
             </Typography>
             <ul className="list-none ml-2 list-inside text-xs">
               <li>
@@ -131,67 +190,7 @@ const page = () => {
           </Box>
         </div>
       </Box>
-      <Box paddingBottom="24px">
-        <div className="max-w-[1440px] mx-auto px-[16px]">
-          <Box display="flex" flexDirection="column" gap="24px">
-            <Heading
-              titleHighlighted="What is a "
-              titleDark="Digitally-enabled Independent Global Stocktake (DIGS)?"
-              color=""
-            />
-            <Typography
-              sx={{
-                fontSize: {
-                  xs: "12px",
-                  md: "16px",
-                },
-                lineHeight: {
-                  xs: "16px",
-                  md: "24px",
-                },
-              }}
-              variant="body2"
-              lineHeight="16px"
-              letterSpacing="0.5px">
-              The Paris Agreement set up a five-yearly check-in, called the
-              Global Stocktake (GST), to see how nations are doing on their
-              climate commitments. However, there are gaps in this system: many
-              countries struggle with old-fashioned methods of tracking their
-              progress, and lots of important players, Non-State actors, like
-              cities and companies aren&apos;t included at all. The
-              Digitally-enabled Independent Global Stocktake (DIGS) is a new
-              effort to bring modern digital infrastructure tools, like data
-              from satellites, interoperability standards and advanced
-              amdorithms, to track everyone&apos;s progress, especially for
-              cities and companies. By using these tools, the DIGS vision is to
-              make the whole process more open, trustworthy, and efficient.
-              It&apos;s about making sure everyone&apos;s efforts count and
-              pushing the world closer to its climate goals.
-            </Typography>
-            <ul className="list-none ml-2 list-inside text-xs">
-              <li>
-                <Link
-                  href="https://uploads-ssl.webflow.com/62192ceb9199b3dd08431a6b/63288ad5701afc27ed83d2ef_Litepaper%20-%20A%20Digitally-Enabled%20Independent%20Global%20Stocktake.pdf"
-                  className="text-[#2351DC] flex items-center gap-2 font-[600] leading-6">
-                  <span>&bull;</span>
-                  <Typography
-                    variant="body2"
-                    className="underline"
-                    color="text-[#2351DC]"
-                    sx={{
-                      fontSize: {
-                        xs: "12px",
-                        md: "16px",
-                      },
-                    }}>
-                    Read the DIGS Litepaper
-                  </Typography>
-                </Link>
-              </li>
-            </ul>
-          </Box>
-        </div>
-      </Box>
+
       <Box
         paddingBottom="24px"
         sx={{
@@ -576,7 +575,16 @@ const page = () => {
           </div>
         </div>
       </Box>
-      <Box height="152px" width="100%" bgcolor="#E6E7FF" paddingTop="24px">
+      <Box
+        sx={{
+          height: {
+            xs: "220px",
+            md: "200px",
+          },
+        }}
+        width="100%"
+        bgcolor="#E6E7FF"
+        paddingTop="24px">
         <div className="max-w-[1440px] mx-auto px-[16px]">
           <Box display="flex" flexDirection="column" gap="20px">
             <Typography
@@ -586,6 +594,23 @@ const page = () => {
               fontWeight={600}
               lineHeight="32px">
               Get started now
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: {
+                  xs: "12px",
+                  md: "16px",
+                },
+                lineHeight: {
+                  xs: "16px",
+                  md: "24px",
+                },
+              }}
+              variant="body2"
+              lineHeight="16px"
+              letterSpacing="0.5px">
+              Use the OpenClimate API to develop your own stocktaking data
+              exercises and visualizations and share it with us and the world.
             </Typography>
             <ul className="list-none ml-2 list-inside text-xs md:text-base">
               <li>
@@ -659,7 +684,7 @@ const page = () => {
               }}
               fontWeight={600}
               lineHeight="32px">
-              Get started now
+              Contact Us
             </Typography>
             <Typography
               sx={{

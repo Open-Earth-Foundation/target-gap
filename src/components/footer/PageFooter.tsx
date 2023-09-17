@@ -1,5 +1,6 @@
 "use client";
 
+import { BASE_URL } from "@/lib/api";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
@@ -47,6 +48,15 @@ const Footer = () => {
                     lineHeight="20px"
                     letterSpacing="0.5px">
                     About OpenClimate
+                  </Typography>
+                </Link>
+                <Link className="text-white text-[14px]" href={`${BASE_URL}`}>
+                  <Typography
+                    sx={{ fontSize: { xs: "12px", md: "14px" } }}
+                    fontWeight="500"
+                    lineHeight="20px"
+                    letterSpacing="0.5px">
+                    OpenClimate Platform
                   </Typography>
                 </Link>
                 <Link

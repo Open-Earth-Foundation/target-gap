@@ -7,10 +7,10 @@ import {
 } from "./models";
 
 const API_URL = `https://openclimate.network/api/v1`;
-
+export const BASE_URL = `https://openclimate.network/`;
 async function fetchAPI(
   route: String,
-  params: Record<string, any> = {},
+  params: Record<string, any> = {}
 ): Promise<Record<string, any>> {
   const paramString =
     Object.keys(params).length > 0 ? "?" + new URLSearchParams(params) : "";
@@ -44,7 +44,7 @@ async function fetchAPI(
 
 export async function getActorParts(
   actorId: string,
-  partType: string | undefined = undefined,
+  partType: string | undefined = undefined
 ): Promise<ActorPart[]> {
   const params = partType !== undefined ? { part_type: partType } : {};
   return (await fetchAPI(`/actor/${actorId}/parts`, params)) as Promise<
@@ -53,7 +53,7 @@ export async function getActorParts(
 }
 
 export async function getActorPath(
-  actorId: string,
+  actorId: string
 ): Promise<ActorPathSegment[]> {
   return (await fetchAPI(`/actor/${actorId}/path`)) as Promise<
     ActorPathSegment[]
@@ -61,16 +61,16 @@ export async function getActorPath(
 }
 
 export async function getActorOverview(
-  actorId: string,
+  actorId: string
 ): Promise<ActorOverview> {
   return (await fetchAPI(`/actor/${actorId}`)) as Promise<ActorOverview>;
 }
 
 export async function getActorEmissions(
-  actorId: string,
+  actorId: string
 ): Promise<ActorEmissionsMap> {
   return (await fetchAPI(
-    `/actor/${actorId}/emissions`,
+    `/actor/${actorId}/emissions`
   )) as Promise<ActorEmissionsMap>;
 }
 
