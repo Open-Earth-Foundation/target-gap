@@ -33,6 +33,10 @@ const ButtonMain: FC<ButtonMainProps> = ({
         lineHeight: "16px",
         fontSize: "14px",
         border: border ? "2px solid #24BE00" : undefined,
+        ":hover": {
+          background: "#24BE00",
+          color: bgColor === "none" ? "white" : textColor,
+        },
       }}>
       {text}
     </Button>

@@ -17,6 +17,7 @@ import Image from "next/image";
 import { CoverageData, CoverageDiagramEntry } from "@/lib/models";
 import { getCoverageData } from "@/lib/api";
 import TextBox from "../sections/TextBox";
+import ButtonMain from "../button/ButtonMain";
 
 const ActorsWithTargetsTabs = () => {
   const [isLoading, setLoading] = useState(true);
@@ -269,6 +270,26 @@ const ActorsWithTargetsTabs = () => {
           className="md:h-[732px] w-full"
         />
         <p className="w-full text-right">Image by L. Gloege</p>
+      </Box>
+      <Box
+        display="flex"
+        flexDirection="column"
+        gap="24px"
+        className="h-[200px] pt-8">
+        <Heading
+          titleHighlighted="OpenClimate "
+          titleDark="Data Coverage"
+          color=""
+        />
+        <ButtonMain
+          bgColor="#008600"
+          border={false}
+          text="Review Data Coverage"
+          h="48px"
+          w="320px"
+          textColor="white"
+          borderColor="none"
+        />
       </Box>
     </Box>
   );

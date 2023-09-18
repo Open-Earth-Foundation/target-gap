@@ -15,7 +15,7 @@ export function TargetGapTab() {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [selectedCountry, setSelectedCountry] = useState("");
   const [countryDetails, setCountryDetails] = useState<ActorOverview | null>(
-    null,
+    null
   );
   const [subActorDetails, setSubActorDetails] = useState<ActorOverview[]>([]);
 
@@ -29,12 +29,12 @@ export function TargetGapTab() {
     const countryEmissionsData = await getActorOverview(actorId);
     const subActors = await getActorParts(actorId);
     const adm1Actors = subActors.filter(
-      (actor) => actor.type === ActorType.Adm1,
+      (actor) => actor.type === ActorType.Adm1
     );
     const subActorDetails = await Promise.all(
       adm1Actors.map(async (subActor): Promise<ActorOverview> => {
         return await getActorOverview(subActor.actor_id);
-      }),
+      })
     );
     setCountryDetails(countryEmissionsData);
     setSubActorDetails(subActorDetails);
@@ -42,17 +42,7 @@ export function TargetGapTab() {
   };
 
   const description = `
-  This target gap visualizer uses the OpenClimate API to shows the
-  difference between the emissions reductions targets of national actors
-  and their subnational parts (states, provinces, or regions).
-  The emissions graph shows the projected emissions by the national actor
-  if they achieve their next reductions target, next to the sum of the
-  emissions by all of their subnational parts. If subnational actors
-  have not made emission reductions targets, it uses their last measured
-  emisisons values. The reductions graph shows the amount of reductions
-  the national actor needs to achieve their next target, next to the sum
-  of the reductions needed by all of their subnational parts. If a subnational
-  actor has not made a reduction target, we use 0.0 for its reductions value.
+  This target gap visualizer uses the OpenClimate API to illustrate the difference in reduction targets between a national actor and its subnational parts (states, provinces, or regions). The emissions graph shows the expected target emissions set by the national actor alongside the cumulative emissions of its subnational parts, using the expected target emissions set by each. If a subnational actor has not established an emissions reduction target, we use their most recent inventory emissions, thus presuming their emissions will remain at current levels. The reductions graph compares the emission reductions a national actor must attain to achieve their emissions target with the cumulative reductions of all its subnational parts. Subnational actors lacking specific reduction targets are assigned a reduction value of 0, thus assuming their emissions remain unchanged. 
   `;
 
   const methodology = `
