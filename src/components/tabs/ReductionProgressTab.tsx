@@ -43,11 +43,19 @@ export function ReductionProgressTab() {
   };
 
   const description = `
+<<<<<<< HEAD
   This tool offers an intuitive way to gauge an actor’s progress toward its emission reduction targets. Drawing on the Hsu et al. (2020) methodology, the visualization serves as a guide to evaluate current emissions against a scenario where emissions are reduced linearly from the baseline year to target year. 
 `;
 
   const methodology = `
   The “Reduction Progress” visualization is based on the Hsu et al. (2020) approach. It compares latest emissions data to a linear reduction scenario from baseline to target years. This linear reduction pathway serves as a comparative benchmark, not as an expected reduction path. In the chart, an orange line represents current emissions and a dotted line indicates baseline emissions. An actor is deemed “on track” if its current emissions are below the baseline, and “not on track” otherwise. The visualization aims to give a clear understanding of how effective climate actions have been. 
+=======
+This tool offers an intuitive way to gauge a country's progress toward its emission reduction targets. Drawing on the Hsu et al. (2020) methodology, the visualization serves as a guide for countries to evaluate their current emissions against a modelled linear reduction path from baseline to target years.
+`;
+
+  const methodology = `
+The "Reduction Progress" visualization is based on the Hsu et al. (2020) approach. It compares a country's latest emissions data to a linear reduction scenario from baseline to target years. The linear model serves as a comparative benchmark, not as an expected reduction path. In the chart, an orange line represents current emissions and a dotted line indicates baseline emissions. A country is deemed "on track" if its current emissions are below the baseline, and "not on track" otherwise. The visualization aims to give countries a clear understanding of how effective their climate actions have been.
+>>>>>>> main
 `;
 
   return (
