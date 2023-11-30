@@ -6,8 +6,8 @@ import {
   CoverageData,
 } from "./models";
 
-const API_URL = `https://openclimate.network/api/v1`;
-export const BASE_URL = `https://openclimate.network/`;
+const API_URL = `https://app.openclimate.network/api/v1`;
+export const BASE_URL = `https://app.openclimate.network/`;
 async function fetchAPI(
   route: String,
   params: Record<string, any> = {}
